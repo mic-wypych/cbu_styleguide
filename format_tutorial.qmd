@@ -1,0 +1,17 @@
+What this tutorial has to include:
+
+1.  General introduction to quarto?
+2.  Overview of the format and its tech stack:
+    1.  quarto to write so we work in markdown
+    2.  typst to render to pdf. DO NOT TOUCH
+    3.  Zotero for citations
+    4.  R/python/julia for calculations. Preferably R
+3.  Walkthrough making a report
+    1.  Writing regular text
+    2.  footnotes
+    3.  Headings: we use level 4 headings for sections
+    4.  Making tables
+    5.  Making plots
+    6.  References:
+        1.  Zotero
+        2.  referencing tables and plots

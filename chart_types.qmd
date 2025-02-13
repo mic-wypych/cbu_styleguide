@@ -1,0 +1,63 @@
+This part discusses specific types of charts, when to use them and some tweaks to make them work.
+
+## General rules?
+
+## Chart types
+
+Ok, on to the chart types!
+
+### Bar charts
+
+Preferably for displaying
+
+-   general rules
+
+-   position dodge
+
+-   text above
+
+-   error bars
+
+### Filled bar charts
+
+-   mainly for displaying percentages
+
+-   working with text
+
+-   What to do with very small categories
+
+    -   ggrepel
+
+    -   collapse categories
+
+    -   maybe facet_zoom?
+
+### Line charts
+
+-   showing changes in time
+
+-   Avoid spaghetti plots
+
+-   highlighting categories?
+
+### Scatterplots
+
+-   dealing with overplotting
+
+-   Too many points -\> go for geom_count?
+
+### Line-of-best-fit charts
+
+This in general refers to plots that show some kind of regression-like line of best fit, be it from a GLM, LOESS, GAM etc.
+
+-   Make sure a proper interpretation is provided.
+
+-   Try to include uncertainty
+
+### Dumbbell charts
+
+-   showing changes
+
+### Pie charts
+
+just no. Make a bar chart.
