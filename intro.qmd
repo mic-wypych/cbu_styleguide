@@ -1,9 +1,21 @@
 # Introduction
 
-This is a book created from markdown and executable code.
+THis styleguide is intended to provide general rules on a bunch of things. This ensures more uniform and consistent look and feel across all visualizations in cbu reports. It also lists a bunch of things (especially related to accessibility) that should be considered when making plots and tables. Additionally the idea is to reduce the burden of designing and making choices when creating plots. Ultimately the all functionalities related to making cbu-styled plots and reports should end up in the `{cbuR}` package.
 
-See @knuth84 for additional discussion of literate programming.
+In more details the things discussed are:
 
-```{r}
-1 + 1
-```
+1.  Use of colors
+2.  Text: typography etc
+3.  General theme for the plots
+4.  Specific types of plots, how to use them and what to tweak
+5.  A tutorial on using the quarto extension for making the report
+
+## General rules
+
+-   plots should be accessible. This means ensuring that text is readable, does no overlap but also thinking about colors with regard to black-white scale and colorblindness.
+
+-   Plots should have consistent styling. Don't switch between types
+
+-   Plots should use shapes that display information in as readable way as possible (e.g. when showing changes in time line plots are often better than bar plots).
+
+-   Rules are not hard-coded. Sometimes using specific colors (e.g. some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.

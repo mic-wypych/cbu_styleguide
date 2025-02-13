@@ -2,4 +2,4 @@
 
 Hi,
 
-this is a styleguide document for building Center for Research on Prejudice reports.
+this is a styleguide document for building Center for Research on Prejudice reports. It provides general rules for building cbu-styled plots and tables and gives some rules on putting them in the cbu report format.
