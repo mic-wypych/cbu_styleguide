@@ -44,7 +44,7 @@
     "href": "intro.html#general-rules",
     "title": "1  Introduction",
     "section": "",
-    "text": "plots should be accessible. This means ensuring that text is readable, does no overlap but also thinking about colors with regard to black-white scale and colorblindness.\nPlots should have consistent styling. Don’t switch between types\nPlots should use shapes that display information in as readable way as possible (e.g. when showing changes in time line plots are often better than bar plots).\nRules are not hard-coded. Sometimes using specific colors (e.g. some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.",
+    "text": "plots should be accessible. This means ensuring that text is readable, does no overlap but also thinking about colors with regard to black-white scale and colorblindness.\nPlots should have consistent styling. Don’t switch between types\nPlots should use shapes that display information in as readable way as possible (e.g. when showing changes in time line plots are often better than bar plots).\nRules are not hard-coded. Sometimes using specific colors (e.g. some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.\nCharts and tables should be referenced text. Specific guidelines are provided in tutorial on the report format. This matters both for readability and apparently is a quarto quirk with {tinytable} package used for rendering tables.\nWe do not use titles for plots.",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -54,9 +54,79 @@
     "href": "text.html",
     "title": "2  Table showing all font sizes, families etc.",
     "section": "",
-    "text": "This part deals with all text-related things in\nput the table here\nAre there any additional rules about text?\nProbably something like:\n\navoid very long titles\navoid very long headings\nmake sure text does not overlap -&gt; {ggrepel}\nensure proper contrast for text -&gt; {ggfittext}",
+    "text": "This part deals with all text-related things in the format. Both in terms of typography and some rules about general writing\nput the table here\nAre there any additional rules about text?\nProbably something like:\n\navoid very long titles\navoid very long headings\nmake sure text does not overlap -&gt; {ggrepel}\nensure proper contrast for text -&gt; {ggfittext}\n\nGeneral rules about writing should go here?\n\nBe accessible… Don’t wirte about logits. Opt for Average MArginal Effects in percentages instead. If possible try to get a sense of scale and some interpretation for the effects\nBut remain scientific. Be precise, don’t overstate - this is scientific writing.",
     "crumbs": [
       "<span class='chapter-number'>2</span>  <span class='chapter-title'>Table showing all font sizes, families etc.</span>"
+    ]
+  },
+  {
+    "objectID": "color.html",
+    "href": "color.html",
+    "title": "3  Categorical palette",
+    "section": "",
+    "text": "3.1 Continuous palettes\nThis chapter discusses the cbu color palette.\nWe are working with 2 categorical, 4 continuous (plus grey) and 1 divergent palette.\nThe palette revolves around lighter, desaturated pinks, blues and puprles.",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Categorical palette</span>"
+    ]
+  },
+  {
+    "objectID": "color.html#divergent-palette",
+    "href": "color.html#divergent-palette",
+    "title": "3  Categorical palette",
+    "section": "3.2 Divergent palette",
+    "text": "3.2 Divergent palette",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Categorical palette</span>"
+    ]
+  },
+  {
+    "objectID": "theme.html",
+    "href": "theme.html",
+    "title": "4  The function",
+    "section": "",
+    "text": "4.1 How it looks like\nThis chapter discusses the cbu_theme() function for styling the ggplot objects into cbu-styled plots.\nnote: should we have logo on the plots?\nPut the function here and discuss it a bit.\nMake a plot that shows each element with the spacing, font sizes etc.",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The function</span>"
+    ]
+  },
+  {
+    "objectID": "theme.html#table-themeing",
+    "href": "theme.html#table-themeing",
+    "title": "4  The function",
+    "section": "4.2 Table themeing",
+    "text": "4.2 Table themeing\n\nnumbers: summary stats\ntext tables\nmodel output tables",
+    "crumbs": [
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>The function</span>"
+    ]
+  },
+  {
+    "objectID": "chart_types.html",
+    "href": "chart_types.html",
+    "title": "5  General rules?",
+    "section": "",
+    "text": "5.1 Chart types\nThis part discusses specific types of charts, when to use them and some tweaks to make them work.\nOk, on to the chart types!",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>General rules?</span>"
+    ]
+  },
+  {
+    "objectID": "chart_types.html#chart-types",
+    "href": "chart_types.html#chart-types",
+    "title": "5  General rules?",
+    "section": "",
+    "text": "5.1.1 Bar charts\nPreferably for displaying\n\ngeneral rules\nposition dodge\ntext above\nerror bars\nlong labels:\n\nopt for coord_flip?\nwrap the labels\n\nLikert scale issues:\n\nstarting from 1: geom_col() will start from 0 by default. Override with coord_cartesian()\n\n\n\n\n5.1.2 Filled bar charts\n\nmainly for displaying percentages\nworking with text\nWhat to do with very small categories\n\nggrepel\ncollapse categories\nmaybe facet_zoom?\n\n\n\n\n5.1.3 Line charts\n\nshowing changes in time\nAvoid spaghetti plots\nhighlighting categories?\n\n\n\n5.1.4 Scatterplots\n\ndealing with overplotting\nToo many points -&gt; go for geom_count?\nremember about reference line - geom_point will happily start the y axis from a number different from 0 or 1\n\n\n\n5.1.5 Line-of-best-fit charts\nThis in general refers to plots that show some kind of regression-like line of best fit, be it from a GLM, LOESS, GAM etc.\n\nMake sure a proper interpretation is provided.\nTry to include uncertainty\n\n\n\n5.1.6 Correlation plots?\n\nright now we make bar plots. Is this the best option?\nDo we want to include asterikses for significant relations?\n\n\n\n5.1.7 Dumbbell charts\n\nshowing changes\n\n\n\n5.1.8 Waffle charts?\n\ndo we want them? For displaying simple percentages they might be ok\n\n\n\n5.1.9 Maps?\n\n\n5.1.10 Pie charts\njust no. Make a bar chart.",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>General rules?</span>"
+    ]
+  },
+  {
+    "objectID": "format_tutorial.html",
+    "href": "format_tutorial.html",
+    "title": "cbu styleguide",
+    "section": "",
+    "text": "What this tutorial has to include:\n\nGeneral introduction to quarto?\nOverview of the format and its tech stack:\n\nquarto to write so we work in markdown\ntypst to render to pdf. DO NOT TOUCH\nZotero for citations\nR/python/julia for calculations. Preferably R\n\nWalkthrough making a report\n\nWriting regular text\nfootnotes\nHeadings: we use level 4 headings for sections\nMaking tables\nMaking plots\nReferences:\n\nZotero\nreferencing tables and plots",
+    "crumbs": [
+      "<span class='chapter-number'>6</span>  <span class='chapter-title'>format_tutorial.html</span>"
     ]
   }
 ]

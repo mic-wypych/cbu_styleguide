@@ -85,3 +85,7 @@ This in general refers to plots that show some kind of regression-like line of b
 ### Pie charts
 
 just no. Make a bar chart.
+
+### Showing statistical models
+
+-   SEM models?
