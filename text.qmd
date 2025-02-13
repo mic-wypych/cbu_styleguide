@@ -1,4 +1,4 @@
-This part deals with all text-related things in
+This part deals with all text-related things in the format. Both in terms of typography and some rules about general writing
 
 ### Table showing all font sizes, families etc.
 
@@ -15,3 +15,9 @@ Probably something like:
 -   make sure text does not overlap -\> `{ggrepel}`
 
 -   ensure proper contrast for text -\> `{ggfittext}`
+
+General rules about writing should go here?
+
+-   Be accessible... Don't wirte about logits. Opt for Average MArginal Effects in percentages instead. If possible try to get a sense of scale and some interpretation for the effects
+
+-   But remain scientific. Be precise, don't overstate - this is scientific writing.

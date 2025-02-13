@@ -18,6 +18,16 @@ Preferably for displaying
 
 -   error bars
 
+-   long labels:
+
+    -   opt for coord_flip?
+
+    -   wrap the labels
+
+-   Likert scale issues:
+
+    -   starting from 1: geom_col() will start from 0 by default. Override with coord_cartesian()
+
 ### Filled bar charts
 
 -   mainly for displaying percentages
@@ -46,6 +56,8 @@ Preferably for displaying
 
 -   Too many points -\> go for geom_count?
 
+-   remember about reference line - geom_point will happily start the y axis from a number different from 0 or 1
+
 ### Line-of-best-fit charts
 
 This in general refers to plots that show some kind of regression-like line of best fit, be it from a GLM, LOESS, GAM etc.
@@ -54,9 +66,21 @@ This in general refers to plots that show some kind of regression-like line of b
 
 -   Try to include uncertainty
 
+### Correlation plots?
+
+-   right now we make bar plots. Is this the best option?
+
+-   Do we want to include asterikses for significant relations?
+
 ### Dumbbell charts
 
 -   showing changes
+
+### Waffle charts?
+
+-   do we want them? For displaying simple percentages they might be ok
+
+### Maps?
 
 ### Pie charts
 

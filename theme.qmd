@@ -9,3 +9,11 @@ Put the function here and discuss it a bit.
 ## How it looks like
 
 Make a plot that shows each element with the spacing, font sizes etc.
+
+## Table themeing
+
+-   numbers: summary stats
+
+-   text tables
+
+-   model output tables
