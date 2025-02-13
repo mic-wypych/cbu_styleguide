@@ -1,0 +1,11 @@
+This chapter discusses the cbu color palette.
+
+We are working with 2 categorical, 4 continuous (plus grey) and 1 divergent palette.
+
+The palette revolves around lighter, desaturated pinks, blues and puprles.
+
+## Categorical palette
+
+## Continuous palettes
+
+## Divergent palette
