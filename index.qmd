@@ -1,0 +1,5 @@
+# Preface {.unnumbered}
+
+Hi,
+
+this is a styleguide document for building Center for Research on Prejudice reports.
