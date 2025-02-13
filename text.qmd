@@ -1,0 +1,17 @@
+This part deals with all text-related things in
+
+### Table showing all font sizes, families etc.
+
+put the table here
+
+Are there any additional rules about text?
+
+Probably something like:
+
+-   avoid very long titles
+
+-   avoid very long headings
+
+-   make sure text does not overlap -\> `{ggrepel}`
+
+-   ensure proper contrast for text -\> `{ggfittext}`

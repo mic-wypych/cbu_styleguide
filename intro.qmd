@@ -19,3 +19,7 @@ In more details the things discussed are:
 -   Plots should use shapes that display information in as readable way as possible (e.g. when showing changes in time line plots are often better than bar plots).
 
 -   Rules are not hard-coded. Sometimes using specific colors (e.g. some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.
+
+-   Charts and tables should be referenced text. Specific guidelines are provided in tutorial on the report format. This matters both for readability and apparently is a quarto quirk with `{tinytable}` package used for rendering tables.
+
+-   We do not use titles for plots.

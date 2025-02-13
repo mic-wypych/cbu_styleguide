@@ -8,6 +8,11 @@ book:
   chapters:
     - index.qmd
     - intro.qmd
+    - text.qmd
+    - color.qmd
+    - theme.qmd
+    - chart_types.qmd
+    - format_tutorial.qmd
     - summary.qmd
     - references.qmd
 

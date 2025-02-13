@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "cbu styleguide",
     "section": "",
-    "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.\n\n1 + 1\n\n[1] 2",
+    "text": "Preface\nHi,\nthis is a styleguide document for building Center for Research on Prejudice reports. It provides general rules for building cbu-styled plots and tables and gives some rules on putting them in the cbu report format.",
     "crumbs": [
       "Preface"
     ]
@@ -14,7 +14,7 @@
     "href": "intro.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee Knuth (1984) for additional discussion of literate programming.\n\n1 + 1\n\n[1] 2\n\n\n\n\n\n\nKnuth, Donald E. 1984. “Literate Programming.” Comput. J. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
+    "text": "1.1 General rules\nTHis styleguide is intended to provide general rules on a bunch of things. This ensures more uniform and consistent look and feel across all visualizations in cbu reports. It also lists a bunch of things (especially related to accessibility) that should be considered when making plots and tables. Additionally the idea is to reduce the burden of designing and making choices when creating plots. Ultimately the all functionalities related to making cbu-styled plots and reports should end up in the {cbuR} package.\nIn more details the things discussed are:",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -37,6 +37,26 @@
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
     "crumbs": [
       "References"
+    ]
+  },
+  {
+    "objectID": "intro.html#general-rules",
+    "href": "intro.html#general-rules",
+    "title": "1  Introduction",
+    "section": "",
+    "text": "plots should be accessible. This means ensuring that text is readable, does no overlap but also thinking about colors with regard to black-white scale and colorblindness.\nPlots should have consistent styling. Don’t switch between types\nPlots should use shapes that display information in as readable way as possible (e.g. when showing changes in time line plots are often better than bar plots).\nRules are not hard-coded. Sometimes using specific colors (e.g. some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.",
+    "crumbs": [
+      "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
+    ]
+  },
+  {
+    "objectID": "text.html",
+    "href": "text.html",
+    "title": "2  Table showing all font sizes, families etc.",
+    "section": "",
+    "text": "This part deals with all text-related things in\nput the table here\nAre there any additional rules about text?\nProbably something like:\n\navoid very long titles\navoid very long headings\nmake sure text does not overlap -&gt; {ggrepel}\nensure proper contrast for text -&gt; {ggfittext}",
+    "crumbs": [
+      "<span class='chapter-number'>2</span>  <span class='chapter-title'>Table showing all font sizes, families etc.</span>"
     ]
   }
 ]
