@@ -96,14 +96,58 @@ Below is a breakdown of all elements in the theme:
 
 Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content.
 
--   numbers: summary stats
+### Tables with numbers
 
--   text tables:
+These tables include things like tables with sample characteristics (e.g. age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc. Here is the basic theme for `{tinytable}` that contains mainly summary stats:
 
-    -   issues: long text
+```{r}
+tt_theme_cbu <- function(x, caption) {
+  out <- x |>
+    tt(theme = "striped", cpation = caption) |>
+    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
+    style_tt(j = 1:ncol(x), align = "c") |>
+    style_tt(i = 0, bold = TRUE) |>
+    style_tt(i = nrow(x), line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "t", line_color = "#ABABAB")
+  return(out)
+}
+```
 
-    -   merging cells
+Here is an exmaple table
 
--   model output tables:
+issues:
 
-    -   general information that should be included in a table that describes a model are pretty much the same as standard APA stuff: include uncertainty (standard errors or confidence intervals)
+-   split by group
+
+### Text tables
+
+These tables include tables that primarily present text, especially when presenting scale items. Here is the basic theme for `{tinytable}` that contains mainly text:
+
+```{r}
+tt_theme_cbu <- function(x, caption) {
+  out <- x |>
+    tt(theme = "striped", cpation = caption) |>
+    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
+    style_tt(j = 1:ncol(x), align = "c") |>
+    style_tt(i = 0, bold = TRUE) |>
+    style_tt(i = nrow(x), line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "t", line_color = "#ABABAB")
+  return(out)
+}
+```
+
+Here is an example:
+
+issues:
+
+-   long text
+
+-   merging cells
+
+### Model output tables
+
+These tables include any statistical models presented in table format.
+
+-   which information should be included
