@@ -96,7 +96,7 @@ Below is a breakdown of all elements in the theme:
 
 ## Table theming
 
-Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content.
+Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content. More general tutorial and docs on `{tinytable}` can be found [here](https://vincentarelbundock.github.io/tinytable/vignettes/tinytable.html).
 
 ### Tables with numbers
 
@@ -128,13 +128,23 @@ summarise(across(.cols = c(x, y),
 tt_theme_cbu(caption = "Table 1. some summary statistics split by category")
 ```
 
-One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in `{tinytable}`
+One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in `{tinytable}`. You can set the grouping using `style_tt()`. the argument `i` specifies which rows to merge, `j` specifies which column to target and r`owspan` how many rows to merge for each i. `alignv` specifies how to vertically align text in the merged
 
 ```{r}
+grouped_df <- data.frame(
+    category = sample(c("option 1", "option 2", "option 3"), 1e3, replace = T),
+    group = sample(c("group 1", "group 2", "group 3"), 1e3, replace = T),
+    y = rnorm(1e3)
+)
 
+grouped_df %>%
+group_by(group, category) %>%
+summarise(across(y, .fns = list("mean" = \(x) mean(x),
+                           "sd" = \(x) sd(x)
+                           ), .names = "{.col} {.fn}")) %>%
+tt_theme_cbu(caption = "Table 2. Some grouped summary statistis.") %>%
+style_tt(i = c(1, 4, 7), j = 1, rowspan = 3, alignv = "m")
 ```
-
--   split by group
 
 ### Text tables
 
@@ -164,15 +174,24 @@ issues:
 
 ### Model output tables
 
-These tables include any statistical models presented in table format.
+These tables include any statistical models presented in table format. The key part is how to
 
 ```{r}
-lm_1 <- lm(y ~ x*a, cont_df)
+x <- rnorm(1e3)
+x_2 <- rnorm(1e3, 3, .7)
+y <- rnorm(1e3, 1 + .4*x + .4*x_2 - .5*x*x_2)
+df_cont_2 <- data.frame(
+    x, x_2, y
+)
 
-modelsummary(lm_1, )
+lm_1 <- lm(y ~ x + x_2, df_cont_2)
 
+lm_2 <- lm(y ~ x*x_2, df_cont_2)
+
+modelsummary(list("model 1" = lm_1, "model 2" = lm_2), stars = TRUE,
+            shape = term ~ model + statistic,
+            gof_map = c("nobs", "r.squared"))
 ```
 
--   which information should be included
+-   which information should be included:
 -   multiple models
--
