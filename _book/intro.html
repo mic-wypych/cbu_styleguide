@@ -121,19 +121,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./text.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Table showing all font sizes, families etc.</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">text</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./color.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Categorical palette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Colors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./theme.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The function</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Theme</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -196,7 +196,7 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>THis styleguide is intended to provide general rules on a bunch of things. This ensures more uniform and consistent look and feel across all visualizations in cbu reports. It also lists a bunch of things (especially related to accessibility) that should be considered when making plots and tables. Additionally the idea is to reduce the burden of designing and making choices when creating plots. Ultimately the all functionalities related to making cbu-styled plots and reports should end up in the <code>{cbuR}</code> package.</p>
+<p>This styleguide is intended to provide general rules on a bunch of things. This ensures more uniform and consistent look and feel across all visualizations in cbu reports. It also lists a bunch of things (especially related to accessibility) that should be considered when making plots and tables. Additionally the idea is to reduce the burden of designing and making choices when creating plots. Ultimately the all functionalities related to making cbu-styled plots and reports should end up in the <code>{cbuR}</code> package.</p>
 <p>In more details the things discussed are:</p>
 <ol type="1">
 <li>Use of colors</li>
@@ -209,11 +209,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 data-number="1.1" class="anchored" data-anchor-id="general-rules"><span class="header-section-number">1.1</span> General rules</h2>
 <ul>
 <li><p>plots should be accessible. This means ensuring that text is readable, does no overlap but also thinking about colors with regard to black-white scale and colorblindness.</p></li>
-<li><p>Plots should have consistent styling. Don’t switch between types</p></li>
+<li><p>Plots should have consistent styling. Don’t switch between types. If some categories are code with a given color, they should have that color in the entire report.</p></li>
 <li><p>Plots should use shapes that display information in as readable way as possible (e.g.&nbsp;when showing changes in time line plots are often better than bar plots).</p></li>
 <li><p>Rules are not hard-coded. Sometimes using specific colors (e.g.&nbsp;some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.</p></li>
-<li><p>Charts and tables should be referenced text. Specific guidelines are provided in tutorial on the report format. This matters both for readability and apparently is a quarto quirk with <code>{tinytable}</code> package used for rendering tables.</p></li>
-<li><p>We do not use titles for plots.</p></li>
+<li><p>Charts and tables should be referenced in text. Specific guidelines are provided in tutorial on the report format. This matters both for readability and apparently is a quarto quirk with <code>{tinytable}</code> package used for rendering tables.</p></li>
+<li><p>We do not use titles for plots. Any explanations are given in the caption</p></li>
 </ul>
 
 
@@ -644,8 +644,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./text.html" class="pagination-link" aria-label="Table showing all font sizes, families etc.">
-        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Table showing all font sizes, families etc.</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./text.html" class="pagination-link" aria-label="text">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">text</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

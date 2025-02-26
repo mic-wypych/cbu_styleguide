@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>3&nbsp; Categorical palette – cbu styleguide</title>
+<title>3&nbsp; Colors – cbu styleguide</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./color.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Categorical palette</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./color.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Colors</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -121,19 +155,19 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./text.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Table showing all font sizes, families etc.</span></span></a>
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">text</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./color.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Categorical palette</span></span></a>
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Colors</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./theme.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The function</span></span></a>
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Theme</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -144,8 +178,8 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./format_tutorial.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">format_tutorial.html</span></span></a>
+  <a href="./tutorial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">tutorial.html</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -170,8 +204,10 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#continuous-palettes" id="toc-continuous-palettes" class="nav-link active" data-scroll-target="#continuous-palettes"><span class="header-section-number">3.1</span> Continuous palettes</a></li>
-  <li><a href="#divergent-palette" id="toc-divergent-palette" class="nav-link" data-scroll-target="#divergent-palette"><span class="header-section-number">3.2</span> Divergent palette</a></li>
+  <li><a href="#general-rules" id="toc-general-rules" class="nav-link active" data-scroll-target="#general-rules"><span class="header-section-number">3.1</span> General rules</a></li>
+  <li><a href="#categorical-palette" id="toc-categorical-palette" class="nav-link" data-scroll-target="#categorical-palette"><span class="header-section-number">3.2</span> Categorical palette</a></li>
+  <li><a href="#continuous-palettes" id="toc-continuous-palettes" class="nav-link" data-scroll-target="#continuous-palettes"><span class="header-section-number">3.3</span> Continuous palettes</a></li>
+  <li><a href="#divergent-palette" id="toc-divergent-palette" class="nav-link" data-scroll-target="#divergent-palette"><span class="header-section-number">3.4</span> Divergent palette</a></li>
   </ul>
 </nav>
     </div>
@@ -180,7 +216,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Categorical palette</span></h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Colors</span></h1>
 </div>
 
 
@@ -197,14 +233,198 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This chapter discusses the cbu color palette.</p>
+<p>This chapter discusses the cbu color palette and preferable ways to use them</p>
 <p>We are working with 2 categorical, 4 continuous (plus grey) and 1 divergent palette.</p>
-<p>The palette revolves around lighter, desaturated pinks, blues and puprles.</p>
-<section id="continuous-palettes" class="level2" data-number="3.1">
-<h2 data-number="3.1" class="anchored" data-anchor-id="continuous-palettes"><span class="header-section-number">3.1</span> Continuous palettes</h2>
+<section id="general-rules" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="general-rules"><span class="header-section-number">3.1</span> General rules</h2>
+<p>There are some general rules for working with color</p>
 </section>
-<section id="divergent-palette" class="level2" data-number="3.2">
-<h2 data-number="3.2" class="anchored" data-anchor-id="divergent-palette"><span class="header-section-number">3.2</span> Divergent palette</h2>
+<section id="categorical-palette" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="categorical-palette"><span class="header-section-number">3.2</span> Categorical palette</h2>
+<p>The full categorical palette looks like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cbu_cat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#b96784"</span>, <span class="st">"#88375d"</span>,<span class="st">"#9bb6bd"</span>,<span class="st">"#5E9FB1"</span>, <span class="st">"#755687"</span>,<span class="st">"#4a2d5e"</span>, <span class="st">"#eb676c"</span>,<span class="st">"#aa2041"</span>, <span class="st">"#f2d1ab"</span>, <span class="st">"#dd9d38"</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>cbu_cat_1 <span class="ot">&lt;-</span> cbu_cat[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>cbu_cat_2 <span class="ot">&lt;-</span> cbu_cat[<span class="fu">c</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)]</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_swatch</span>(cbu_cat, <span class="at">nrow =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>It can be used in 2 categorical palettes with up to 5 colors each:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_swatch</span>(cbu_cat_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot_swatch</span>(cbu_cat_2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-3-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>The categorical palettes should be used in the following order for increasing number of categories:</p>
+<p><strong>Palette 1:</strong></p>
+<ul>
+<li><p>2 colors: <span style="background-color: #b96784;">blush</span>, and <span style="background-color: #9bb6bd;">blue</span></p></li>
+<li><p>3 colors: <span style="background-color: #b96784;">blush</span>, and <span style="background-color: #9bb6bd;">blue</span>, <span style="background-color: #755687;">purple</span></p></li>
+<li><p>4 colors: <span style="background-color: #b96784;">blush</span>, and <span style="background-color: #9bb6bd;">blue</span>, <span style="background-color: #755687;">purple</span> and <span style="background-color: #88375d;">magenta</span></p></li>
+</ul>
+<p><strong>Palette 2:</strong></p>
+<ul>
+<li><p>2 colors: <span style="background-color: #f2d1ab;">light yellow</span>, and <span style="background-color: #eb676c;">salmon</span></p></li>
+<li><p>3 colors: <span style="background-color: #f2d1ab;">light yellow</span>, and <span style="background-color: #eb676c;">salmon</span>, <span style="background-color: #4a2d5e;">dark purple</span></p></li>
+<li><p>4 colors: <span style="background-color: #f2d1ab;">light yellow</span>, and <span style="background-color: #eb676c;">salmon</span>, <span style="background-color: #4a2d5e;">dark purple</span> and <span style="background-color: #aa2041;">dark red</span></p></li>
+</ul>
+<p>Sample plots with those palettes:</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'marital'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'marital'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="continuous-palettes" class="level2" data-number="3.3">
+<h2 data-number="3.3" class="anchored" data-anchor-id="continuous-palettes"><span class="header-section-number">3.3</span> Continuous palettes</h2>
+<p>The continuous palettes are bases on the categorical ones with one palette in greys added.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cbu_pink <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#f79fbc'</span>, <span class="st">'#e48dac'</span>, <span class="st">'#d17b9b'</span>, <span class="st">'#be6a8b'</span>, <span class="st">'#ac597b'</span>, <span class="st">'#9a486c'</span>, <span class="st">'#88375d'</span>)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>cbu_blue <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#c4e0e7'</span>, <span class="st">'#a6c7d0'</span>, <span class="st">'#89afba'</span>, <span class="st">'#6c98a4'</span>, <span class="st">'#4f818f'</span>, <span class="st">'#306b7b'</span>, <span class="st">'#005667'</span>)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>cbu_purple <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#d0ade3'</span>, <span class="st">'#bc9ad0'</span>, <span class="st">'#a987bc'</span>, <span class="st">'#9675aa'</span>, <span class="st">'#836397'</span>, <span class="st">'#715285'</span>, <span class="st">'#5f4174'</span>)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>cbu_red <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#ff9799'</span>, <span class="st">'#f18489'</span>, <span class="st">'#e3727a'</span>, <span class="st">'#d55f6b'</span>, <span class="st">'#c74c5d'</span>, <span class="st">'#b8384f'</span>, <span class="st">'#aa2041'</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>cbu_yellow <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'#e4b67d'</span>, <span class="st">'#d2a368'</span>, <span class="st">'#c09054'</span>, <span class="st">'#af7e40'</span>, <span class="st">'#9d6b2d'</span>, <span class="st">'#8b5a18'</span>, <span class="st">'#7a4900'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Sample plots in the continuous palettes are as follows:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>cont_palettes <span class="ot">&lt;-</span> <span class="fu">list</span>(cbu_pink, cbu_blue, cbu_purple, cbu_red, cbu_yellow)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>cont_plot <span class="ot">&lt;-</span> <span class="cf">function</span>(palette) {</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  gss_cat_filt <span class="sc">%&gt;%</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(marital) <span class="sc">%&gt;%</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(partyid) <span class="sc">%&gt;%</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">perc =</span> <span class="fu">round</span>(n<span class="sc">/</span><span class="fu">sum</span>(n),<span class="dv">2</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital, <span class="at">y =</span> perc, <span class="at">fill =</span> partyid)) <span class="sc">+</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_col</span>(<span class="at">position =</span> <span class="st">"fill"</span>)<span class="sc">+</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_text</span>(<span class="fu">aes</span>(<span class="at">label =</span> <span class="fu">paste0</span>(perc<span class="sc">*</span><span class="dv">100</span>, <span class="st">"%"</span>)), <span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">hjust =</span> <span class="fl">1.7</span>, <span class="at">fontface =</span> <span class="st">"bold"</span>) <span class="sc">+</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span> palette) <span class="sc">+</span></span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Marital status and party id in some gss"</span>) <span class="sc">+</span></span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_cbu</span>()</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="fu">lapply</span>(cont_palettes, cont_plot)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[1]]</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[2]]</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-6-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[3]]</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-6-3.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[4]]</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-6-4.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+[[5]]</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-6-5.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="divergent-palette" class="level2" data-number="3.4">
+<h2 data-number="3.4" class="anchored" data-anchor-id="divergent-palette"><span class="header-section-number">3.4</span> Divergent palette</h2>
+<p>The divergent palette is created by joining the blue and red continuous palettes with 1 additional color as the middle point.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cbu_div <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rev</span>(cbu_blue), <span class="st">"grey80"</span>, cbu_red)</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>gss_cat_filt <span class="sc">%&gt;%</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> marital, <span class="at">fill =</span> <span class="fu">factor</span>(partyid))) <span class="sc">+</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>, <span class="at">color =</span> <span class="st">"black"</span>)<span class="sc">+</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values=</span> cbu_div[<span class="fu">c</span>(<span class="dv">2</span>,<span class="dv">4</span>,<span class="dv">6</span>,<span class="dv">8</span>,<span class="dv">11</span>,<span class="dv">13</span>,<span class="dv">15</span>)]) <span class="sc">+</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">title =</span> <span class="st">"Marital status and party id in some gss"</span>) <span class="sc">+</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_flip</span>() <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_cbu</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="color_files/figure-html/unnamed-chunk-7-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 
 
 </section>
@@ -629,13 +849,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./text.html" class="pagination-link" aria-label="Table showing all font sizes, families etc.">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Table showing all font sizes, families etc.</span></span>
+      <a href="./text.html" class="pagination-link" aria-label="text">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">text</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./theme.html" class="pagination-link" aria-label="The function">
-        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">The function</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./theme.html" class="pagination-link" aria-label="Theme">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Theme</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

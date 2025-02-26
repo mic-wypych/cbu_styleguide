@@ -1,23 +1,60 @@
+## text
+
 This part deals with all text-related things in the format. Both in terms of typography and some rules about general writing
 
 ### Table showing all font sizes, families etc.
 
-put the table here
+put the table here.
+
+| level             | font      | size | styling | add? |
+|-------------------|-----------|------|---------|------|
+| H1 - report title | Open sans |      |         |      |
+| H2                | Open sans |      |         |      |
+| H3                | Open sans |      |         |      |
+| H4                | Open sans |      |         |      |
+| regular text      | Open sans | 12pt |         |      |
+| caption           | Open sans |      |         |      |
+| axis titles       | Open sans |      |         |      |
+| axis text         | Open sans |      |         |      |
+| plot text         | Open sans |      |         |      |
 
 Are there any additional rules about text?
 
 Probably something like:
 
--   avoid very long titles
+-   avoid very long titles for reports
 
 -   avoid very long headings
 
--   make sure text does not overlap -\> `{ggrepel}`
+-   make sure text does not overlap -\> `{ggrepel}`\
+    This package has a function `geom_text_repel()` which tries to adjust labels so that they don't overlap. For example this plot has an issue with overlap:
+
+    ```{r}
+
+    ```
+
+    We can deal with this using `geom_text_repel()`. Additional arguments like `force` control how much the labels should be pushed from their original positions.
+
+    ```{r}
+
+    ```
 
 -   ensure proper contrast for text -\> `{ggfittext}`
 
+    For example the plot below does not have decent contrast when all text is in black:\
+
+    ```{r}
+
+    ```
+
+    We can fix that using `{ggfittext}` and `geom_fit_text()`
+
+    ```{r}
+
+    ```
+
 General rules about writing should go here?
 
--   Be accessible... Don't wirte about logits. Opt for Average MArginal Effects in percentages instead. If possible try to get a sense of scale and some interpretation for the effects
+-   Be accessible... Don't write about logits. Opt for Average Marginal Effects in percentages instead. If possible try to get a sense of scale and some interpretation for the effects (maybe something like probability of superiority over cohen's d etc.)
 
 -   But remain scientific. Be precise, don't overstate - this is scientific writing.

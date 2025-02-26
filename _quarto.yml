@@ -12,7 +12,7 @@ book:
     - color.qmd
     - theme.qmd
     - chart_types.qmd
-    - format_tutorial.qmd
+    - tutorial.qmd
     - summary.qmd
     - references.qmd
 

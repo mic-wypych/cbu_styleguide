@@ -1,6 +1,6 @@
 # Introduction
 
-THis styleguide is intended to provide general rules on a bunch of things. This ensures more uniform and consistent look and feel across all visualizations in cbu reports. It also lists a bunch of things (especially related to accessibility) that should be considered when making plots and tables. Additionally the idea is to reduce the burden of designing and making choices when creating plots. Ultimately the all functionalities related to making cbu-styled plots and reports should end up in the `{cbuR}` package.
+This styleguide is intended to provide general rules on a bunch of things. This ensures more uniform and consistent look and feel across all visualizations in cbu reports. It also lists a bunch of things (especially related to accessibility) that should be considered when making plots and tables. Additionally the idea is to reduce the burden of designing and making choices when creating plots. Ultimately the all functionalities related to making cbu-styled plots and reports should end up in the `{cbuR}` package.
 
 In more details the things discussed are:
 
@@ -14,12 +14,12 @@ In more details the things discussed are:
 
 -   plots should be accessible. This means ensuring that text is readable, does no overlap but also thinking about colors with regard to black-white scale and colorblindness.
 
--   Plots should have consistent styling. Don't switch between types
+-   Plots should have consistent styling. Don't switch between types. If some categories are code with a given color, they should have that color in the entire report.
 
 -   Plots should use shapes that display information in as readable way as possible (e.g. when showing changes in time line plots are often better than bar plots).
 
 -   Rules are not hard-coded. Sometimes using specific colors (e.g. some political parties have official colors) might be more appropriate than sticking to the official color palette. In such cases always consult other team members.
 
--   Charts and tables should be referenced text. Specific guidelines are provided in tutorial on the report format. This matters both for readability and apparently is a quarto quirk with `{tinytable}` package used for rendering tables.
+-   Charts and tables should be referenced in text. Specific guidelines are provided in tutorial on the report format. This matters both for readability and apparently is a quarto quirk with `{tinytable}` package used for rendering tables.
 
--   We do not use titles for plots.
+-   We do not use titles for plots. Any explanations are given in the caption

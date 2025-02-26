@@ -1,3 +1,5 @@
+## Theme
+
 This chapter discusses the `cbu_theme()` function for styling the ggplot objects into cbu-styled plots.
 
 **note**: should we have logo on the plots?
@@ -6,14 +8,47 @@ This chapter discusses the `cbu_theme()` function for styling the ggplot objects
 
 Put the function here and discuss it a bit.
 
+```{r}
+
+font <- "Open Sans"
+
+theme_cbu <- function() {
+  theme_minimal(base_size = 14, base_family = "Open Sans") +
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(linetype = "dashed", color = "grey80", linewidht = .5),
+          plot.background = element_rect(fill = "white", color = NA),
+          plot.title = element_text(size = 1.68*14, face = "bold", family = "Space Grotesk"),
+          plot.subtitle = element_text(face = "italic", family = "Space Grotesk"),
+          axis.title = element_text(face = "bold"),
+          strip.text = element_text(face = "bold"),
+          strip.background = element_rect(fill = NA, color = NA),
+          plot.caption = element_text(face = "italic", family = "Space Grotesk"),
+          legend.title = element_text(face = "bold"),
+          legend.position='top', 
+          legend.justification='left',
+          legend.direction='horizontal',
+          plot.title.position = "plot")
+}
+```
+
+The function is based on theme minimal. It uses **XXX font** with base size of **XX**. The main idea behind the theme function was to declutter the plot and take care of some basic layout & text hierarchy (especially the legend which can be rendered a bit awkwardly by default).
+
 ## How it looks like
 
 Make a plot that shows each element with the spacing, font sizes etc.
 
-## Table themeing
+## Table theming
+
+Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content.
 
 -   numbers: summary stats
 
--   text tables
+-   text tables:
 
--   model output tables
+    -   issues: long text
+
+    -   merging cells
+
+-   model output tables:
+
+    -   general information that should be included in a table that describes a model are pretty much the same as standard APA stuff: include uncertainty (standard errors or confidence intervals)
