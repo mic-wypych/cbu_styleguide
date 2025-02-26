@@ -1,11 +1,209 @@
-This chapter discusses the cbu color palette.
+## Colors
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(colorblindcheck)
+library(ggfittext)
+library(showtext)
+
+font_add_google("Noto Sans")
+showtext_auto()
+
+font <- "Noto Sans"
+
+
+plot_swatch <- function(palette, nrow = 1) {
+  require(ggplot2)
+  require(dplyr)
+  require(tidyr)
+  require(forcats)
+  
+  stopifnot(is.vector(palette))
+  
+  palette_df <- data.frame(hex = palette) |>
+    mutate(id = row_number()) |>
+    bind_cols(as.data.frame(colorspace::hex2RGB(palette)@coords))
+  
+  palette_df <- palette_df |>
+    bind_cols(
+      rgb2hsv(palette_df$R, palette_df$G, palette_df$B) |> 
+        t() |> 
+        as.data.frame()
+    )  %>%
+    mutate(across(.cols = R:B, ~ . * 255),
+           across(.cols = h:v, \(x) round(x, 3)))
+  
+  palette_df$hex <- fct_inorder(palette_df$hex)
+  palette_df |>
+    ggplot(aes(xmin=0, xmax = 1, ymin = 0, ymax = 1, fill = hex)) +
+    geom_rect() +
+    geom_fit_text(aes(x = .5, y = .7, fill = hex, label = hex), contrast = TRUE, inherit.aes = FALSE, fontface = "bold") +
+    geom_fit_text(aes(x = .5, y = .5,fill = hex, label = glue::glue("R: {palette_df$R} G: {palette_df$G} B: {palette_df$B}")), contrast = T, inherit.aes = F, fontface = "bold") +
+    geom_fit_text(aes(x = .5, y = .3,fill = hex, label = glue::glue("H: {palette_df$h} S: {palette_df$s} V: {palette_df$v}")), contrast = T, inherit.aes = F, fontface = "bold") +
+    scale_fill_identity() +
+    facet_wrap(~hex, nrow = nrow) +
+    coord_fixed() +
+    theme_void() +
+    theme(legend.position = "none",
+          plot.background = element_rect(fill = NA, color = NA),
+          strip.text = element_blank())
+}
+
+theme_cbu <- function() {
+  theme_minimal(base_size = 14, base_family = font) +
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(linetype = "dashed", color = "grey80"),
+          plot.background = element_rect(fill = "white", color = NA),
+          plot.title = element_text(size = 1.68*14, face = "bold", family = font),
+          plot.subtitle = element_text(face = "italic", family = font),
+          axis.title = element_text(face = "bold"),
+          strip.text = element_text(face = "bold"),
+          strip.background = element_rect(fill = NA, color = NA),
+          plot.caption = element_text(face = "italic", family = font),
+          legend.title = element_text(face = "bold"),
+          legend.position='top', 
+          legend.justification='left',
+          legend.direction='horizontal',
+          plot.title.position = "plot")
+}
+
+
+data("gss_cat")
+# sequential tests
+gss_cat_filt <- gss_cat %>%
+  filter(!(partyid %in% c("No answer", "Don't know", "Other party")))
+```
+
+This chapter discusses the cbu color palette and preferable ways to use them
 
 We are working with 2 categorical, 4 continuous (plus grey) and 1 divergent palette.
 
-The palette revolves around lighter, desaturated pinks, blues and puprles.
+## General rules
+
+There are some general rules for working with color
 
 ## Categorical palette
 
+The full categorical palette looks like this:
+
+```{r}
+cbu_cat <- c("#b96784", "#88375d","#9bb6bd","#5E9FB1", "#755687","#4a2d5e", "#eb676c","#aa2041", "#f2d1ab", "#dd9d38")
+cbu_cat_1 <- cbu_cat[c(1:5)]
+cbu_cat_2 <- cbu_cat[c(6:10)]
+
+plot_swatch(cbu_cat, nrow = 2)
+```
+
+It can be used in 2 categorical palettes with up to 5 colors each:
+
+```{r}
+plot_swatch(cbu_cat_1)
+plot_swatch(cbu_cat_2)
+```
+
+The categorical palettes should be used in the following order for increasing number of categories:
+
+**Palette 1:**
+
+-   2 colors: [ blush ]{style="background-color: #b96784;"}, and [ blue ]{style="background-color: #9bb6bd;"}
+
+-   3 colors: [ blush ]{style="background-color: #b96784;"}, and [ blue ]{style="background-color: #9bb6bd;"}, [ purple ]{style="background-color: #755687;"}
+
+-   4 colors: [ blush ]{style="background-color: #b96784;"}, and [ blue ]{style="background-color: #9bb6bd;"}, [ purple ]{style="background-color: #755687;"} and [ magenta ]{style="background-color: #88375d;"}
+
+**Palette 2:**
+
+-   2 colors: [ light yellow ]{style="background-color: #f2d1ab;"}, and [ salmon ]{style="background-color: #eb676c;"}
+
+-   3 colors: [ light yellow ]{style="background-color: #f2d1ab;"}, and [ salmon ]{style="background-color: #eb676c;"}, [ dark purple ]{style="background-color: #4a2d5e;"}
+
+-   4 colors: [ light yellow ]{style="background-color: #f2d1ab;"}, and [ salmon ]{style="background-color: #eb676c;"}, [ dark purple ]{style="background-color: #4a2d5e;"} and [ dark red ]{style="background-color: #aa2041;"}
+
+Sample plots with those palettes:
+
+```{r echo=FALSE}
+gss_cat_filt %>% 
+  filter(marital != "No answer") %>% 
+  group_by(marital, race) %>% 
+  summarise(mean = mean(tvhours, na.rm = T), sd = sd(tvhours, na.rm = T), se = sd/sqrt(n())) %>% 
+  ggplot(aes(x = race, y = mean, fill = marital)) +
+  geom_col(position = position_dodge(), width = .8) + 
+  geom_errorbar(aes(x =race, ymin = mean - se, ymax = mean + se),
+                width = .2, position = position_dodge(width = .8),
+                linewidth = 1, color = "grey50") + 
+  scale_fill_manual(values = cbu_cat_1) + 
+  labs(title = "mean tv hours per party id") +
+  theme_cbu() +
+  theme(panel.grid.major.x = element_blank())
+
+gss_cat_filt %>% 
+  filter(marital != "No answer") %>% 
+  group_by(marital, race) %>% 
+  summarise(mean = mean(tvhours, na.rm = T), sd = sd(tvhours, na.rm = T), se = sd/sqrt(n())) %>% 
+  ggplot(aes(x = race, y = mean, fill = marital)) +
+  geom_col(position = position_dodge(), width = .8) + 
+  geom_errorbar(aes(x =race, ymin = mean - se, ymax = mean + se),
+                width = .2, position = position_dodge(width = .8),
+                linewidth = 1, color = "grey50") + 
+  scale_fill_manual(values = cbu_cat_2) + 
+  labs(title = "mean tv hours per party id") +
+  theme_cbu() +
+  theme(panel.grid.major.x = element_blank())
+```
+
 ## Continuous palettes
 
+The continuous palettes are bases on the categorical ones with one palette in greys added.
+
+```{r}
+cbu_pink <- c('#f79fbc', '#e48dac', '#d17b9b', '#be6a8b', '#ac597b', '#9a486c', '#88375d')
+
+cbu_blue <- c('#c4e0e7', '#a6c7d0', '#89afba', '#6c98a4', '#4f818f', '#306b7b', '#005667')
+
+cbu_purple <- c('#d0ade3', '#bc9ad0', '#a987bc', '#9675aa', '#836397', '#715285', '#5f4174')
+
+cbu_red <- c('#ff9799', '#f18489', '#e3727a', '#d55f6b', '#c74c5d', '#b8384f', '#aa2041')
+
+cbu_yellow <- c('#e4b67d', '#d2a368', '#c09054', '#af7e40', '#9d6b2d', '#8b5a18', '#7a4900')
+```
+
+Sample plots in the continuous palettes are as follows:
+
+```{r}
+
+cont_palettes <- list(cbu_pink, cbu_blue, cbu_purple, cbu_red, cbu_yellow)
+
+
+cont_plot <- function(palette) {
+  gss_cat_filt %>%
+  group_by(marital) %>%
+  count(partyid) %>%
+  mutate(perc = round(n/sum(n),2)) %>%
+  ggplot(aes(x = marital, y = perc, fill = partyid)) +
+  geom_col(position = "fill")+
+  geom_text(aes(label = paste0(perc*100, "%")), position = "fill", hjust = 1.7, fontface = "bold") +
+  scale_fill_manual(values= palette) +
+  labs(title = "Marital status and party id in some gss") +
+  coord_flip() +
+  theme_cbu()
+}
+
+lapply(cont_palettes, cont_plot)
+
+```
+
 ## Divergent palette
+
+The divergent palette is created by joining the blue and red continuous palettes with 1 additional color as the middle point.
+
+```{r}
+cbu_div <- c(rev(cbu_blue), "grey80", cbu_red)
+
+gss_cat_filt %>%
+  ggplot(aes(x = marital, fill = factor(partyid))) +
+  geom_bar(position = "fill")+
+  scale_fill_manual(values= cbu_div[c(2,4,6,8,11,13,15)]) +
+  labs(title = "Marital status and party id in some gss") +
+  coord_flip() +
+  theme_cbu()
+```
