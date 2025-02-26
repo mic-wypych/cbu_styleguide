@@ -9,13 +9,17 @@ This chapter discusses the `cbu_theme()` function for styling the ggplot objects
 Put the function here and discuss it a bit.
 
 ```{r}
+library(tidyverse)
+library(showtext)
 
+font_add_google("Open Sans")
+showtext_auto()
 font <- "Open Sans"
 
 theme_cbu <- function() {
   theme_minimal(base_size = 14, base_family = "Open Sans") +
     theme(panel.grid.minor = element_blank(),
-          panel.grid.major = element_line(linetype = "dashed", color = "grey80", linewidht = .5),
+          panel.grid.major = element_line(linetype = "dashed", color = "grey80", linewidth = .5),
           plot.background = element_rect(fill = "white", color = NA),
           plot.title = element_text(size = 1.68*14, face = "bold", family = "Space Grotesk"),
           plot.subtitle = element_text(face = "italic", family = "Space Grotesk"),
@@ -36,6 +40,21 @@ The function is based on theme minimal. It uses **XXX font** with base size of *
 ## How it looks like
 
 Make a plot that shows each element with the spacing, font sizes etc.
+
+```{r}
+some_df <- data.frame(
+    a = sample(letters[1:7], 1000, replace = T)
+) %>%
+count(a)
+
+some_df %>%
+ggplot(aes(x = a, y = n)) +
+geom_col(fill = "#b96784", width = .6) +
+geom_text(aes(label = n), nudge_y = 2) +
+labs(x = "letters", y = "counts") +
+coord_flip() +
+theme_cbu()
+```
 
 ## Table theming
 

@@ -105,19 +105,19 @@ The categorical palettes should be used in the following order for increasing nu
 
 **Palette 1:**
 
--   2 colors: [ blush ]{style="background-color: #b96784;"}, and [ blue ]{style="background-color: #9bb6bd;"}
+-   2 colors: [blush]{style="background-color: #b96784;"}, and [blue]{style="background-color: #9bb6bd;"}
 
--   3 colors: [ blush ]{style="background-color: #b96784;"}, and [ blue ]{style="background-color: #9bb6bd;"}, [ purple ]{style="background-color: #755687;"}
+-   3 colors: [blush]{style="background-color: #b96784;"}, and [blue]{style="background-color: #9bb6bd;"}, [purple]{style="background-color: #755687;"}
 
--   4 colors: [ blush ]{style="background-color: #b96784;"}, and [ blue ]{style="background-color: #9bb6bd;"}, [ purple ]{style="background-color: #755687;"} and [ magenta ]{style="background-color: #88375d;"}
+-   4 colors: [blush]{style="background-color: #b96784;"}, and [blue]{style="background-color: #9bb6bd;"}, [purple]{style="background-color: #755687;"} and [magenta]{style="background-color: #88375d;"}
 
 **Palette 2:**
 
--   2 colors: [ light yellow ]{style="background-color: #f2d1ab;"}, and [ salmon ]{style="background-color: #eb676c;"}
+-   2 colors: [light yellow]{style="background-color: #f2d1ab;"}, and [salmon]{style="background-color: #eb676c;"}
 
--   3 colors: [ light yellow ]{style="background-color: #f2d1ab;"}, and [ salmon ]{style="background-color: #eb676c;"}, [ dark purple ]{style="background-color: #4a2d5e;"}
+-   3 colors: [light yellow]{style="background-color: #f2d1ab;"}, and [salmon]{style="background-color: #eb676c;"}, [dark purple]{style="background-color: #4a2d5e;"}
 
--   4 colors: [ light yellow ]{style="background-color: #f2d1ab;"}, and [ salmon ]{style="background-color: #eb676c;"}, [ dark purple ]{style="background-color: #4a2d5e;"} and [ dark red ]{style="background-color: #aa2041;"}
+-   4 colors: [light yellow]{style="background-color: #f2d1ab;"}, and [salmon]{style="background-color: #eb676c;"}, [dark purple]{style="background-color: #4a2d5e;"} and [dark red]{style="background-color: #aa2041;"}
 
 Sample plots with those palettes:
 
