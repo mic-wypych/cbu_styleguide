@@ -11,6 +11,8 @@ Put the function here and discuss it a bit.
 ```{r warning = FALSE, message = FALSE}
 library(tidyverse)
 library(showtext)
+library(tinytable)
+library(modelsummary)
 
 font_add_google("Open Sans")
 showtext_auto()
@@ -103,7 +105,7 @@ These tables include things like tables with sample characteristics (e.g. age, g
 ```{r}
 tt_theme_cbu <- function(x, caption) {
   out <- x |>
-    tt(theme = "striped", cpation = caption) |>
+    tt(caption = caption) |>
     format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
     style_tt(j = 1:ncol(x), align = "c") |>
     style_tt(i = 0, bold = TRUE) |>
@@ -114,9 +116,23 @@ tt_theme_cbu <- function(x, caption) {
 }
 ```
 
-Here is an exmaple table
+Here is an exmaple table:
 
-issues:
+```{r}
+cont_df %>%
+group_by(a) %>%
+summarise(across(.cols = c(x, y),
+                .fns = list("mean" = \(x) mean(x),
+                           "sd" = \(x) sd(x)
+                           ), .names = "{.col} {.fn}")) %>%
+tt_theme_cbu(caption = "Table 1. some summary statistics split by category")
+```
+
+One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in `{tinytable}`
+
+```{r}
+
+```
 
 -   split by group
 
@@ -124,21 +140,21 @@ issues:
 
 These tables include tables that primarily present text, especially when presenting scale items. Here is the basic theme for `{tinytable}` that contains mainly text:
 
-```{r}
-tt_theme_cbu <- function(x, caption) {
-  out <- x |>
-    tt(theme = "striped", cpation = caption) |>
-    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
-    style_tt(j = 1:ncol(x), align = "c") |>
-    style_tt(i = 0, bold = TRUE) |>
-    style_tt(i = nrow(x), line = "b", line_color = "#ABABAB") |>
-    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
-    style_tt(i = 0, line = "t", line_color = "#ABABAB")
-  return(out)
-}
-```
-
 Here is an example:
+
+```{r}
+text_df <- data.frame(
+    item = c("When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
+            "I keep my emotions to myself.",
+            "When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about.",
+            "When I am feeling positive emotions, I am careful not to express them."),
+    mean = c(4.54, 2.34, 6.44, 3.55),
+    sd = c(0.67, 1.23, 1.12, 0.89)
+)
+
+text_df %>%
+tt_theme_cbu(caption = "Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations")
+```
 
 issues:
 
@@ -150,4 +166,13 @@ issues:
 
 These tables include any statistical models presented in table format.
 
+```{r}
+lm_1 <- lm(y ~ x*a, cont_df)
+
+modelsummary(lm_1, )
+
+```
+
 -   which information should be included
+-   multiple models
+-

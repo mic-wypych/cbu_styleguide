@@ -206,7 +206,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <ul>
   <li><a href="#the-function" id="toc-the-function" class="nav-link active" data-scroll-target="#the-function"><span class="header-section-number">4.1</span> The function</a></li>
   <li><a href="#how-it-looks-like" id="toc-how-it-looks-like" class="nav-link" data-scroll-target="#how-it-looks-like"><span class="header-section-number">4.2</span> How it looks like</a></li>
-  <li><a href="#table-theming" id="toc-table-theming" class="nav-link" data-scroll-target="#table-theming"><span class="header-section-number">4.3</span> Table theming</a></li>
+  <li><a href="#table-theming" id="toc-table-theming" class="nav-link" data-scroll-target="#table-theming"><span class="header-section-number">4.3</span> Table theming</a>
+  <ul class="collapse">
+  <li><a href="#tables-with-numbers" id="toc-tables-with-numbers" class="nav-link" data-scroll-target="#tables-with-numbers"><span class="header-section-number">4.3.1</span> Tables with numbers</a></li>
+  <li><a href="#text-tables" id="toc-text-tables" class="nav-link" data-scroll-target="#text-tables"><span class="header-section-number">4.3.2</span> Text tables</a></li>
+  <li><a href="#model-output-tables" id="toc-model-output-tables" class="nav-link" data-scroll-target="#model-output-tables"><span class="header-section-number">4.3.3</span> Model output tables</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -240,38 +245,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="st">"Open Sans"</span>)</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>font <span class="ot">&lt;-</span> <span class="st">"Open Sans"</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>cbu_cat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#b96784"</span>, <span class="st">"#88375d"</span>,<span class="st">"#9bb6bd"</span>,<span class="st">"#5E9FB1"</span>, <span class="st">"#755687"</span>,<span class="st">"#4a2d5e"</span>, <span class="st">"#eb676c"</span>,<span class="st">"#aa2041"</span>, <span class="st">"#f2d1ab"</span>, <span class="st">"#dd9d38"</span>)</span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>cbu_cat_1 <span class="ot">&lt;-</span> cbu_cat[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>cbu_cat_2 <span class="ot">&lt;-</span> cbu_cat[<span class="fu">c</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)]</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>theme_cbu <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> font) <span class="sc">+</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">linewidth =</span> .<span class="dv">5</span>),</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">1.68</span><span class="sc">*</span><span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">family =</span> font),</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">family =</span> font),</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">8.5</span>),</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">family =</span> font, <span class="at">size =</span> <span class="dv">8</span>),</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">10</span>, <span class="st">"pt"</span>),</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.justification=</span><span class="st">'left'</span>,</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.direction=</span><span class="st">'horizontal'</span>,</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="at">t =</span><span class="dv">0</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">l =</span> <span class="dv">0</span>), <span class="st">"cm"</span>)</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>          )</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tinytable)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(modelsummary)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">font_add_google</span>(<span class="st">"Open Sans"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="fu">showtext_auto</span>()</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>font <span class="ot">&lt;-</span> <span class="st">"Open Sans"</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>cbu_cat <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">"#b96784"</span>, <span class="st">"#88375d"</span>,<span class="st">"#9bb6bd"</span>,<span class="st">"#5E9FB1"</span>, <span class="st">"#755687"</span>,<span class="st">"#4a2d5e"</span>, <span class="st">"#eb676c"</span>,<span class="st">"#aa2041"</span>, <span class="st">"#f2d1ab"</span>, <span class="st">"#dd9d38"</span>)</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>cbu_cat_1 <span class="ot">&lt;-</span> cbu_cat[<span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>)]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>cbu_cat_2 <span class="ot">&lt;-</span> cbu_cat[<span class="fu">c</span>(<span class="dv">6</span><span class="sc">:</span><span class="dv">10</span>)]</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>theme_cbu <span class="ot">&lt;-</span> <span class="cf">function</span>() {</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>(<span class="at">base_size =</span> <span class="dv">14</span>, <span class="at">base_family =</span> font) <span class="sc">+</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="fu">theme</span>(<span class="at">panel.grid.minor =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major =</span> <span class="fu">element_line</span>(<span class="at">color =</span> <span class="st">"grey80"</span>, <span class="at">linewidth =</span> .<span class="dv">5</span>),</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>          <span class="at">panel.grid.major.x =</span> <span class="fu">element_blank</span>(),</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="st">"white"</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.title =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="fl">1.68</span><span class="sc">*</span><span class="dv">12</span>, <span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">family =</span> font),</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.subtitle =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">family =</span> font),</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="fl">8.5</span>),</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>          <span class="at">axis.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.text =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>          <span class="at">strip.background =</span> <span class="fu">element_rect</span>(<span class="at">fill =</span> <span class="cn">NA</span>, <span class="at">color =</span> <span class="cn">NA</span>),</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.caption =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"italic"</span>, <span class="at">family =</span> font, <span class="at">size =</span> <span class="dv">8</span>),</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.title =</span> <span class="fu">element_text</span>(<span class="at">face =</span> <span class="st">"bold"</span>, <span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.text =</span> <span class="fu">element_text</span>(<span class="at">size =</span> <span class="dv">10</span>),</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.key.size =</span> <span class="fu">unit</span>(<span class="dv">10</span>, <span class="st">"pt"</span>),</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.position =</span> <span class="st">"top"</span>,</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.justification=</span><span class="st">'left'</span>,</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>          <span class="at">legend.direction=</span><span class="st">'horizontal'</span>,</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>          <span class="at">plot.margin =</span> <span class="fu">unit</span>(<span class="fu">c</span>(<span class="at">t =</span><span class="dv">0</span>, <span class="at">r =</span> <span class="dv">0</span>, <span class="at">b =</span> <span class="dv">0</span>, <span class="at">l =</span> <span class="dv">0</span>), <span class="st">"cm"</span>)</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>          )</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>The function is based on theme minimal. It uses <strong>Open Sans font</strong> with base size of <strong>14</strong>. The main idea behind the theme function was to declutter the plot and take care of some basic layout &amp; text hierarchy (especially the legend which can be rendered a bit awkwardly by default).</p>
 </section>
@@ -335,20 +342,480 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="table-theming" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="table-theming"><span class="header-section-number">4.3</span> Table theming</h2>
 <p>Cbu report format works on typst which necessitates using <code>{tinytable}</code> package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g.&nbsp;summary statistics, reporting model coefficients) and ones containing primarily text (e.g.&nbsp;item wording). Those can be styled a bit differently to fit conventions and the particular content.</p>
+<section id="tables-with-numbers" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="tables-with-numbers"><span class="header-section-number">4.3.1</span> Tables with numbers</h3>
+<p>These tables include things like tables with sample characteristics (e.g.&nbsp;age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc. Here is the basic theme for <code>{tinytable}</code> that contains mainly summary stats:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>tt_theme_cbu <span class="ot">&lt;-</span> <span class="cf">function</span>(x, caption) {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> x <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">tt</span>(<span class="at">caption =</span> caption) <span class="sc">|&gt;</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">format_tt</span>(<span class="at">digits =</span> <span class="dv">2</span>, <span class="at">num_fmt =</span> <span class="st">"significant_cell"</span>, <span class="at">num_mark_dec =</span> <span class="st">","</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">style_tt</span>(<span class="at">j =</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">ncol</span>(x), <span class="at">align =</span> <span class="st">"c"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="dv">0</span>, <span class="at">bold =</span> <span class="cn">TRUE</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="fu">nrow</span>(x), <span class="at">line =</span> <span class="st">"b"</span>, <span class="at">line_color =</span> <span class="st">"#ABABAB"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="dv">0</span>, <span class="at">line =</span> <span class="st">"b"</span>, <span class="at">line_color =</span> <span class="st">"#ABABAB"</span>) <span class="sc">|&gt;</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">style_tt</span>(<span class="at">i =</span> <span class="dv">0</span>, <span class="at">line =</span> <span class="st">"t"</span>, <span class="at">line_color =</span> <span class="st">"#ABABAB"</span>)</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">return</span>(out)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is an exmaple table:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cont_df <span class="sc">%&gt;%</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(a) <span class="sc">%&gt;%</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">across</span>(<span class="at">.cols =</span> <span class="fu">c</span>(x, y),</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                <span class="at">.fns =</span> <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> \(x) <span class="fu">mean</span>(x),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"sd"</span> <span class="ot">=</span> \(x) <span class="fu">sd</span>(x)</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>                           ), <span class="at">.names =</span> <span class="st">"{.col} {.fn}"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="fu">tt_theme_cbu</span>(<span class="at">caption =</span> <span class="st">"Table 1. some summary statistics split by category"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_e98b3ou59of6vn7dtwd6(i, j, css_id) {
+          var table = document.getElementById("tinytable_e98b3ou59of6vn7dtwd6");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_e98b3ou59of6vn7dtwd6');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_e98b3ou59of6vn7dtwd6(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_e98b3ou59of6vn7dtwd6");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 1, j: 4 }, { i: 2, j: 4 },  ], css_id: 'tinytable_css_wol8h04h1iamysxmoywv',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_t74ob469ble06u47n02e',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_oddi70xloerko29ai7wi',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_e98b3ou59of6vn7dtwd6(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_wol8h04h1iamysxmoywv, .table th.tinytable_css_wol8h04h1iamysxmoywv { text-align: center; }
+      .table td.tinytable_css_t74ob469ble06u47n02e, .table th.tinytable_css_t74ob469ble06u47n02e { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_oddi70xloerko29ai7wi, .table th.tinytable_css_oddi70xloerko29ai7wi { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_e98b3ou59of6vn7dtwd6" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        </thead><caption>Table 1. some summary statistics split by category</caption>
+              <tbody><tr>
+                <th scope="col">a</th>
+                <th scope="col">x mean</th>
+                <th scope="col">x sd</th>
+                <th scope="col">y mean</th>
+                <th scope="col">y sd</th>
+              </tr>
+        
+        
+        </tbody><tbody>
+                <tr>
+                  <td>a</td>
+                  <td>2</td>
+                  <td>1,2</td>
+                  <td>3,4</td>
+                  <td>4,4</td>
+                </tr>
+                <tr>
+                  <td>b</td>
+                  <td>2,2</td>
+                  <td>1,2</td>
+                  <td>2,5</td>
+                  <td>2,5</td>
+                </tr>
+                <tr>
+                  <td>c</td>
+                  <td>2</td>
+                  <td>1,2</td>
+                  <td>9,4</td>
+                  <td>4,1</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<p>One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in <code>{tinytable}</code></p>
 <ul>
-<li><p>numbers: summary stats</p></li>
-<li><p>text tables:</p>
+<li>split by group</li>
+</ul>
+</section>
+<section id="text-tables" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="text-tables"><span class="header-section-number">4.3.2</span> Text tables</h3>
+<p>These tables include tables that primarily present text, especially when presenting scale items. Here is the basic theme for <code>{tinytable}</code> that contains mainly text:</p>
+<p>Here is an example:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">item =</span> <span class="fu">c</span>(<span class="st">"When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about."</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"I keep my emotions to myself."</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about."</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"When I am feeling positive emotions, I am careful not to express them."</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">c</span>(<span class="fl">4.54</span>, <span class="fl">2.34</span>, <span class="fl">6.44</span>, <span class="fl">3.55</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">c</span>(<span class="fl">0.67</span>, <span class="fl">1.23</span>, <span class="fl">1.12</span>, <span class="fl">0.89</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>text_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tt_theme_cbu</span>(<span class="at">caption =</span> <span class="st">"Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_p8yuv56cc3mihzd4ono4(i, j, css_id) {
+          var table = document.getElementById("tinytable_p8yuv56cc3mihzd4ono4");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_p8yuv56cc3mihzd4ono4');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_p8yuv56cc3mihzd4ono4(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_p8yuv56cc3mihzd4ono4");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_oewreqfougzz4bz6w3eq',}, 
+          { positions: [ { i: 4, j: 0 }, { i: 4, j: 1 }, { i: 4, j: 2 },  ], css_id: 'tinytable_css_mvtg8peb89oa5mfiafxp',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_74cn300zlbe6f29issc1',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_p8yuv56cc3mihzd4ono4(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_oewreqfougzz4bz6w3eq, .table th.tinytable_css_oewreqfougzz4bz6w3eq { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_mvtg8peb89oa5mfiafxp, .table th.tinytable_css_mvtg8peb89oa5mfiafxp { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_74cn300zlbe6f29issc1, .table th.tinytable_css_74cn300zlbe6f29issc1 { text-align: center; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_p8yuv56cc3mihzd4ono4" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        </thead><caption>Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations</caption>
+              <tbody><tr>
+                <th scope="col">item</th>
+                <th scope="col">mean</th>
+                <th scope="col">sd</th>
+              </tr>
+        
+        
+        </tbody><tbody>
+                <tr>
+                  <td>When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.</td>
+                  <td>4,5</td>
+                  <td>0,67</td>
+                </tr>
+                <tr>
+                  <td>I keep my emotions to myself.</td>
+                  <td>2,3</td>
+                  <td>1,2</td>
+                </tr>
+                <tr>
+                  <td>When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about.</td>
+                  <td>6,4</td>
+                  <td>1,1</td>
+                </tr>
+                <tr>
+                  <td>When I am feeling positive emotions, I am careful not to express them.</td>
+                  <td>3,5</td>
+                  <td>0,89</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
+<p>issues:</p>
 <ul>
-<li><p>issues: long text</p></li>
+<li><p>long text</p></li>
 <li><p>merging cells</p></li>
-</ul></li>
-<li><p>model output tables:</p>
+</ul>
+</section>
+<section id="model-output-tables" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="model-output-tables"><span class="header-section-number">4.3.3</span> Model output tables</h3>
+<p>These tables include any statistical models presented in table format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x<span class="sc">*</span>a, cont_df)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(lm_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<!-- preamble start -->
+
+    <script>
+
+      function styleCell_jgp50u5d580h6ubbo7oe(i, j, css_id) {
+          var table = document.getElementById("tinytable_jgp50u5d580h6ubbo7oe");
+          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
+          if (cell) {
+              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
+              cell.classList.add(css_id);
+          } else {
+              console.warn(`Cell at (${i}, ${j}) not found.`);
+          }
+      }
+      function insertSpanRow(i, colspan, content) {
+        var table = document.getElementById('tinytable_jgp50u5d580h6ubbo7oe');
+        var newRow = table.insertRow(i);
+        var newCell = newRow.insertCell(0);
+        newCell.setAttribute("colspan", colspan);
+        // newCell.innerText = content;
+        // this may be unsafe, but innerText does not interpret <br>
+        newCell.innerHTML = content;
+      }
+      function spanCell_jgp50u5d580h6ubbo7oe(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_jgp50u5d580h6ubbo7oe");
+        const targetRow = table.rows[i];
+        const targetCell = targetRow.cells[j];
+        for (let r = 0; r < rowspan; r++) {
+          // Only start deleting cells to the right for the first row (r == 0)
+          if (r === 0) {
+            // Delete cells to the right of the target cell in the first row
+            for (let c = colspan - 1; c > 0; c--) {
+              if (table.rows[i + r].cells[j + c]) {
+                table.rows[i + r].deleteCell(j + c);
+              }
+            }
+          }
+          // For rows below the first, delete starting from the target column
+          if (r > 0) {
+            for (let c = colspan - 1; c >= 0; c--) {
+              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
+                table.rows[i + r].deleteCell(j);
+              }
+            }
+          }
+        }
+        // Set rowspan and colspan of the target cell
+        targetCell.rowSpan = rowspan;
+        targetCell.colSpan = colspan;
+      }
+      // tinytable span after
+      window.addEventListener('load', function () {
+          var cellsToStyle = [
+            // tinytable style arrays after
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_ykt9m9ylttna5xksahnb',}, 
+          { positions: [ { i: 19, j: 1 },  ], css_id: 'tinytable_css_x79pz0gwc8g8xwn36ofv',}, 
+          { positions: [ { i: 12, j: 1 },  ], css_id: 'tinytable_css_wb0j9le1v4sr88lq85fc',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_qcs8jb9u52jfla4r0d17',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 16, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 17, j: 0 }, { i: 18, j: 0 },  ], css_id: 'tinytable_css_q6i46qqi2yozt1bzv8oo',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 16, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 15, j: 1 }, { i: 17, j: 1 }, { i: 18, j: 1 },  ], css_id: 'tinytable_css_p6l5qvpiccdoyy5kyd5j',}, 
+          { positions: [ { i: 19, j: 0 },  ], css_id: 'tinytable_css_p0dckb2na78xvyywq9qc',}, 
+          { positions: [ { i: 12, j: 0 },  ], css_id: 'tinytable_css_bdjzsvi2u29lkiksszla',}, 
+          ];
+
+          // Loop over the arrays to style the cells
+          cellsToStyle.forEach(function (group) {
+              group.positions.forEach(function (cell) {
+                  styleCell_jgp50u5d580h6ubbo7oe(cell.i, cell.j, group.css_id);
+              });
+          });
+      });
+    </script>
+
+    <style>
+      /* tinytable css entries after */
+      .table td.tinytable_css_ykt9m9ylttna5xksahnb, .table th.tinytable_css_ykt9m9ylttna5xksahnb { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_x79pz0gwc8g8xwn36ofv, .table th.tinytable_css_x79pz0gwc8g8xwn36ofv { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_wb0j9le1v4sr88lq85fc, .table th.tinytable_css_wb0j9le1v4sr88lq85fc { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_qcs8jb9u52jfla4r0d17, .table th.tinytable_css_qcs8jb9u52jfla4r0d17 { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_q6i46qqi2yozt1bzv8oo, .table th.tinytable_css_q6i46qqi2yozt1bzv8oo { text-align: left; }
+      .table td.tinytable_css_p6l5qvpiccdoyy5kyd5j, .table th.tinytable_css_p6l5qvpiccdoyy5kyd5j { text-align: center; }
+      .table td.tinytable_css_p0dckb2na78xvyywq9qc, .table th.tinytable_css_p0dckb2na78xvyywq9qc { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_bdjzsvi2u29lkiksszla, .table th.tinytable_css_bdjzsvi2u29lkiksszla { text-align: left; border-bottom: solid black 0.05em; }
+    </style>
+    <div class="container">
+      <table class="table table-borderless" id="tinytable_jgp50u5d580h6ubbo7oe" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+        <thead>
+        
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">(1)</th>
+              </tr>
+        </thead>
+        
+        <tbody>
+                <tr>
+                  <td>(Intercept)</td>
+                  <td>-1.144</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.285)</td>
+                </tr>
+                <tr>
+                  <td>x</td>
+                  <td>2.316</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.124)</td>
+                </tr>
+                <tr>
+                  <td>ab</td>
+                  <td>1.808</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.426)</td>
+                </tr>
+                <tr>
+                  <td>ac</td>
+                  <td>4.523</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.415)</td>
+                </tr>
+                <tr>
+                  <td>x × ab</td>
+                  <td>-1.496</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.178)</td>
+                </tr>
+                <tr>
+                  <td>x × ac</td>
+                  <td>0.696</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.181)</td>
+                </tr>
+                <tr>
+                  <td>Num.Obs.</td>
+                  <td>1000</td>
+                </tr>
+                <tr>
+                  <td>R2</td>
+                  <td>0.683</td>
+                </tr>
+                <tr>
+                  <td>R2 Adj.</td>
+                  <td>0.682</td>
+                </tr>
+                <tr>
+                  <td>AIC</td>
+                  <td>4835.7</td>
+                </tr>
+                <tr>
+                  <td>BIC</td>
+                  <td>4870.0</td>
+                </tr>
+                <tr>
+                  <td>Log.Lik.</td>
+                  <td>-2410.832</td>
+                </tr>
+                <tr>
+                  <td>RMSE</td>
+                  <td>2.70</td>
+                </tr>
+        </tbody>
+      </table>
+    </div>
+<!-- hack to avoid NA insertion in last line -->
+</div>
+</div>
 <ul>
-<li>general information that should be included in a table that describes a model are pretty much the same as standard APA stuff: include uncertainty (standard errors or confidence intervals)</li>
-</ul></li>
+<li>which information should be included</li>
+<li>multiple models</li>
+<li></li>
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
