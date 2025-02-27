@@ -170,7 +170,7 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#table-showing-all-font-sizes-families-etc." id="toc-table-showing-all-font-sizes-families-etc." class="nav-link active" data-scroll-target="#table-showing-all-font-sizes-families-etc."><span class="header-section-number">2.0.1</span> Table showing all font sizes, families etc.</a></li>
+  <li><a href="#some-additional-rules-and-tips" id="toc-some-additional-rules-and-tips" class="nav-link active" data-scroll-target="#some-additional-rules-and-tips"><span class="header-section-number">2.1</span> Some additional rules and tips</a></li>
   </ul>
 </nav>
     </div>
@@ -196,101 +196,90 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>This part deals with all text-related things in the format. Both in terms of typography and some rules about general writing</p>
-<section id="table-showing-all-font-sizes-families-etc." class="level3" data-number="2.0.1">
-<h3 data-number="2.0.1" class="anchored" data-anchor-id="table-showing-all-font-sizes-families-etc."><span class="header-section-number">2.0.1</span> Table showing all font sizes, families etc.</h3>
-<p>put the table here.</p>
+<p>This part deals with all text-related things in the format. Both in terms of typography and some rules about general writing. The font used throughout the report is Open Sans. The text hierarchy is defined below:</p>
 <table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 23%">
+<col style="width: 23%">
+<col style="width: 23%">
+</colgroup>
 <thead>
 <tr class="header">
 <th>level</th>
 <th>font</th>
 <th>size</th>
 <th>styling</th>
-<th>add?</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td>H1 - report title</td>
+<td><span style="font-size: 2.0em;">H1 - report title</span></td>
 <td>Open sans</td>
-<td></td>
-<td></td>
-<td></td>
+<td>2em</td>
+<td>bold?</td>
 </tr>
 <tr class="even">
-<td>H2</td>
+<td><span style="font-size: 1.68em;">H2 - main points</span></td>
 <td>Open sans</td>
-<td></td>
-<td></td>
+<td>1.68em</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>H3</td>
+<td><span style="font-size: 1.41em;">H3 - section title</span></td>
 <td>Open sans</td>
-<td></td>
-<td></td>
+<td>1.41em</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>H4</td>
+<td><span style="font-size: 1.189em; font-weight bold;">H4</span></td>
 <td>Open sans</td>
-<td></td>
-<td></td>
-<td></td>
+<td>1.1892em</td>
+<td>bold? underline?</td>
 </tr>
 <tr class="odd">
 <td>regular text</td>
 <td>Open sans</td>
 <td>12pt</td>
 <td></td>
+</tr>
+<tr class="even">
+<td><span style="font-size: 8pt;">caption</span></td>
+<td>Open sans</td>
+<td>8pt</td>
+<td>grey</td>
+</tr>
+<tr class="odd">
+<td><span style="font-size: 8.5pt;">axis titles</span></td>
+<td>Open sans</td>
+<td>8.5pt</td>
 <td></td>
 </tr>
 <tr class="even">
-<td>caption</td>
+<td><span style="font-size: 8pt;">axis text</span></td>
 <td>Open sans</td>
-<td></td>
-<td></td>
+<td>8pt</td>
 <td></td>
 </tr>
 <tr class="odd">
-<td>axis titles</td>
+<td><span style="font-size: 10pt;">plot text</span></td>
 <td>Open sans</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="even">
-<td>axis text</td>
-<td>Open sans</td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>plot text</td>
-<td>Open sans</td>
-<td></td>
-<td></td>
+<td>10pt</td>
 <td></td>
 </tr>
 </tbody>
 </table>
-<p>Are there any additional rules about text?</p>
-<p>Probably something like:</p>
+<section id="some-additional-rules-and-tips" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="some-additional-rules-and-tips"><span class="header-section-number">2.1</span> Some additional rules and tips</h2>
 <ul>
 <li><p>avoid very long titles for reports</p></li>
-<li><p>avoid very long headings</p></li>
-<li><p>make sure text does not overlap -&gt; <code>{ggrepel}</code><br>
-This package has a function <code>geom_text_repel()</code> which tries to adjust labels so that they don’t overlap. For example this plot has an issue with overlap:</p>
+<li><p>avoid very long section titles</p></li>
+<li><p>make sure text does not overlap on plots -&gt;<br>
+<code>{ggrepel}</code> package has a function <code>geom_text_repel()</code> which tries to adjust labels so that they don’t overlap. For example this plot has an issue with overlap:</p>
 <p>We can deal with this using <code>geom_text_repel()</code>. Additional arguments like <code>force</code> control how much the labels should be pushed from their original positions.</p></li>
 <li><p>ensure proper contrast for text -&gt; <code>{ggfittext}</code></p>
-<p>For example the plot below does not have decent contrast when all text is in black:<br>
-</p>
+<p>For example the plot below does not have decent contrast when all text is in black:</p>
 <p>We can fix that using <code>{ggfittext}</code> and <code>geom_fit_text()</code></p></li>
-</ul>
-<p>General rules about writing should go here?</p>
-<ul>
 <li><p>Be accessible… Don’t write about logits. Opt for Average Marginal Effects in percentages instead. If possible try to get a sense of scale and some interpretation for the effects (maybe something like probability of superiority over cohen’s d etc.)</p></li>
 <li><p>But remain scientific. Be precise, don’t overstate - this is scientific writing.</p></li>
 </ul>
