@@ -341,7 +341,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="table-theming" class="level2" data-number="4.3">
 <h2 data-number="4.3" class="anchored" data-anchor-id="table-theming"><span class="header-section-number">4.3</span> Table theming</h2>
-<p>Cbu report format works on typst which necessitates using <code>{tinytable}</code> package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g.&nbsp;summary statistics, reporting model coefficients) and ones containing primarily text (e.g.&nbsp;item wording). Those can be styled a bit differently to fit conventions and the particular content. More general tutorial and docs on <code>{tinytable}</code> can be found <a href="https://vincentarelbundock.github.io/tinytable/vignettes/tinytable.html">here</a>.</p>
+<p>Cbu report format works on typst which necessitates using <code>{tinytable}</code> package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g.&nbsp;summary statistics, reporting model coefficients) and ones containing primarily text (e.g.&nbsp;item wording). Those can be styled a bit differently to fit conventions and the particular content.</p>
 <section id="tables-with-numbers" class="level3" data-number="4.3.1">
 <h3 data-number="4.3.1" class="anchored" data-anchor-id="tables-with-numbers"><span class="header-section-number">4.3.1</span> Tables with numbers</h3>
 <p>These tables include things like tables with sample characteristics (e.g.&nbsp;age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc. Here is the basic theme for <code>{tinytable}</code> that contains mainly summary stats:</p>
@@ -372,8 +372,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     <script>
 
-      function styleCell_tbs7s0fpyvzgtcbk73od(i, j, css_id) {
-          var table = document.getElementById("tinytable_tbs7s0fpyvzgtcbk73od");
+      function styleCell_3ma1xwvqqn4apjcddo4h(i, j, css_id) {
+          var table = document.getElementById("tinytable_3ma1xwvqqn4apjcddo4h");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -383,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_tbs7s0fpyvzgtcbk73od');
+        var table = document.getElementById('tinytable_3ma1xwvqqn4apjcddo4h');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -391,8 +391,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_tbs7s0fpyvzgtcbk73od(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_tbs7s0fpyvzgtcbk73od");
+      function spanCell_3ma1xwvqqn4apjcddo4h(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_3ma1xwvqqn4apjcddo4h");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -422,15 +422,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_v4hemlzplfx9jkc4pch0',}, 
-          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 1, j: 4 }, { i: 2, j: 4 },  ], css_id: 'tinytable_css_jtpwtpeyrw1ocpl3gs23',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_da3ls2yh97za619a5c9j',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 }, { i: 0, j: 4 },  ], css_id: 'tinytable_css_xmewmfu67d3vwcq7arty',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 3, j: 2 }, { i: 3, j: 3 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_uvwjngaya32tz7i0ef6h',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 1, j: 2 }, { i: 2, j: 2 }, { i: 1, j: 3 }, { i: 2, j: 3 }, { i: 1, j: 4 }, { i: 2, j: 4 },  ], css_id: 'tinytable_css_okgt6h69cjs00ixsoovi',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_tbs7s0fpyvzgtcbk73od(cell.i, cell.j, group.css_id);
+                  styleCell_3ma1xwvqqn4apjcddo4h(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -438,12 +438,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_v4hemlzplfx9jkc4pch0, .table th.tinytable_css_v4hemlzplfx9jkc4pch0 { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_jtpwtpeyrw1ocpl3gs23, .table th.tinytable_css_jtpwtpeyrw1ocpl3gs23 { text-align: center; }
-      .table td.tinytable_css_da3ls2yh97za619a5c9j, .table th.tinytable_css_da3ls2yh97za619a5c9j { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_xmewmfu67d3vwcq7arty, .table th.tinytable_css_xmewmfu67d3vwcq7arty { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_uvwjngaya32tz7i0ef6h, .table th.tinytable_css_uvwjngaya32tz7i0ef6h { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_okgt6h69cjs00ixsoovi, .table th.tinytable_css_okgt6h69cjs00ixsoovi { text-align: center; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_tbs7s0fpyvzgtcbk73od" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_3ma1xwvqqn4apjcddo4h" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Table 1. some summary statistics split by category</caption>
               <tbody><tr>
@@ -458,24 +458,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         </tbody><tbody>
                 <tr>
                   <td>a</td>
-                  <td>1,9</td>
+                  <td>2</td>
                   <td>1,2</td>
-                  <td>3,2</td>
-                  <td>4</td>
+                  <td>3,5</td>
+                  <td>4,1</td>
                 </tr>
                 <tr>
                   <td>b</td>
                   <td>2</td>
-                  <td>1,1</td>
-                  <td>1,8</td>
-                  <td>2,6</td>
+                  <td>1,2</td>
+                  <td>2,4</td>
+                  <td>2,4</td>
                 </tr>
                 <tr>
                   <td>c</td>
                   <td>2</td>
                   <td>1,2</td>
-                  <td>9,4</td>
-                  <td>4,1</td>
+                  <td>9,5</td>
+                  <td>4,4</td>
                 </tr>
         </tbody>
       </table>
@@ -483,202 +483,34 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- hack to avoid NA insertion in last line -->
 </div>
 </div>
-<p>One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in <code>{tinytable}</code>. You can set the grouping using <code>style_tt()</code>. the argument <code>i</code> specifies which rows to merge, <code>j</code> specifies which column to target and r<code>owspan</code> how many rows to merge for each i. <code>alignv</code> specifies how to vertically align text in the merged</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>grouped_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">category =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"option 1"</span>, <span class="st">"option 2"</span>, <span class="st">"option 3"</span>), <span class="fl">1e3</span>, <span class="at">replace =</span> T),</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">group =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="st">"group 1"</span>, <span class="st">"group 2"</span>, <span class="st">"group 3"</span>), <span class="fl">1e3</span>, <span class="at">replace =</span> T),</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">y =</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>grouped_df <span class="sc">%&gt;%</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="fu">group_by</span>(group, category) <span class="sc">%&gt;%</span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="fu">summarise</span>(<span class="fu">across</span>(y, <span class="at">.fns =</span> <span class="fu">list</span>(<span class="st">"mean"</span> <span class="ot">=</span> \(x) <span class="fu">mean</span>(x),</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>                           <span class="st">"sd"</span> <span class="ot">=</span> \(x) <span class="fu">sd</span>(x)</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>                           ), <span class="at">.names =</span> <span class="st">"{.col} {.fn}"</span>)) <span class="sc">%&gt;%</span></span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="fu">tt_theme_cbu</span>(<span class="at">caption =</span> <span class="st">"Table 2. Some grouped summary statistis."</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a><span class="fu">style_tt</span>(<span class="at">i =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">7</span>), <span class="at">j =</span> <span class="dv">1</span>, <span class="at">rowspan =</span> <span class="dv">3</span>, <span class="at">alignv =</span> <span class="st">"m"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stderr">
-<pre><code>`summarise()` has grouped output by 'group'. You can override using the
-`.groups` argument.</code></pre>
-</div>
-<div class="cell-output-display">
-<!-- preamble start -->
-
-    <script>
-
-      function styleCell_xnishac0gdw2tnw7kjxi(i, j, css_id) {
-          var table = document.getElementById("tinytable_xnishac0gdw2tnw7kjxi");
-          var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
-          if (cell) {
-              console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
-              cell.classList.add(css_id);
-          } else {
-              console.warn(`Cell at (${i}, ${j}) not found.`);
-          }
-      }
-      function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_xnishac0gdw2tnw7kjxi');
-        var newRow = table.insertRow(i);
-        var newCell = newRow.insertCell(0);
-        newCell.setAttribute("colspan", colspan);
-        // newCell.innerText = content;
-        // this may be unsafe, but innerText does not interpret <br>
-        newCell.innerHTML = content;
-      }
-      function spanCell_xnishac0gdw2tnw7kjxi(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_xnishac0gdw2tnw7kjxi");
-        const targetRow = table.rows[i];
-        const targetCell = targetRow.cells[j];
-        for (let r = 0; r < rowspan; r++) {
-          // Only start deleting cells to the right for the first row (r == 0)
-          if (r === 0) {
-            // Delete cells to the right of the target cell in the first row
-            for (let c = colspan - 1; c > 0; c--) {
-              if (table.rows[i + r].cells[j + c]) {
-                table.rows[i + r].deleteCell(j + c);
-              }
-            }
-          }
-          // For rows below the first, delete starting from the target column
-          if (r > 0) {
-            for (let c = colspan - 1; c >= 0; c--) {
-              if (table.rows[i + r] && table.rows[i + r].cells[j]) {
-                table.rows[i + r].deleteCell(j);
-              }
-            }
-          }
-        }
-        // Set rowspan and colspan of the target cell
-        targetCell.rowSpan = rowspan;
-        targetCell.colSpan = colspan;
-      }
-      // tinytable span after
-      window.addEventListener('load', function () { spanCell_xnishac0gdw2tnw7kjxi(7, 0, 3, 1) })
-      window.addEventListener('load', function () { spanCell_xnishac0gdw2tnw7kjxi(4, 0, 3, 1) })
-      window.addEventListener('load', function () { spanCell_xnishac0gdw2tnw7kjxi(1, 0, 3, 1) })
-      window.addEventListener('load', function () {
-          var cellsToStyle = [
-            // tinytable style arrays after
-          { positions: [ { i: 1, j: 0 }, { i: 4, j: 0 }, { i: 7, j: 0 },  ], css_id: 'tinytable_css_yrfrvqb7oixy724k0jgr',}, 
-          { positions: [ { i: 9, j: 0 }, { i: 9, j: 1 }, { i: 9, j: 2 }, { i: 9, j: 3 },  ], css_id: 'tinytable_css_uh0srubqr7ddzj6o272v',}, 
-          { positions: [ { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 1, j: 1 }, { i: 8, j: 0 }, { i: 2, j: 2 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 8, j: 1 }, { i: 2, j: 3 }, { i: 6, j: 1 }, { i: 1, j: 2 }, { i: 5, j: 3 }, { i: 3, j: 2 }, { i: 4, j: 2 }, { i: 5, j: 2 }, { i: 6, j: 2 }, { i: 7, j: 2 }, { i: 8, j: 2 }, { i: 3, j: 3 }, { i: 7, j: 1 }, { i: 1, j: 3 }, { i: 6, j: 3 }, { i: 7, j: 3 }, { i: 4, j: 3 }, { i: 8, j: 3 },  ], css_id: 'tinytable_css_kt96gegpc741w82slcm2',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_exeecolmibypuibypxth',}, 
-          ];
-
-          // Loop over the arrays to style the cells
-          cellsToStyle.forEach(function (group) {
-              group.positions.forEach(function (cell) {
-                  styleCell_xnishac0gdw2tnw7kjxi(cell.i, cell.j, group.css_id);
-              });
-          });
-      });
-    </script>
-
-    <style>
-      /* tinytable css entries after */
-      .table td.tinytable_css_yrfrvqb7oixy724k0jgr, .table th.tinytable_css_yrfrvqb7oixy724k0jgr { text-align: center; vertical-align: middle; }
-      .table td.tinytable_css_uh0srubqr7ddzj6o272v, .table th.tinytable_css_uh0srubqr7ddzj6o272v { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_kt96gegpc741w82slcm2, .table th.tinytable_css_kt96gegpc741w82slcm2 { text-align: center; }
-      .table td.tinytable_css_exeecolmibypuibypxth, .table th.tinytable_css_exeecolmibypuibypxth { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-    </style>
-    <div class="container">
-      <table class="table table-borderless" id="tinytable_xnishac0gdw2tnw7kjxi" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
-        <thead>
-        </thead><caption>Table 2. Some grouped summary statistis.</caption>
-              <tbody><tr>
-                <th scope="col">group</th>
-                <th scope="col">category</th>
-                <th scope="col">y mean</th>
-                <th scope="col">y sd</th>
-              </tr>
-        
-        
-        </tbody><tbody>
-                <tr>
-                  <td>group 1</td>
-                  <td>option 1</td>
-                  <td>0,042</td>
-                  <td>1</td>
-                </tr>
-                <tr>
-                  <td>group 1</td>
-                  <td>option 2</td>
-                  <td>-0,11</td>
-                  <td>1,1</td>
-                </tr>
-                <tr>
-                  <td>group 1</td>
-                  <td>option 3</td>
-                  <td>-0,12</td>
-                  <td>0,96</td>
-                </tr>
-                <tr>
-                  <td>group 2</td>
-                  <td>option 1</td>
-                  <td>-0,03</td>
-                  <td>0,96</td>
-                </tr>
-                <tr>
-                  <td>group 2</td>
-                  <td>option 2</td>
-                  <td>-0,019</td>
-                  <td>0,98</td>
-                </tr>
-                <tr>
-                  <td>group 2</td>
-                  <td>option 3</td>
-                  <td>-0,015</td>
-                  <td>0,95</td>
-                </tr>
-                <tr>
-                  <td>group 3</td>
-                  <td>option 1</td>
-                  <td>0,22</td>
-                  <td>1,1</td>
-                </tr>
-                <tr>
-                  <td>group 3</td>
-                  <td>option 2</td>
-                  <td>-0,033</td>
-                  <td>1,1</td>
-                </tr>
-                <tr>
-                  <td>group 3</td>
-                  <td>option 3</td>
-                  <td>0,0071</td>
-                  <td>1</td>
-                </tr>
-        </tbody>
-      </table>
-    </div>
-<!-- hack to avoid NA insertion in last line -->
-</div>
-</div>
+<p>One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in <code>{tinytable}</code></p>
+<ul>
+<li>split by group</li>
+</ul>
 </section>
 <section id="text-tables" class="level3" data-number="4.3.2">
 <h3 data-number="4.3.2" class="anchored" data-anchor-id="text-tables"><span class="header-section-number">4.3.2</span> Text tables</h3>
 <p>These tables include tables that primarily present text, especially when presenting scale items. Here is the basic theme for <code>{tinytable}</code> that contains mainly text:</p>
 <p>Here is an example:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">item =</span> <span class="fu">c</span>(<span class="st">"When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about."</span>,</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"I keep my emotions to myself."</span>,</span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about."</span>,</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"When I am feeling positive emotions, I am careful not to express them."</span>),</span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">c</span>(<span class="fl">4.54</span>, <span class="fl">2.34</span>, <span class="fl">6.44</span>, <span class="fl">3.55</span>),</span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">c</span>(<span class="fl">0.67</span>, <span class="fl">1.23</span>, <span class="fl">1.12</span>, <span class="fl">0.89</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>text_df <span class="sc">%&gt;%</span></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tt_theme_cbu</span>(<span class="at">caption =</span> <span class="st">"Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>text_df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">item =</span> <span class="fu">c</span>(<span class="st">"When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about."</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>            <span class="st">"I keep my emotions to myself."</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>            <span class="st">"When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about."</span>,</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>            <span class="st">"When I am feeling positive emotions, I am careful not to express them."</span>),</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">mean =</span> <span class="fu">c</span>(<span class="fl">4.54</span>, <span class="fl">2.34</span>, <span class="fl">6.44</span>, <span class="fl">3.55</span>),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd =</span> <span class="fu">c</span>(<span class="fl">0.67</span>, <span class="fl">1.23</span>, <span class="fl">1.12</span>, <span class="fl">0.89</span>)</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>text_df <span class="sc">%&gt;%</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a><span class="fu">tt_theme_cbu</span>(<span class="at">caption =</span> <span class="st">"Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_92s3rxgd4qgdwkro833s(i, j, css_id) {
-          var table = document.getElementById("tinytable_92s3rxgd4qgdwkro833s");
+      function styleCell_3wz8pg15yxjwmlwrj66h(i, j, css_id) {
+          var table = document.getElementById("tinytable_3wz8pg15yxjwmlwrj66h");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -688,7 +520,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_92s3rxgd4qgdwkro833s');
+        var table = document.getElementById('tinytable_3wz8pg15yxjwmlwrj66h');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -696,8 +528,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_92s3rxgd4qgdwkro833s(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_92s3rxgd4qgdwkro833s");
+      function spanCell_3wz8pg15yxjwmlwrj66h(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_3wz8pg15yxjwmlwrj66h");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -727,15 +559,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_v3mnbosxkrk9y3crvykj',}, 
-          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_o96yyv1lg3wimtc9otbh',}, 
-          { positions: [ { i: 4, j: 0 }, { i: 4, j: 1 }, { i: 4, j: 2 },  ], css_id: 'tinytable_css_8c1sqva39ydkjhbtal3i',}, 
+          { positions: [ { i: 0, j: 0 }, { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_xajbaxx19gjellxt56f4',}, 
+          { positions: [ { i: 4, j: 0 }, { i: 4, j: 1 }, { i: 4, j: 2 },  ], css_id: 'tinytable_css_sucdu2nv45a4q1blig4e',}, 
+          { positions: [ { i: 3, j: 0 }, { i: 3, j: 1 }, { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 2, j: 1 }, { i: 2, j: 2 }, { i: 3, j: 2 }, { i: 1, j: 1 }, { i: 1, j: 2 },  ], css_id: 'tinytable_css_olp1il3zjuvq6cppfu6d',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_92s3rxgd4qgdwkro833s(cell.i, cell.j, group.css_id);
+                  styleCell_3wz8pg15yxjwmlwrj66h(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -743,12 +575,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_v3mnbosxkrk9y3crvykj, .table th.tinytable_css_v3mnbosxkrk9y3crvykj { text-align: center; }
-      .table td.tinytable_css_o96yyv1lg3wimtc9otbh, .table th.tinytable_css_o96yyv1lg3wimtc9otbh { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_8c1sqva39ydkjhbtal3i, .table th.tinytable_css_8c1sqva39ydkjhbtal3i { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_xajbaxx19gjellxt56f4, .table th.tinytable_css_xajbaxx19gjellxt56f4 { text-align: center; font-weight: bold; border-bottom: solid #ABABAB 0.1em; border-top: solid #ABABAB 0.1em; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_sucdu2nv45a4q1blig4e, .table th.tinytable_css_sucdu2nv45a4q1blig4e { text-align: center; border-bottom: solid #ABABAB 0.1em; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_olp1il3zjuvq6cppfu6d, .table th.tinytable_css_olp1il3zjuvq6cppfu6d { text-align: center; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_92s3rxgd4qgdwkro833s" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_3wz8pg15yxjwmlwrj66h" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
         </thead><caption>Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations</caption>
               <tbody><tr>
@@ -793,29 +625,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="model-output-tables" class="level3" data-number="4.3.3">
 <h3 data-number="4.3.3" class="anchored" data-anchor-id="model-output-tables"><span class="header-section-number">4.3.3</span> Model output tables</h3>
-<p>These tables include any statistical models presented in table format. The key part is how to</p>
+<p>These tables include any statistical models presented in table format.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>)</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>x_2 <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>, <span class="dv">3</span>, .<span class="dv">7</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>, <span class="dv">1</span> <span class="sc">+</span> .<span class="dv">4</span><span class="sc">*</span>x <span class="sc">+</span> .<span class="dv">4</span><span class="sc">*</span>x_2 <span class="sc">-</span> .<span class="dv">5</span><span class="sc">*</span>x<span class="sc">*</span>x_2)</span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>df_cont_2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>    x, x_2, y</span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x <span class="sc">+</span> x_2, df_cont_2)</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>lm_2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x<span class="sc">*</span>x_2, df_cont_2)</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(<span class="fu">list</span>(<span class="st">"model 1"</span> <span class="ot">=</span> lm_1, <span class="st">"model 2"</span> <span class="ot">=</span> lm_2), <span class="at">stars =</span> <span class="cn">TRUE</span>,</span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>            <span class="at">shape =</span> term <span class="sc">~</span> model <span class="sc">+</span> statistic,</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>            <span class="at">gof_map =</span> <span class="fu">c</span>(<span class="st">"nobs"</span>, <span class="st">"r.squared"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>lm_1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(y <span class="sc">~</span> x<span class="sc">*</span>a, cont_df)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="fu">modelsummary</span>(lm_1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <!-- preamble start -->
 
     <script>
 
-      function styleCell_23q9t3fg14d2o907mdjd(i, j, css_id) {
-          var table = document.getElementById("tinytable_23q9t3fg14d2o907mdjd");
+      function styleCell_k4nzza4ywefp6rkt684l(i, j, css_id) {
+          var table = document.getElementById("tinytable_k4nzza4ywefp6rkt684l");
           var cell = table.rows[i]?.cells[j];  // Safe navigation to avoid errors
           if (cell) {
               console.log(`Styling cell at (${i}, ${j}) with class ${css_id}`);
@@ -825,7 +646,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           }
       }
       function insertSpanRow(i, colspan, content) {
-        var table = document.getElementById('tinytable_23q9t3fg14d2o907mdjd');
+        var table = document.getElementById('tinytable_k4nzza4ywefp6rkt684l');
         var newRow = table.insertRow(i);
         var newCell = newRow.insertCell(0);
         newCell.setAttribute("colspan", colspan);
@@ -833,8 +654,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         // this may be unsafe, but innerText does not interpret <br>
         newCell.innerHTML = content;
       }
-      function spanCell_23q9t3fg14d2o907mdjd(i, j, rowspan, colspan) {
-        var table = document.getElementById("tinytable_23q9t3fg14d2o907mdjd");
+      function spanCell_k4nzza4ywefp6rkt684l(i, j, rowspan, colspan) {
+        var table = document.getElementById("tinytable_k4nzza4ywefp6rkt684l");
         const targetRow = table.rows[i];
         const targetCell = targetRow.cells[j];
         for (let r = 0; r < rowspan; r++) {
@@ -864,23 +685,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       window.addEventListener('load', function () {
           var cellsToStyle = [
             // tinytable style arrays after
-          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_yugwgpc547qh7f1dy4wl',}, 
-          { positions: [ { i: 5, j: 3 }, { i: 5, j: 1 }, { i: 5, j: 4 }, { i: 5, j: 2 },  ], css_id: 'tinytable_css_xu7scz72ix0sxs45r87p',}, 
-          { positions: [ { i: 0, j: 1 }, { i: 0, j: 2 },  ], css_id: 'tinytable_css_xrc80j7fwbuu89lkj3d6',}, 
-          { positions: [ { i: 5, j: 0 },  ], css_id: 'tinytable_css_xoqq27h2b3w69j05j3g5',}, 
-          { positions: [ { i: 7, j: 0 },  ], css_id: 'tinytable_css_qyxku62pfgkh9k2lumql',}, 
-          { positions: [ { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 6, j: 0 },  ], css_id: 'tinytable_css_qsshz1qkcc7urujea6pu',}, 
-          { positions: [ { i: 0, j: 4 }, { i: 0, j: 3 },  ], css_id: 'tinytable_css_pmz4lb169jfxn3ivni0y',}, 
-          { positions: [ { i: 7, j: 1 }, { i: 7, j: 3 }, { i: 7, j: 2 }, { i: 7, j: 4 },  ], css_id: 'tinytable_css_48ockoug9z62ibigehl6',}, 
-          { positions: [ { i: 1, j: 1 }, { i: 1, j: 3 }, { i: 1, j: 2 }, { i: 1, j: 4 },  ], css_id: 'tinytable_css_3f345pu4r148v3t9uu8f',}, 
-          { positions: [ { i: 2, j: 1 }, { i: 6, j: 1 }, { i: 4, j: 1 }, { i: 2, j: 3 }, { i: 2, j: 2 }, { i: 4, j: 3 }, { i: 4, j: 2 }, { i: 2, j: 4 }, { i: 6, j: 2 }, { i: 4, j: 4 }, { i: 3, j: 1 }, { i: 6, j: 4 }, { i: 6, j: 3 }, { i: 3, j: 3 }, { i: 3, j: 2 }, { i: 3, j: 4 },  ], css_id: 'tinytable_css_1o2w9eerfbiq8ywdugd7',}, 
-          { positions: [ { i: 1, j: 0 },  ], css_id: 'tinytable_css_1hyz4allih1t31c7nqhp',}, 
+          { positions: [ { i: 1, j: 1 }, { i: 2, j: 1 }, { i: 3, j: 1 }, { i: 4, j: 1 }, { i: 5, j: 1 }, { i: 6, j: 1 }, { i: 7, j: 1 }, { i: 8, j: 1 }, { i: 9, j: 1 }, { i: 10, j: 1 }, { i: 11, j: 1 }, { i: 16, j: 1 }, { i: 13, j: 1 }, { i: 14, j: 1 }, { i: 15, j: 1 }, { i: 17, j: 1 }, { i: 18, j: 1 },  ], css_id: 'tinytable_css_z92zayiwwfafcg10pn4k',}, 
+          { positions: [ { i: 0, j: 0 },  ], css_id: 'tinytable_css_tlyw7ob3vg5e41hw3btg',}, 
+          { positions: [ { i: 1, j: 0 }, { i: 2, j: 0 }, { i: 3, j: 0 }, { i: 4, j: 0 }, { i: 5, j: 0 }, { i: 6, j: 0 }, { i: 7, j: 0 }, { i: 8, j: 0 }, { i: 9, j: 0 }, { i: 10, j: 0 }, { i: 11, j: 0 }, { i: 16, j: 0 }, { i: 13, j: 0 }, { i: 14, j: 0 }, { i: 15, j: 0 }, { i: 17, j: 0 }, { i: 18, j: 0 },  ], css_id: 'tinytable_css_qof8a9e0en0zfqlpfzt7',}, 
+          { positions: [ { i: 0, j: 1 },  ], css_id: 'tinytable_css_pgjljs99jmrry6v3s0h5',}, 
+          { positions: [ { i: 12, j: 1 },  ], css_id: 'tinytable_css_l6n0rjmpf4b090m716gr',}, 
+          { positions: [ { i: 12, j: 0 },  ], css_id: 'tinytable_css_fi8afr8iob39td19lavz',}, 
+          { positions: [ { i: 19, j: 1 },  ], css_id: 'tinytable_css_5atvea6tqgjfjxfvo76q',}, 
+          { positions: [ { i: 19, j: 0 },  ], css_id: 'tinytable_css_297qse94vpjbe4l7xghs',}, 
           ];
 
           // Loop over the arrays to style the cells
           cellsToStyle.forEach(function (group) {
               group.positions.forEach(function (cell) {
-                  styleCell_23q9t3fg14d2o907mdjd(cell.i, cell.j, group.css_id);
+                  styleCell_k4nzza4ywefp6rkt684l(cell.i, cell.j, group.css_id);
               });
           });
       });
@@ -888,78 +706,101 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
     <style>
       /* tinytable css entries after */
-      .table td.tinytable_css_yugwgpc547qh7f1dy4wl, .table th.tinytable_css_yugwgpc547qh7f1dy4wl { text-align: left; text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; }
-      .table td.tinytable_css_xu7scz72ix0sxs45r87p, .table th.tinytable_css_xu7scz72ix0sxs45r87p { text-align: center; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_xrc80j7fwbuu89lkj3d6, .table th.tinytable_css_xrc80j7fwbuu89lkj3d6 { text-align: center; text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_xoqq27h2b3w69j05j3g5, .table th.tinytable_css_xoqq27h2b3w69j05j3g5 { text-align: left; border-bottom: solid black 0.05em; }
-      .table td.tinytable_css_qyxku62pfgkh9k2lumql, .table th.tinytable_css_qyxku62pfgkh9k2lumql { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_qsshz1qkcc7urujea6pu, .table th.tinytable_css_qsshz1qkcc7urujea6pu { text-align: left; }
-      .table td.tinytable_css_pmz4lb169jfxn3ivni0y, .table th.tinytable_css_pmz4lb169jfxn3ivni0y { text-align: center; text-align: center; border-top: solid #d3d8dc 0.1em; text-align: center; }
-      .table td.tinytable_css_48ockoug9z62ibigehl6, .table th.tinytable_css_48ockoug9z62ibigehl6 { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
-      .table td.tinytable_css_3f345pu4r148v3t9uu8f, .table th.tinytable_css_3f345pu4r148v3t9uu8f { text-align: center; border-bottom: solid #d3d8dc 0.05em; }
-      .table td.tinytable_css_1o2w9eerfbiq8ywdugd7, .table th.tinytable_css_1o2w9eerfbiq8ywdugd7 { text-align: center; }
-      .table td.tinytable_css_1hyz4allih1t31c7nqhp, .table th.tinytable_css_1hyz4allih1t31c7nqhp { text-align: left; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_z92zayiwwfafcg10pn4k, .table th.tinytable_css_z92zayiwwfafcg10pn4k { text-align: center; }
+      .table td.tinytable_css_tlyw7ob3vg5e41hw3btg, .table th.tinytable_css_tlyw7ob3vg5e41hw3btg { text-align: left; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_qof8a9e0en0zfqlpfzt7, .table th.tinytable_css_qof8a9e0en0zfqlpfzt7 { text-align: left; }
+      .table td.tinytable_css_pgjljs99jmrry6v3s0h5, .table th.tinytable_css_pgjljs99jmrry6v3s0h5 { text-align: center; border-top: solid #d3d8dc 0.1em; border-bottom: solid #d3d8dc 0.05em; }
+      .table td.tinytable_css_l6n0rjmpf4b090m716gr, .table th.tinytable_css_l6n0rjmpf4b090m716gr { text-align: center; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_fi8afr8iob39td19lavz, .table th.tinytable_css_fi8afr8iob39td19lavz { text-align: left; border-bottom: solid black 0.05em; }
+      .table td.tinytable_css_5atvea6tqgjfjxfvo76q, .table th.tinytable_css_5atvea6tqgjfjxfvo76q { text-align: center; border-bottom: solid #d3d8dc 0.1em; }
+      .table td.tinytable_css_297qse94vpjbe4l7xghs, .table th.tinytable_css_297qse94vpjbe4l7xghs { text-align: left; border-bottom: solid #d3d8dc 0.1em; }
     </style>
     <div class="container">
-      <table class="table table-borderless" id="tinytable_23q9t3fg14d2o907mdjd" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
+      <table class="table table-borderless" id="tinytable_k4nzza4ywefp6rkt684l" style="width: auto; margin-left: auto; margin-right: auto;" data-quarto-disable-processing="true">
         <thead>
-<tr>
-<th scope="col" align="center" colspan="1"> </th>
-<th scope="col" align="center" colspan="2">model 1</th>
-<th scope="col" align="center" colspan="2">model 2</th>
-</tr>
         
               <tr>
                 <th scope="col"> </th>
-                <th scope="col">Est.</th>
-                <th scope="col">S.E.</th>
-                <th scope="col">Est.</th>
-                <th scope="col">S.E.</th>
+                <th scope="col">(1)</th>
               </tr>
         </thead>
-        <tfoot><tr><td colspan="5">+ p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001</td></tr></tfoot>
+        
         <tbody>
                 <tr>
                   <td>(Intercept)</td>
-                  <td>0.856***</td>
-                  <td>0.151</td>
-                  <td>0.826***</td>
-                  <td>0.140</td>
+                  <td>-0.604</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.300)</td>
                 </tr>
                 <tr>
                   <td>x</td>
-                  <td>-1.084***</td>
-                  <td>0.035</td>
-                  <td>0.578***</td>
-                  <td>0.132</td>
+                  <td>2.025</td>
                 </tr>
                 <tr>
-                  <td>x_2</td>
-                  <td>0.454***</td>
-                  <td>0.049</td>
-                  <td>0.459***</td>
-                  <td>0.046</td>
+                  <td></td>
+                  <td>(0.128)</td>
                 </tr>
                 <tr>
-                  <td>x × x_2</td>
+                  <td>ab</td>
+                  <td>2.044</td>
+                </tr>
+                <tr>
                   <td></td>
+                  <td>(0.414)</td>
+                </tr>
+                <tr>
+                  <td>ac</td>
+                  <td>3.735</td>
+                </tr>
+                <tr>
                   <td></td>
-                  <td>-0.559***</td>
-                  <td>0.043</td>
+                  <td>(0.414)</td>
+                </tr>
+                <tr>
+                  <td>x × ab</td>
+                  <td>-1.533</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.179)</td>
+                </tr>
+                <tr>
+                  <td>x × ac</td>
+                  <td>1.105</td>
+                </tr>
+                <tr>
+                  <td></td>
+                  <td>(0.176)</td>
                 </tr>
                 <tr>
                   <td>Num.Obs.</td>
                   <td>1000</td>
-                  <td></td>
-                  <td>1000</td>
-                  <td></td>
                 </tr>
                 <tr>
                   <td>R2</td>
-                  <td>0.513</td>
-                  <td></td>
-                  <td>0.583</td>
-                  <td></td>
+                  <td>0.698</td>
+                </tr>
+                <tr>
+                  <td>R2 Adj.</td>
+                  <td>0.697</td>
+                </tr>
+                <tr>
+                  <td>AIC</td>
+                  <td>4828.9</td>
+                </tr>
+                <tr>
+                  <td>BIC</td>
+                  <td>4863.3</td>
+                </tr>
+                <tr>
+                  <td>Log.Lik.</td>
+                  <td>-2407.474</td>
+                </tr>
+                <tr>
+                  <td>RMSE</td>
+                  <td>2.69</td>
                 </tr>
         </tbody>
       </table>
@@ -970,6 +811,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>which information should be included</li>
 <li>multiple models</li>
+<li></li>
 </ul>
 
 
