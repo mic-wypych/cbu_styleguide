@@ -3,7 +3,7 @@
 This part deals with all text-related things in the format. Both in terms of typography and some rules about general writing. The font used throughout the report is Open Sans. The text hierarchy is defined below:
 
 | level | font | size | styling |
-|---------------------|-----------------|-----------------|-----------------|
+|-------------------|------------------|------------------|------------------|
 | [H1 - report title]{style="font-size: 2.0em;"} | Open sans | 2em | bold? |
 | [H2 - main points]{style="font-size: 1.68em;"} | Open sans | 1.68em |  |
 | [H3 - section title]{style="font-size: 1.41em;"} | Open sans | 1.41em |  |
@@ -23,28 +23,81 @@ This part deals with all text-related things in the format. Both in terms of typ
 -   make sure text does not overlap on plots -\>\
     `{ggrepel}` package has a function `geom_text_repel()` which tries to adjust labels so that they don't overlap. For example this plot has an issue with overlap:
 
-    ```{r}
+    ```{r warning=FALSE, message=FALSE}
+    library(dplyr)
+    library(ggplot2)
+    graph_df <- data.frame(
+      target = c(rep("group 1", 6), rep("group 2", 6)),
+      year =  c(rep(2017, 3), rep(2021, 3),rep(2017, 3), rep(2021, 3)),
+      att = factor(c(rep(c("ok", "meh", "not ok"), 4)), ordered = T, levels = c("ok", "meh", "not ok")),
+      value = c(.0714, .3121, .6165, .034, .2021, .7639, .0189, .1859, .7952, .0103, .0964, .8933)
+    )
 
+    graph_df %>%
+      ggplot(aes(x = target, y = value, fill = att)) +
+      geom_col(width = .6) +
+      geom_text(aes(label = paste0(value*100, "%")),direction = "y", position = "stack", vjust = 2) +
+      scale_fill_manual(values= c("ok"= "steelblue",
+                                  "meh" = "grey80",
+                                  "not ok" = "tomato4")) +
+      facet_wrap(~year) +
+      labs(x = NULL, y = NULL) +
+      theme_minimal() +
+      theme(legend.title = element_blank())
     ```
 
     We can deal with this using `geom_text_repel()`. Additional arguments like `force` control how much the labels should be pushed from their original positions.
 
     ```{r}
+    library(ggrepel)
 
+    graph_df %>%
+      ggplot(aes(x = target, y = value, fill = att)) +
+      geom_col(width = .6) +
+      geom_text_repel(aes(label = paste0(value*100, "%")),direction = "y", position = "stack", vjust = 2) +
+      scale_fill_manual(values= c("ok"= "steelblue",
+                                  "meh" = "grey80",
+                                  "not ok" = "tomato4")) +
+      facet_wrap(~year) +
+      labs(x = NULL, y = NULL) +
+      theme_minimal() +
+      theme(legend.title = element_blank())
     ```
 
--   ensure proper contrast for text -\> `{ggfittext}`
+-   ensure proper contrast for text:
 
     For example the plot below does not have decent contrast when all text is in black:
 
     ```{r}
+    b_df <- data.frame(
+        a = sample(letters[1:5], 1e3, replace = T),
+        b = sample(letters[1:3], 1e3, replace = T)
+    ) %>%
+    count(a,b)
 
+    b_df %>%
+    ggplot(aes(x = a, y = n, fill = b)) +
+    geom_col(position = "fill") +
+    geom_text(aes(label = n),direction = "y", position = "fill", vjust = 2) +
+    scale_fill_manual(values = c("grey80", "firebrick4", "mistyrose")) +
+    theme_minimal() +
+    theme(legend.title = element_blank(),
+         legend.position = "top")
     ```
 
-    We can fix that using `{ggfittext}` and `geom_fit_text()`
+    We can fix that using `{ggfittext}` and `geom_fit_text():`
 
-    ```{r}
+    ```{r warning = FALSE}
+    library(ggfittext)
 
+    b_df %>%
+    ggplot(aes(x = a, y = n, fill = b)) +
+    geom_col(position = "fill") +
+    geom_fit_text(aes(label = n, fill = b), position = "fill", vjust = 2, contrast = TRUE, show_guide = FALSE) +
+    scale_fill_manual(values = c("grey80", "firebrick4", "mistyrose")) +
+    theme_minimal() +
+    theme(legend.title = element_blank(),
+         legend.position = "top")
     ```
 
 -   Be accessible... Don't write about logits. Opt for Average Marginal Effects in percentages instead. If possible try to get a sense of scale and some interpretation for the effects (maybe something like probability of superiority over cohen's d etc.)
