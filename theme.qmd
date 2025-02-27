@@ -8,38 +8,50 @@ This chapter discusses the `cbu_theme()` function for styling the ggplot objects
 
 Put the function here and discuss it a bit.
 
-```{r}
+```{r warning = FALSE, message = FALSE}
 library(tidyverse)
 library(showtext)
+library(tinytable)
+library(modelsummary)
 
 font_add_google("Open Sans")
 showtext_auto()
 font <- "Open Sans"
 
+
+cbu_cat <- c("#b96784", "#88375d","#9bb6bd","#5E9FB1", "#755687","#4a2d5e", "#eb676c","#aa2041", "#f2d1ab", "#dd9d38")
+cbu_cat_1 <- cbu_cat[c(1:5)]
+cbu_cat_2 <- cbu_cat[c(6:10)]
+
 theme_cbu <- function() {
   theme_minimal(base_size = 14, base_family = font) +
     theme(panel.grid.minor = element_blank(),
-          panel.grid.major = element_line(linetype = "dashed", color = "grey80", linewidth = .5),
+          panel.grid.major = element_line(color = "grey80", linewidth = .5),
+          panel.grid.major.x = element_blank(),
           plot.background = element_rect(fill = "white", color = NA),
-          plot.title = element_text(size = 1.68*14, face = "bold", family = font),
+          plot.title = element_text(size = 1.68*12, face = "bold", family = font),
           plot.subtitle = element_text(face = "italic", family = font),
-          axis.title = element_text(face = "bold"),
-          strip.text = element_text(face = "bold"),
+          axis.title = element_text(face = "bold", size = 8.5),
+          axis.text = element_text(size = 8),
+          strip.text = element_text(face = "bold", size = 10),
           strip.background = element_rect(fill = NA, color = NA),
-          plot.caption = element_text(face = "italic", family = font),
-          legend.title = element_text(face = "bold"),
-          legend.position='top', 
+          plot.caption = element_text(face = "italic", family = font, size = 8),
+          legend.title = element_text(face = "bold", size = 10),
+          legend.text = element_text(size = 10),
+          legend.key.size = unit(10, "pt"),
+          legend.position = "top",
           legend.justification='left',
           legend.direction='horizontal',
-          plot.title.position = "plot")
+          plot.margin = unit(c(t =0, r = 0, b = 0, l = 0), "cm")
+          )
 }
 ```
 
-The function is based on theme minimal. It uses **XXX font** with base size of **XX**. The main idea behind the theme function was to declutter the plot and take care of some basic layout & text hierarchy (especially the legend which can be rendered a bit awkwardly by default).
+The function is based on theme minimal. It uses **Open Sans font** with base size of **14**. The main idea behind the theme function was to declutter the plot and take care of some basic layout & text hierarchy (especially the legend which can be rendered a bit awkwardly by default).
 
 ## How it looks like
 
-Make a plot that shows each element with the spacing, font sizes etc.
+Here is a sample plot:
 
 ```{r}
 some_df <- data.frame(
@@ -49,25 +61,145 @@ count(a)
 
 some_df %>%
 ggplot(aes(x = a, y = n)) +
-geom_col(fill = "#b96784", width = .6) +
+geom_col(fill = cbu_cat_1[1], width = .6) +
 geom_text(aes(label = n), nudge_y = 2, size = 3) +
 labs(x = "letters", y = "counts") +
 coord_flip() +
 theme_cbu()
 ```
 
+Another example with continuous variables:
+
+```{r}
+cont_df <- data.frame(x = runif(1e3, 0, 4),
+                      a = sample(letters[1:3], 1e3, replace = T)) %>%
+  mutate(y = ifelse(a == "a",
+                    rnorm(1e3, mean = sin(x) + 3*cos(x^2) - x^2 + .5*x^3),
+                    ifelse(a == "b",
+                           rnorm(1e3, mean = -sin(x) + 3*cos(x^2) + x^2 - .2*x^3),
+                           rnorm(1e3, mean = 6 + 2*sin(x) - 1.5*cos(x^2) - x^2 + .5*x^3))))
+           
+
+
+cont_df %>%
+  ggplot(aes(x = x, y = y, color = a)) +
+  geom_point(alpha = .5) +
+  geom_smooth(method = "gam", se = F) +
+  scale_color_manual(values = cbu_cat_2[c(2,4,1)]) +
+  labs(x = "jakiś czas", y = "jakaś ilościowa", color = "category") +
+  theme_cbu()
+```
+
+Below is a breakdown of all elements in the theme:
+
+![](images/clipboard-1620097183.png)
+
 ## Table theming
 
-Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content.
+Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content. More general tutorial and docs on `{tinytable}` can be found [here](https://vincentarelbundock.github.io/tinytable/vignettes/tinytable.html).
 
--   numbers: summary stats
+### Tables with numbers
 
--   text tables:
+These tables include things like tables with sample characteristics (e.g. age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc. Here is the basic theme for `{tinytable}` that contains mainly summary stats:
 
-    -   issues: long text
+```{r}
+tt_theme_cbu <- function(x) {
+  out <- x |>
+    tt() |>
+    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
+    style_tt(j = 1:ncol(x), align = "c") |>
+    style_tt(i = 0, bold = TRUE) |>
+    style_tt(i = nrow(x), line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "t", line_color = "#ABABAB")
+  return(out)
+}
+```
 
-    -   merging cells
+Here is an exmaple table:
 
--   model output tables:
+```{r}
+#| label: tbl-1
+#| tbl-cap: "Some summary statistics split by category"
+cont_df %>%
+group_by(a) %>%
+summarise(across(.cols = c(x, y),
+                .fns = list("mean" = \(x) mean(x),
+                           "sd" = \(x) sd(x)
+                           ), .names = "{.col} {.fn}")) %>%
+tt_theme_cbu()
+```
 
-    -   general information that should be included in a table that describes a model are pretty much the same as standard APA stuff: include uncertainty (standard errors or confidence intervals)
+One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in `{tinytable}`. You can set the grouping using `style_tt()`. the argument `i` specifies which rows to merge, `j` specifies which column to target and r`owspan` how many rows to merge for each i. `alignv` specifies how to vertically align text in the merged
+
+```{r}
+#| label: tbl-2
+#| tbl-cap: "Some grouped summary statistis."
+grouped_df <- data.frame(
+    category = sample(c("option 1", "option 2", "option 3"), 1e3, replace = T),
+    group = sample(c("group 1", "group 2", "group 3"), 1e3, replace = T),
+    y = rnorm(1e3)
+)
+
+grouped_df %>%
+group_by(group, category) %>%
+summarise(across(y, .fns = list("mean" = \(x) mean(x),
+                           "sd" = \(x) sd(x)
+                           ), .names = "{.col} {.fn}")) %>%
+tt_theme_cbu() %>%
+style_tt(i = c(1, 4, 7), j = 1, rowspan = 3, alignv = "m")
+```
+
+### Text tables
+
+These tables include tables that primarily present text, especially when presenting scale items. Here is the basic theme for `{tinytable}` that contains mainly text:
+
+Here is an example:
+
+```{r}
+#| label: tbl-3
+#| tbl-cap: "Emotion Regulation Questionnaire items with means and stnadard deviations"
+text_df <- data.frame(
+    item = c("When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
+            "I keep my emotions to myself.",
+            "When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about.",
+            "When I am feeling positive emotions, I am careful not to express them."),
+    mean = c(4.54, 2.34, 6.44, 3.55),
+    sd = c(0.67, 1.23, 1.12, 0.89)
+)
+
+text_df %>%
+tt_theme_cbu()
+```
+
+### Model output tables
+
+These tables include any statistical models presented in table format. If we have the numbers stored separately (we just know the
+
+A decent alternative is to use `{modelsummary}` which is nicely integrated with `{tinytable}`. It automatically extracts information from all sorts of models and allows quite a bit of styling and formatting. Here is an example below:
+
+```{r}
+#| label: tbl-4
+#| tbl-cap: "Some stats from models with interactions"
+x <- rnorm(1e3)
+x_2 <- rnorm(1e3, 3, .7)
+y <- rnorm(1e3, 1 + .4*x + .4*x_2 - .5*x*x_2)
+df_cont_2 <- data.frame(
+    x, x_2, y
+)
+
+lm_1 <- lm(y ~ x + x_2, df_cont_2)
+
+lm_2 <- lm(y ~ x*x_2, df_cont_2)
+
+modelsummary(list("model 1" = lm_1, "model 2" = lm_2), stars = TRUE,
+            shape = term ~ model + statistic,
+            gof_map = c("nobs", "r.squared")) |>
+    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
+    style_tt(i = 0, bold = TRUE) |>
+    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "t", line_color = "#ABABAB")
+```
+
+-   which information should be included:
+-   multiple models
