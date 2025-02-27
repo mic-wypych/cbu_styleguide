@@ -1,10 +1,8 @@
 This part discusses specific types of charts, when to use them and some tweaks to make them work.
 
-## General rules?
-
 ## Chart types
 
-Ok, on to the chart types!
+Center for Research on Prejudice reports can contain various types of plots but there are some common ones that appear more often then others and also have some specific issues related to them. This section provides some suggestions on how to build specific types of charts and how to address the issues that arise with each of those types.
 
 ### Bar charts
 
