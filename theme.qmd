@@ -103,9 +103,9 @@ Cbu report format works on typst which necessitates using `{tinytable}` package 
 These tables include things like tables with sample characteristics (e.g. age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc. Here is the basic theme for `{tinytable}` that contains mainly summary stats:
 
 ```{r}
-tt_theme_cbu <- function(x, caption) {
+tt_theme_cbu <- function(x) {
   out <- x |>
-    tt(caption = caption) |>
+    tt() |>
     format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
     style_tt(j = 1:ncol(x), align = "c") |>
     style_tt(i = 0, bold = TRUE) |>
@@ -119,18 +119,22 @@ tt_theme_cbu <- function(x, caption) {
 Here is an exmaple table:
 
 ```{r}
+#| label: tbl-1
+#| tbl-cap: "Some summary statistics split by category"
 cont_df %>%
 group_by(a) %>%
 summarise(across(.cols = c(x, y),
                 .fns = list("mean" = \(x) mean(x),
                            "sd" = \(x) sd(x)
                            ), .names = "{.col} {.fn}")) %>%
-tt_theme_cbu(caption = "Table 1. some summary statistics split by category")
+tt_theme_cbu()
 ```
 
 One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in `{tinytable}`. You can set the grouping using `style_tt()`. the argument `i` specifies which rows to merge, `j` specifies which column to target and r`owspan` how many rows to merge for each i. `alignv` specifies how to vertically align text in the merged
 
 ```{r}
+#| label: tbl-2
+#| tbl-cap: "Some grouped summary statistis."
 grouped_df <- data.frame(
     category = sample(c("option 1", "option 2", "option 3"), 1e3, replace = T),
     group = sample(c("group 1", "group 2", "group 3"), 1e3, replace = T),
@@ -142,7 +146,7 @@ group_by(group, category) %>%
 summarise(across(y, .fns = list("mean" = \(x) mean(x),
                            "sd" = \(x) sd(x)
                            ), .names = "{.col} {.fn}")) %>%
-tt_theme_cbu(caption = "Table 2. Some grouped summary statistis.") %>%
+tt_theme_cbu() %>%
 style_tt(i = c(1, 4, 7), j = 1, rowspan = 3, alignv = "m")
 ```
 
@@ -153,6 +157,8 @@ These tables include tables that primarily present text, especially when present
 Here is an example:
 
 ```{r}
+#| label: tbl-3
+#| tbl-cap: "Emotion Regulation Questionnaire items with means and stnadard deviations"
 text_df <- data.frame(
     item = c("When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
             "I keep my emotions to myself.",
@@ -163,20 +169,18 @@ text_df <- data.frame(
 )
 
 text_df %>%
-tt_theme_cbu(caption = "Table 2. Emotion Regulation Questionnaire items with means and stnadard deviations")
+tt_theme_cbu()
 ```
-
-issues:
-
--   long text
-
--   merging cells
 
 ### Model output tables
 
-These tables include any statistical models presented in table format. The key part is how to
+These tables include any statistical models presented in table format. If we have the numbers stored separately (we just know the
+
+A decent alternative is to use `{modelsummary}` which is nicely integrated with `{tinytable}`. It automatically extracts information from all sorts of models and allows quite a bit of styling and formatting. Here is an example below:
 
 ```{r}
+#| label: tbl-4
+#| tbl-cap: "Some stats from models with interactions"
 x <- rnorm(1e3)
 x_2 <- rnorm(1e3, 3, .7)
 y <- rnorm(1e3, 1 + .4*x + .4*x_2 - .5*x*x_2)
@@ -190,7 +194,11 @@ lm_2 <- lm(y ~ x*x_2, df_cont_2)
 
 modelsummary(list("model 1" = lm_1, "model 2" = lm_2), stars = TRUE,
             shape = term ~ model + statistic,
-            gof_map = c("nobs", "r.squared"))
+            gof_map = c("nobs", "r.squared")) |>
+    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
+    style_tt(i = 0, bold = TRUE) |>
+    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "t", line_color = "#ABABAB")
 ```
 
 -   which information should be included:
