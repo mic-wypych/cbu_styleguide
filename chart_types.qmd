@@ -4,43 +4,173 @@ This part discusses specific types of charts, when to use them and some tweaks t
 
 Center for Research on Prejudice reports can contain various types of plots but there are some common ones that appear more often then others and also have some specific issues related to them. This section provides some suggestions on how to build specific types of charts and how to address the issues that arise with each of those types.
 
+```{r}
+library(tidyverse)
+library(showtext)
+library(ggrepel)
+library(ggfittext)
+font_add_google("Open Sans")
+showtext_auto()
+font <- "Open Sans"
+
+
+cbu_cat <- c("#b96784", "#88375d","#9bb6bd","#5E9FB1", "#755687","#4a2d5e", "#eb676c","#aa2041", "#f2d1ab", "#dd9d38")
+cbu_cat_1 <- cbu_cat[c(1:5)]
+cbu_cat_2 <- cbu_cat[c(6:10)]
+
+theme_cbu <- function() {
+  theme_minimal(base_size = 14, base_family = font) +
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major = element_line(color = "grey80", linewidth = .5),
+          panel.grid.major.x = element_blank(),
+          plot.background = element_rect(fill = "white", color = NA),
+          plot.title = element_text(size = 1.68*12, face = "bold", family = font),
+          plot.subtitle = element_text(face = "italic", family = font),
+          axis.title = element_text(face = "bold", size = 8.5),
+          axis.text = element_text(size = 8),
+          strip.text = element_text(face = "bold", size = 10),
+          strip.background = element_rect(fill = NA, color = NA),
+          plot.caption = element_text(face = "italic", family = font, size = 8),
+          legend.title = element_text(face = "bold", size = 10),
+          legend.text = element_text(size = 10),
+          legend.key.size = unit(10, "pt"),
+          legend.position = "top",
+          legend.justification='left',
+          legend.direction='horizontal',
+          plot.margin = unit(c(t =0, r = 0, b = 0, l = 0), "cm")
+          )
+}
+```
+
 ### Bar charts
 
-Preferably for displaying
+We'll start with bar charts. Those are pretty common in cbu reports for showing and comparing means or counts. Some general rules to follow here are:
 
--   general rules
+-   if possible add text above the bars
 
--   position dodge
+-   make the bars a bit thinner than default ggplot behaviour
 
--   text above
+-   Unless necessary don't use multiple colors
 
--   error bars
+Here is an example of a cbu styled bar plot showing some means:
+
+```{r}
+bar_df <- data.frame(
+    category = letters[1:7],
+    means = round(rnorm(7, 6, 1.5), 2)
+)
+
+bar_df %>%
+ggplot(aes(x = category, y = means)) +
+geom_col(fill= cbu_cat_1[1], width = .6) +
+geom_text(aes(label = means), nudge_y = .5) +
+theme_cbu()
+```
+
+A few more specific issues that often arise for bar plots:
+
+-   position adjustments\
+
+    ```{r}
+    bar_df$category_2 <- c(rep("a", 3), rep("b", 4))
+
+    bar_df %>%
+    ggplot(aes(x = category_2, y = means, fill = category)) +
+    geom_col(width = .6, position = position_dodge(width = .6)) +
+    geom_text(aes(label = means),position = position_dodge(width = .6), vjust = 1) +
+    scale_fill_manual(values = cbu_cat) +
+    theme_cbu()
+    ```
 
 -   long labels:
 
-    -   opt for coord_flip?
+    Sometimes we might be working with very long labels for some categories. Those can be difficult to nicely render on a bar plot. 2 ways to deal with this is either to flip coordinates that often makes the labels more readable or to wrap them so that they will have fixed maximum length on a single line. In case of flipping coordinates you will need to adjust the grid lines as well\
+    Option 1:
 
-    -   wrap the labels
+    ```{r}
+    df_long_labs <- data.frame(
+        item = c("When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
+                "I keep my emotions to myself.",
+                "When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about.",
+                "When I am feeling positive emotions, I am careful not to express them."),
+        mean = c(4.54, 2.34, 6.44, 3.55),
+        sd = c(0.67, 1.23, 1.12, 0.89)
+    )
 
--   Likert scale issues:
+    df_long_labs %>%
+    ggplot(aes(x = item, y = mean)) +
+    geom_col(fill = cbu_cat_2[2], width = .6) +
+    geom_text(aes(label = mean), nudge_y = .5) +
+    coord_flip() +
+    theme_cbu() +
+    theme(panel.grid.major.y = element_blank(),
+         panel.grid.major.x = element_line(color = "grey80", linewidth = .5))
+    ```
 
-    -   starting from 1: geom_col() will start from 0 by default. Override with coord_cartesian()
+    \
+    Option 2:
+
+    ```{r}
+    df_long_labs <- data.frame(
+        item = c("When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
+                "I keep my emotions to myself.",
+                "When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about.",
+                "When I am feeling positive emotions, I am careful not to express them."),
+        mean = c(4.54, 2.34, 6.44, 3.55),
+        sd = c(0.67, 1.23, 1.12, 0.89)
+    )
+
+    df_long_labs %>%
+    ggplot(aes(x = str_wrap(item, 40), y = mean)) +
+    geom_col(fill = cbu_cat_2[2], width = .6) +
+    geom_text(aes(label = mean), nudge_y = .5) +
+    coord_flip() +
+    theme_cbu() +
+    theme(panel.grid.major.y = element_blank(),
+         panel.grid.major.x = element_line(color = "grey80", linewidth = .5))
+    ```
+
+-   adding errorbars:
+
+    error
+
+-   some likert-sclae related issues:
+
+    `geom_bar()` will always by default start the plots from 0. This is generally good behavior but in case of likert scale items we often want them to start from 1. The best way to adjsut this is via `coord_cartesian()` and setting the ylim argument.
+
+    ```{r}
+    df_long_labs %>%
+    ggplot(aes(x = str_wrap(item, 40), y = mean)) +
+    geom_col(fill = cbu_cat_2[2], width = .6) +
+    geom_text(aes(label = mean), nudge_y = .5) +
+    coord_cartesian(ylim=c(1,7)) +
+    theme_cbu()
+    ```
 
 ### Filled bar charts
 
--   mainly for displaying percentages
+We use those usually for displaying percentages (e.g. distribution of answers to a likert scale type question). Specific issues that often arise with these kinds of plots are related to very small categories. When trying to show text for those categories it can be difficult to get non-overlappling and readable labels. Some ways to deal with this is to collapse categories if possible or use `{ggrepel}` to push text.
 
--   working with text
+```{r warning = FALSE}
+df_cat <- data.frame(
+    cat_1 = sample(letters[1:4], 1e3, replace = TRUE),
+    cat_2 = sample(letters[5:7], 1e3, replace = TRUE, prob = c(.01, .6, .39))
+)
 
--   What to do with very small categories
-
-    -   ggrepel
-
-    -   collapse categories
-
-    -   maybe facet_zoom?
+df_cat %>%
+count(cat_1, cat_2) %>%
+group_by(cat_1) %>%
+mutate(perc =n/sum(n)) %>%
+ggplot(aes(x = cat_1, y = perc, fill = cat_2)) +
+geom_col(width = .6) +
+geom_text_repel(aes(label = scales::percent(perc)), position = "fill", direction = "y") +
+scale_fill_manual(values = cbu_cat_2[c(1,2,4)]) +
+theme_cbu()
+```
 
 ### Line charts
+
+Line charts are usually best suited for showing changes in time.
 
 -   showing changes in time
 
