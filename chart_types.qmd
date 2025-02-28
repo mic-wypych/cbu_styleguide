@@ -134,6 +134,16 @@ A few more specific issues that often arise for bar plots:
 
     error
 
+    ```{r}
+    df_long_labs %>%
+    ggplot(aes(x = item, y = mean)) +
+    geom_col(fill = cbu_cat_2[2], width = .6) +
+    geom_errorbar(aes(x = item, ymin = mean - sd, ymax = mean + sd), width = .2) +
+    theme_cbu() +
+    theme(panel.grid.major.y = element_blank(),
+         panel.grid.major.x = element_line(color = "grey80", linewidth = .5))
+    ```
+
 -   some likert-sclae related issues:
 
     `geom_bar()` will always by default start the plots from 0. This is generally good behavior but in case of likert scale items we often want them to start from 1. The best way to adjsut this is via `coord_cartesian()` and setting the ylim argument.
@@ -204,11 +214,13 @@ This in general refers to plots that show some kind of regression-like line of b
 
 -   showing changes
 
-### Waffle charts?
+### Waffle charts
 
--   do we want them? For displaying simple percentages they might be ok
+Waffle charts can be used as alternative to bar charts for displaying counts or percentages. Preferrably they should also have numbers shown.
 
-### Maps?
+```{r}
+
+```
 
 ### Pie charts
 
@@ -216,4 +228,6 @@ just no. Make a bar chart.
 
 ### Showing statistical models
 
--   SEM models?
+One additional type of charts that sometimes appears in the reports are path diagrams showing path/SEM models. Unfortunately there isn't really any good package for displaying path diagrams. IF you really want to make it in R you can use `{ggdag}` but all the nodes, positions and text has to be coded manually.
+
+You can make such diagrams in Figma, diagram.net or Power Point. If you do that remember to use Open Sans font, preferrably size 12 or 14.
