@@ -212,19 +212,42 @@ This in general refers to plots that show some kind of regression-like line of b
 
 ### Dumbbell charts
 
--   showing changes
+Dumbell charts are good for comparing changes or categories
+
+```{r}
+
+```
 
 ### Waffle charts
 
 Waffle charts can be used as alternative to bar charts for displaying counts or percentages. Preferrably they should also have numbers shown.
 
 ```{r}
+library(waffle)
 
+df_cat %>%
+count(cat_1, cat_2) %>%
+ggplot(
+    aes(fill = cat_1, values = n)
+  ) +
+  geom_waffle(
+    n_rows = 20,
+    size = 0.33, 
+    colour = "white",
+    flip = TRUE
+  ) +
+  scale_fill_manual(
+    name = NULL,
+    values = c("#a40000", "#c68958", "#ae6056")
+  ) +
+  facet_wrap(~cat_2, nrow = 1) +
+  coord_equal() +
+  theme_enhance_waffle()
 ```
 
 ### Pie charts
 
-just no. Make a bar chart.
+just no. Make a bar chart. Or a waffle chart
 
 ### Showing statistical models
 
