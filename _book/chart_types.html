@@ -211,10 +211,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#line-of-best-fit-charts" id="toc-line-of-best-fit-charts" class="nav-link" data-scroll-target="#line-of-best-fit-charts"><span class="header-section-number">5.0.5</span> Line-of-best-fit charts</a></li>
   <li><a href="#correlation-plots" id="toc-correlation-plots" class="nav-link" data-scroll-target="#correlation-plots"><span class="header-section-number">5.0.6</span> Correlation plots?</a></li>
   <li><a href="#dumbbell-charts" id="toc-dumbbell-charts" class="nav-link" data-scroll-target="#dumbbell-charts"><span class="header-section-number">5.0.7</span> Dumbbell charts</a></li>
-  <li><a href="#waffle-charts" id="toc-waffle-charts" class="nav-link" data-scroll-target="#waffle-charts"><span class="header-section-number">5.0.8</span> Waffle charts?</a></li>
-  <li><a href="#maps" id="toc-maps" class="nav-link" data-scroll-target="#maps"><span class="header-section-number">5.0.9</span> Maps?</a></li>
-  <li><a href="#pie-charts" id="toc-pie-charts" class="nav-link" data-scroll-target="#pie-charts"><span class="header-section-number">5.0.10</span> Pie charts</a></li>
-  <li><a href="#showing-statistical-models" id="toc-showing-statistical-models" class="nav-link" data-scroll-target="#showing-statistical-models"><span class="header-section-number">5.0.11</span> Showing statistical models</a></li>
+  <li><a href="#waffle-charts" id="toc-waffle-charts" class="nav-link" data-scroll-target="#waffle-charts"><span class="header-section-number">5.0.8</span> Waffle charts</a></li>
+  <li><a href="#pie-charts" id="toc-pie-charts" class="nav-link" data-scroll-target="#pie-charts"><span class="header-section-number">5.0.9</span> Pie charts</a></li>
+  <li><a href="#showing-statistical-models" id="toc-showing-statistical-models" class="nav-link" data-scroll-target="#showing-statistical-models"><span class="header-section-number">5.0.10</span> Showing statistical models</a></li>
   </ul>
 </nav>
     </div>
@@ -258,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Loading required package: sysfonts
-Loading required package: showtextdb</code></pre>
+<pre><code>Ładowanie wymaganego pakietu: sysfonts
+Ładowanie wymaganego pakietu: showtextdb</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfittext)</span>
@@ -326,7 +325,7 @@ Loading required package: showtextdb</code></pre>
 <p>A few more specific issues that often arise for bar plots:</p>
 <ul>
 <li><p>position adjustments<br>
-</p>
+Bar plot work best with position dodge. The only thing to remember is to set the width right and add the position adjustment to any additional geoms used in the plot.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>bar_df<span class="sc">$</span>category_2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fu">rep</span>(<span class="st">"a"</span>, <span class="dv">3</span>), <span class="fu">rep</span>(<span class="st">"b"</span>, <span class="dv">4</span>))</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -467,15 +466,64 @@ Option 2:</p>
 </section>
 <section id="line-charts" class="level3" data-number="5.0.3">
 <h3 data-number="5.0.3" class="anchored" data-anchor-id="line-charts"><span class="header-section-number">5.0.3</span> Line charts</h3>
-<p>Line charts are usually best suited for showing changes in time.</p>
-<ul>
-<li><p>showing changes in time</p></li>
-<li><p>Avoid spaghetti plots</p></li>
-<li><p>highlighting categories?</p></li>
-</ul>
+<p>Line charts are usually best suited for showing changes in time. One thing that sometimes comes up is a large number of lines that an make the plot unreadable. If possible we can then try to highlight just one (or a few) category and keep the rest in grey.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_lines <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">2012</span>,<span class="dv">2013</span>,<span class="dv">2014</span>,<span class="dv">2015</span>, <span class="dv">2016</span>), <span class="dv">5</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">category =</span> <span class="fu">sort</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],<span class="dv">5</span>)),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> <span class="fu">rnorm</span>(<span class="dv">25</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>df_lines <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y =</span> value, <span class="at">color =</span> category)) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.4</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cbu_cat_2) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_cbu</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chart_types_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="scatterplots" class="level3" data-number="5.0.4">
 <h3 data-number="5.0.4" class="anchored" data-anchor-id="scatterplots"><span class="header-section-number">5.0.4</span> Scatterplots</h3>
+<p>Use cases are pretty obvious. The thing to remember is to deal with overlapping points either by setting transparency, using <code>geom_count()</code> or adding jitter.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>df_scatter <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">x =</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>, <span class="dv">4</span>, <span class="fl">1.2</span>),</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">cat =</span> <span class="fu">rbinom</span>(<span class="fl">1e3</span>, <span class="dv">1</span>, .<span class="dv">5</span>)</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>df_scatter<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>, <span class="dv">2</span> <span class="sc">+</span> .<span class="dv">5</span><span class="sc">*</span>df_scatter<span class="sc">$</span>x <span class="sc">-</span> .<span class="dv">8</span><span class="sc">*</span>df_scatter<span class="sc">$</span>x_2 <span class="sc">+</span> .<span class="dv">5</span><span class="sc">*</span>df_scatter<span class="sc">$</span>x<span class="sc">*</span>df_scatter<span class="sc">$</span>x_2, <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in rnorm(1000, 2 + 0.5 * df_scatter$x - 0.8 * df_scatter$x_2 + 0.5 * :
+wyprodukowano wartości NA</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_scatter <span class="sc">%&gt;%</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> cat)) <span class="sc">+</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_count</span>() <span class="sc">+</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_fill_manual</span>(<span class="at">values =</span> cbu_cat_2) <span class="sc">+</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_cbu</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Removed 1000 rows containing non-finite outside the scale range
+(`stat_sum()`).</code></pre>
+</div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning: Computation failed in `stat_sum()`.
+Caused by error in `$&lt;-.data.frame`:
+! zamiana ma 1 wiersz, dane mają 0</code></pre>
+</div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chart_types_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 <ul>
 <li><p>dealing with overplotting</p></li>
 <li><p>Too many points -&gt; go for geom_count?</p></li>
@@ -499,28 +547,49 @@ Option 2:</p>
 </section>
 <section id="dumbbell-charts" class="level3" data-number="5.0.7">
 <h3 data-number="5.0.7" class="anchored" data-anchor-id="dumbbell-charts"><span class="header-section-number">5.0.7</span> Dumbbell charts</h3>
-<ul>
-<li>showing changes</li>
-</ul>
+<p>Dumbell charts are good for comparing changes or categories</p>
 </section>
 <section id="waffle-charts" class="level3" data-number="5.0.8">
-<h3 data-number="5.0.8" class="anchored" data-anchor-id="waffle-charts"><span class="header-section-number">5.0.8</span> Waffle charts?</h3>
-<ul>
-<li>do we want them? For displaying simple percentages they might be ok</li>
-</ul>
+<h3 data-number="5.0.8" class="anchored" data-anchor-id="waffle-charts"><span class="header-section-number">5.0.8</span> Waffle charts</h3>
+<p>Waffle charts can be used as alternative to bar charts for displaying counts or percentages. Preferrably they should also have numbers shown.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(waffle)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>df_cat <span class="sc">%&gt;%</span></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="fu">count</span>(cat_1, cat_2) <span class="sc">%&gt;%</span></span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">aes</span>(<span class="at">fill =</span> cat_1, <span class="at">values =</span> n)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_waffle</span>(</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>    <span class="at">n_rows =</span> <span class="dv">20</span>,</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>    <span class="at">size =</span> <span class="fl">0.33</span>, </span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>    <span class="at">colour =</span> <span class="st">"white"</span>,</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>    <span class="at">flip =</span> <span class="cn">TRUE</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>    <span class="at">name =</span> <span class="cn">NULL</span>,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>    <span class="at">values =</span> cbu_cat_2</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  ) <span class="sc">+</span></span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>cat_2, <span class="at">nrow =</span> <span class="dv">1</span>) <span class="sc">+</span></span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  <span class="fu">coord_equal</span>() <span class="sc">+</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_enhance_waffle</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chart_types_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
-<section id="maps" class="level3" data-number="5.0.9">
-<h3 data-number="5.0.9" class="anchored" data-anchor-id="maps"><span class="header-section-number">5.0.9</span> Maps?</h3>
+<section id="pie-charts" class="level3" data-number="5.0.9">
+<h3 data-number="5.0.9" class="anchored" data-anchor-id="pie-charts"><span class="header-section-number">5.0.9</span> Pie charts</h3>
+<p>just no. Make a bar chart. Or a waffle chart</p>
 </section>
-<section id="pie-charts" class="level3" data-number="5.0.10">
-<h3 data-number="5.0.10" class="anchored" data-anchor-id="pie-charts"><span class="header-section-number">5.0.10</span> Pie charts</h3>
-<p>just no. Make a bar chart.</p>
-</section>
-<section id="showing-statistical-models" class="level3" data-number="5.0.11">
-<h3 data-number="5.0.11" class="anchored" data-anchor-id="showing-statistical-models"><span class="header-section-number">5.0.11</span> Showing statistical models</h3>
-<ul>
-<li>SEM models?</li>
-</ul>
+<section id="showing-statistical-models" class="level3" data-number="5.0.10">
+<h3 data-number="5.0.10" class="anchored" data-anchor-id="showing-statistical-models"><span class="header-section-number">5.0.10</span> Showing statistical models</h3>
+<p>One additional type of charts that sometimes appears in the reports are path diagrams showing path/SEM models. Unfortunately there isn’t really any good package for displaying path diagrams. IF you really want to make it in R you can use <code>{ggdag}</code> but all the nodes, positions and text has to be coded manually.</p>
+<p>You can make such diagrams in Figma, diagram.net or Power Point. If you do that remember to use Open Sans font, preferrably size 12 or 14.</p>
 
 
 </section>

@@ -184,26 +184,37 @@ theme_cbu()
 Line charts are usually best suited for showing changes in time. One thing that sometimes comes up is a large number of lines that an make the plot unreadable. If possible we can then try to highlight just one (or a few) category and keep the rest in grey.
 
 ```{r}
-dF_lines <- data.frame(
+df_lines <- data.frame(
     date = rep(c(2012,2013,2014,2015, 2016), 5),
-    category = sort(rep(letters[1:5], 4)),
-    value = rnorm(20)
+    category = sort(rep(letters[1:5],5)),
+    value = rnorm(25)
 )
 
 df_lines %>%
 ggplot(aes(x=date, y = value, color = category)) +
-geom_line() +
-scale_fill_manual(values = cbu_cat_2) %>%
+geom_line(linewidth = 1.4) +
+scale_fill_manual(values = cbu_cat_2) +
 theme_cbu()
 ```
 
--   showing changes in time
-
--   Avoid spaghetti plots
-
--   highlighting categories?
-
 ### Scatterplots
+
+Use cases are pretty obvious. The thing to remember is to deal with overlapping points either by setting transparency, using `geom_count()` or adding jitter.
+
+```{r}
+df_scatter <- data.frame(
+    x = rnorm(1e3, 4, 1.2),
+    cat = rbinom(1e3, 1, .5)
+)
+
+df_scatter$y <- rnorm(1e3, 2 + .5*df_scatter$x - .8*df_scatter$x_2 + .5*df_scatter$x*df_scatter$x_2, 1.4)
+
+df_scatter %>%
+ggplot(aes(x = x, y = y, color = cat)) +
+geom_count() +
+scale_fill_manual(values = cbu_cat_2) +
+theme_cbu()
+```
 
 -   dealing with overplotting
 
@@ -253,7 +264,7 @@ ggplot(
   ) +
   scale_fill_manual(
     name = NULL,
-    values = c("#a40000", "#c68958", "#ae6056")
+    values = cbu_cat_2
   ) +
   facet_wrap(~cat_2, nrow = 1) +
   coord_equal() +
