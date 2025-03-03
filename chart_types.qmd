@@ -193,7 +193,7 @@ df_lines <- data.frame(
 df_lines %>%
 ggplot(aes(x=date, y = value, color = category)) +
 geom_line(linewidth = 1.4) +
-scale_fill_manual(values = cbu_cat_2) +
+scale_color_manual(values = cbu_cat_2) +
 theme_cbu()
 ```
 
@@ -268,7 +268,8 @@ ggplot(
   ) +
   facet_wrap(~cat_2, nrow = 1) +
   coord_equal() +
-  theme_enhance_waffle()
+  theme_enhance_waffle() +
+  theme_cbu()
 ```
 
 ### Pie charts
