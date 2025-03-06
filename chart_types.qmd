@@ -145,7 +145,7 @@ A few more specific issues that often arise for bar plots:
          panel.grid.major.x = element_line(color = "grey80", linewidth = .5))
     ```
 
--   some likert-sclae related issues:
+-   some likert-scale related issues:
 
     `geom_bar()` will always by default start the plots from 0. This is generally good behavior but in case of likert scale items we often want them to start from 1. The best way to adjsut this is via `coord_cartesian()` and setting the ylim argument.
 

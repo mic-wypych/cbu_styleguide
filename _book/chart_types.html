@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.39">
+<meta name="generator" content="quarto-1.6.42">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -71,7 +71,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-e26003cea8cd680ca0c55a263523d882.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-2f5df379a58b258e96c21c0638c20c03.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-8da5b4427184b79ecddefad3d342027e.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
@@ -257,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Ładowanie wymaganego pakietu: sysfonts
-Ładowanie wymaganego pakietu: showtextdb</code></pre>
+<pre><code>Loading required package: sysfonts
+Loading required package: showtextdb</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfittext)</span>
@@ -418,7 +418,7 @@ Option 2:</p>
 </div>
 </div>
 </div></li>
-<li><p>some likert-sclae related issues:</p>
+<li><p>some likert-scale related issues:</p>
 <p><code>geom_bar()</code> will always by default start the plots from 0. This is generally good behavior but in case of likert scale items we often want them to start from 1. The best way to adjsut this is via <code>coord_cartesian()</code> and setting the ylim argument.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>df_long_labs <span class="sc">%&gt;%</span></span>
@@ -500,7 +500,7 @@ Option 2:</p>
 <span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>df_scatter<span class="sc">$</span>y <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="fl">1e3</span>, <span class="dv">2</span> <span class="sc">+</span> .<span class="dv">5</span><span class="sc">*</span>df_scatter<span class="sc">$</span>x <span class="sc">-</span> .<span class="dv">8</span><span class="sc">*</span>df_scatter<span class="sc">$</span>x_2 <span class="sc">+</span> .<span class="dv">5</span><span class="sc">*</span>df_scatter<span class="sc">$</span>x<span class="sc">*</span>df_scatter<span class="sc">$</span>x_2, <span class="fl">1.4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in rnorm(1000, 2 + 0.5 * df_scatter$x - 0.8 * df_scatter$x_2 + 0.5 * :
-wyprodukowano wartości NA</code></pre>
+NAs produced</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>df_scatter <span class="sc">%&gt;%</span></span>
 <span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> x, <span class="at">y =</span> y, <span class="at">color =</span> cat)) <span class="sc">+</span></span>
@@ -514,7 +514,7 @@ wyprodukowano wartości NA</code></pre>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning: Computation failed in `stat_sum()`.
 Caused by error in `$&lt;-.data.frame`:
-! zamiana ma 1 wiersz, dane mają 0</code></pre>
+! replacement has 1 row, data has 0</code></pre>
 </div>
 <div class="cell-output-display">
 <div>
