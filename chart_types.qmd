@@ -204,15 +204,16 @@ Use cases are pretty obvious. The thing to remember is to deal with overlapping 
 ```{r}
 df_scatter <- data.frame(
     x = rnorm(1e3, 4, 1.2),
-    cat = rbinom(1e3, 1, .5)
+    x_2 = rnorm(1e3, 1.2, 1.7),
+    cat = factor(rbinom(1e3, 1, .5))
 )
 
 df_scatter$y <- rnorm(1e3, 2 + .5*df_scatter$x - .8*df_scatter$x_2 + .5*df_scatter$x*df_scatter$x_2, 1.4)
 
 df_scatter %>%
 ggplot(aes(x = x, y = y, color = cat)) +
-geom_count() +
-scale_fill_manual(values = cbu_cat_2) +
+geom_count(alpha = .3) +
+scale_color_manual(values = cbu_cat_2) +
 theme_cbu()
 ```
 
@@ -241,7 +242,22 @@ This in general refers to plots that show some kind of regression-like line of b
 Dumbell charts are good for comparing changes or categories
 
 ```{r}
+df_dc <- data.frame(
+    x = c(2020, 2024, 2020, 2024, 2020, 2024),
+    y = c(5.6, 3.4, 2.5, 5.1, 4.3, 4.8),
+    cat = c("a", "a", "b", "b", "c", "c")
+)
 
+df_dc %>%
+ggplot(aes(x = cat, y = y, color = factor(x))) +
+geom_line(aes(group = cat), color = "grey60") +
+geom_point(size = 3) +
+geom_text(aes(label = y), nudge_x = .2) +
+scale_color_manual(values = cbu_cat_1) +
+coord_flip() +
+theme_cbu() +
+theme(panel.grid.major.y = element_blank(),
+     panel.grid.major.x = element_line(color = "grey80"))
 ```
 
 ### Waffle charts
