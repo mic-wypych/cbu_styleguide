@@ -225,13 +225,21 @@ theme_cbu()
 
 ### Line-of-best-fit charts
 
-This in general refers to plots that show some kind of regression-like line of best fit, be it from a GLM, LOESS, GAM etc.
+This in general refers to plots that show some kind of regression-like line of best fit, be it from a GLM, LOESS, GAM etc. Three things to remember about with these kinds of plots is to work with the model itself when plotting (rather than raw data), make sure a proper interpretation is provided and try to include uncertainty.
 
--   Make sure a proper interpretation is provided.
+```{r}
+library(marginaleffects)
+fit_df <- data.frame(
+    x = rnorm(1e3, 3.4, 1.2)
+)
+fit_df$y <- rnorm(1e3, 1 + 3*sin(fit_df$x) - 1.2*cos(fit_df$x) + .2*fit_df$x^2, .6)
 
--   Try to include uncertainty
+model_fit <- lm(y ~ bs)
+```
 
 ### Correlation plots?
+
+Quite commonly
 
 -   right now we make bar plots. Is this the best option?
 
