@@ -133,8 +133,6 @@ A few more specific issues that often arise for bar plots:
 
 -   adding errorbars:
 
-    error
-
     ```{r}
     df_long_labs %>%
     ggplot(aes(x = item, y = mean)) +
@@ -229,21 +227,40 @@ This in general refers to plots that show some kind of regression-like line of b
 
 ```{r}
 library(marginaleffects)
+library(splines)
 fit_df <- data.frame(
     x = rnorm(1e3, 3.4, 1.2)
 )
 fit_df$y <- rnorm(1e3, 1 + 3*sin(fit_df$x) - 1.2*cos(fit_df$x) + .2*fit_df$x^2, .6)
 
-model_fit <- lm(y ~ bs)
+model_fit <- lm(y ~ ns(x, 3), fit_df)
+
+plot_predictions(model_fit, condition = "x") +
+geom_point(data = fit_df, aes(x = x, y = y), alpha = .3) +
+theme_cbu()
 ```
 
 ### Correlation plots?
 
-Quite commonly
+Quite commonly cbu reports graphically display correlations. One way which was commonly used was to make bar plots with heights of bar representing strength of the correlation. Some alternatives include dumbbell charts that use points instead of bars
 
--   right now we make bar plots. Is this the best option?
+```{r}
+cor_df <- data.frame(
+    cor = c(.44, .34, .21, .13, .11, -.23),
+    var = sort(rep(c("SDO", "RWA", "Identification"), 2)),
+    group = rep(c("group a", "group b"), 3)
+)
 
--   Do we want to include asterikses for significant relations?
+cor_df %>%
+ggplot(aes(y = cor, x = var, fill = group)) +
+geom_col(position = position_dodge(width = .9)) +
+geom_text(aes(label = cor), position = position_dodge(width = .9), size = 5) +
+coord_flip() +
+scale_fill_manual(values = cbu_cat_1) +
+theme_cbu() +
+theme(panel.grid.major.y = element_blank(),
+     panel.grid.major.x = element_line(color = "grey80"))
+```
 
 ### Dumbbell charts
 
