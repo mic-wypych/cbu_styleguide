@@ -1,3 +1,13 @@
+## tutorial
+
+This chapter is a walkthrough the report template. It's aim is to present each part of the report and show how to use it to write and render a ready cbu report.
+
+### General structure of the report
+
+When you get/download a directory with the report template you should see the following structure:
+
+### Brief introduction to quarto
+
 What this tutorial has to include:
 
 1.  General introduction to quarto?
