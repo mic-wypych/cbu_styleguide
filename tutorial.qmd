@@ -29,9 +29,9 @@ In case you have not worked with quarto before it is a multi-language version of
 
 When you open the `template.qmd` you will see something like this:
 
-**put a screenshot here**
+![](images/paste-1.png)
 
--   some basic explanation of what is where
+The top left pane is where the report template is. the top part of it is the yaml header where information like report title, date and authors are included. Below the header is the proper report with text and code chunks. In the same part on the right side is a table of contents based on headers. At the top of this pane you can find some basic text formatting tools like inserting images, links, inserting elements like code chunks, bullet lists etc. The rest is the regular Rstudio look.
 
 ### Tech stack
 
@@ -39,7 +39,7 @@ We use quarto for writing and combining text and code. The computations themselv
 
 ### Walkthrough
 
-Below you will see a basic walkthrough of making a simple report
+Below you will see a basic walkthrough of making a simple report. We'll go through setting the general information in the header, writing and formatting text, adding code chunks for calculations, tables and plots and adding references
 
 #### Yaml header
 
@@ -84,3 +84,9 @@ By default the report relies on Zotero which is nicely integrated with RStudio b
     -   Zotero citations
 
     -   Cross referencing tables and
+
+#### Rendering
+
+Once the report is ready it is time to render it! You can do it with the render button.
+
+-   add a video
