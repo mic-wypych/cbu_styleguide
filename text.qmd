@@ -36,7 +36,7 @@ This part deals with all text-related things in the format. Both in terms of typ
     graph_df %>%
       ggplot(aes(x = target, y = value, fill = att)) +
       geom_col(width = .6) +
-      geom_text(aes(label = paste0(value*100, "%")),direction = "y", position = "stack", vjust = 2) +
+      geom_text(aes(label = paste0(value*100, "%")),direction = "y", position = position_stack(vjust = .5)) +
       scale_fill_manual(values= c("ok"= "steelblue",
                                   "meh" = "grey80",
                                   "not ok" = "tomato4")) +
@@ -54,7 +54,7 @@ This part deals with all text-related things in the format. Both in terms of typ
     graph_df %>%
       ggplot(aes(x = target, y = value, fill = att)) +
       geom_col(width = .6) +
-      geom_text_repel(aes(label = paste0(value*100, "%")),direction = "y", position = "stack", vjust = 2) +
+      geom_text_repel(aes(label = paste0(value*100, "%")),direction = "y", position = position_stack(vjust = .5)) +
       scale_fill_manual(values= c("ok"= "steelblue",
                                   "meh" = "grey80",
                                   "not ok" = "tomato4")) +

@@ -11,8 +11,6 @@ Put the function here and discuss it a bit.
 ```{r warning = FALSE, message = FALSE}
 library(tidyverse)
 library(showtext)
-library(tinytable)
-library(modelsummary)
 
 font_add_google("Open Sans")
 showtext_auto()
@@ -96,110 +94,34 @@ Below is a breakdown of all elements in the theme:
 
 ## Table theming
 
-Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content. More general tutorial and docs on `{tinytable}` can be found [here](https://vincentarelbundock.github.io/tinytable/vignettes/tinytable.html).
+Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content.
 
 ### Tables with numbers
 
-These tables include things like tables with sample characteristics (e.g. age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc. Here is the basic theme for `{tinytable}` that contains mainly summary stats:
-
-```{r}
-tt_theme_cbu <- function(x) {
-  out <- x |>
-    tt() |>
-    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
-    style_tt(j = 1:ncol(x), align = "c") |>
-    style_tt(i = 0, bold = TRUE) |>
-    style_tt(i = nrow(x), line = "b", line_color = "#ABABAB") |>
-    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
-    style_tt(i = 0, line = "t", line_color = "#ABABAB")
-  return(out)
-}
-```
-
-Here is an exmaple table:
-
-```{r}
-#| label: tbl-1
-#| tbl-cap: "Some summary statistics split by category"
-cont_df %>%
-group_by(a) %>%
-summarise(across(.cols = c(x, y),
-                .fns = list("mean" = \(x) mean(x),
-                           "sd" = \(x) sd(x)
-                           ), .names = "{.col} {.fn}")) %>%
-tt_theme_cbu()
-```
-
-One common issue with table is when we want to group the rows in a table. Lets see an example and how we can do it in `{tinytable}`. You can set the grouping using `style_tt()`. the argument `i` specifies which rows to merge, `j` specifies which column to target and r`owspan` how many rows to merge for each i. `alignv` specifies how to vertically align text in the merged
-
-```{r}
-#| label: tbl-2
-#| tbl-cap: "Some grouped summary statistis."
-grouped_df <- data.frame(
-    category = sample(c("option 1", "option 2", "option 3"), 1e3, replace = T),
-    group = sample(c("group 1", "group 2", "group 3"), 1e3, replace = T),
-    y = rnorm(1e3)
-)
-
-grouped_df %>%
-group_by(group, category) %>%
-summarise(across(y, .fns = list("mean" = \(x) mean(x),
-                           "sd" = \(x) sd(x)
-                           ), .names = "{.col} {.fn}")) %>%
-tt_theme_cbu() %>%
-style_tt(i = c(1, 4, 7), j = 1, rowspan = 3, alignv = "m")
-```
+These tables include things like tables with sample characteristics (e.g. age, gender, education, place of living etc), summary statistics like means and standard deviations for important variables etc.
 
 ### Text tables
 
-These tables include tables that primarily present text, especially when presenting scale items. Here is the basic theme for `{tinytable}` that contains mainly text:
+These tables include tables that primarily present text, especially when presenting scale items.
 
-Here is an example:
+issues:
 
-```{r}
-#| label: tbl-3
-#| tbl-cap: "Emotion Regulation Questionnaire items with means and stnadard deviations"
-text_df <- data.frame(
-    item = c("When I want to feel more positive emotion (such as joy or amusement), I change what I’m thinking about.",
-            "I keep my emotions to myself.",
-            "When I want to feel less negative emotion (such as sadness or anger), I change what I’m thinking about.",
-            "When I am feeling positive emotions, I am careful not to express them."),
-    mean = c(4.54, 2.34, 6.44, 3.55),
-    sd = c(0.67, 1.23, 1.12, 0.89)
-)
+-   long text
 
-text_df %>%
-tt_theme_cbu()
-```
+-   merging cells
 
 ### Model output tables
 
-These tables include any statistical models presented in table format. If we have the numbers stored separately (we just know the
+These tables include any statistical models presented in table format.
 
-A decent alternative is to use `{modelsummary}` which is nicely integrated with `{tinytable}`. It automatically extracts information from all sorts of models and allows quite a bit of styling and formatting. Here is an example below:
+-   which information should be included
 
-```{r}
-#| label: tbl-4
-#| tbl-cap: "Some stats from models with interactions"
-x <- rnorm(1e3)
-x_2 <- rnorm(1e3, 3, .7)
-y <- rnorm(1e3, 1 + .4*x + .4*x_2 - .5*x*x_2)
-df_cont_2 <- data.frame(
-    x, x_2, y
-)
+-   text tables:
 
-lm_1 <- lm(y ~ x + x_2, df_cont_2)
+    -   issues: long text
 
-lm_2 <- lm(y ~ x*x_2, df_cont_2)
+    -   merging cells
 
-modelsummary(list("model 1" = lm_1, "model 2" = lm_2), stars = TRUE,
-            shape = term ~ model + statistic,
-            gof_map = c("nobs", "r.squared")) |>
-    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
-    style_tt(i = 0, bold = TRUE) |>
-    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
-    style_tt(i = 0, line = "t", line_color = "#ABABAB")
-```
+-   model output tables:
 
--   which information should be included:
--   multiple models
+    -   general information that should be included in a table that describes a model are pretty much the same as standard APA stuff: include uncertainty (standard errors or confidence intervals)
