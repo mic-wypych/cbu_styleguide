@@ -4,24 +4,83 @@ This chapter is a walkthrough the report template. It's aim is to present each p
 
 ### General structure of the report
 
-When you get/download a directory with the report template you should see the following structure:
+When you get/download a directory with the report template you should see the following structure (to be cleaned later:
+
+```{r eval=FALSE}
+cbu_report
+├── template.amd
+├── cbu_report.rproj
+└── _extensions
+    └── cbu_format_typst
+        ├── logo.png
+        ├── Open_Sans
+        ├── typst-show.typ
+        ├── typst-template.typ
+        └── _extension.yml
+├── cbulogo-nobg.png
+├── cover_rect_ggdist.png
+```
+
+The file `template.qmd` is the report template where all the work will happen. `cbu_report.rproj` is the R project file that allows us to work on R project level which makes many things easier. The `_extensions` folder contains fonts, logos as well as typst files that map the information from `template.qmd` to typst and then render in proper format to pdf. DO NOT TOUCH that folder. The remaining files contain the cbu logo and report cover.
 
 ### Brief introduction to quarto
 
-What this tutorial has to include:
+In case you have not worked with quarto before it is a multi-language version of R markdown which allows to combine code and text in a single file. You can find excellent documentation [here](https://quarto.org/docs/get-started/hello/rstudio.html) and a youtube tutorial [here](https://www.youtube.com/watch?v=_f3latmOhew). In order to be able to work with the template you will need to download and install quarto and some editor like rstudio or positron.
 
-1.  General introduction to quarto?
-2.  Overview of the format and its tech stack:
-    1.  quarto to write so we work in markdown
-    2.  typst to render to pdf. DO NOT TOUCH
-    3.  Zotero for citations
-    4.  R/python/julia for calculations. Preferably R
-3.  Walkthrough making a report
-    1.  Writing regular text
-    2.  footnotes
-    3.  Headings: we use level 4 headings for sections
-    4.  Making tables
-    5.  Making plots
-    6.  References:
-        1.  Zotero
-        2.  referencing tables and plots
+When you open the `template.qmd` you will see something like this:
+
+**put a screenshot here**
+
+-   some basic explanation of what is where
+
+### Tech stack
+
+We use quarto for writing and combining text and code. The computations themselves can be done in R, Python or Julia. Rendering to pdf is handled by Typst and citations are made with Zotero.
+
+### Walkthrough
+
+Below you will see a basic walkthrough of making a simple report
+
+#### Yaml header
+
+The first thing to fill when making a report is the so called YAML header. It's the top part of the `template.qmd` denoted by `---`. The information you have to put here are the title of the report, date and authors with their affiliations.
+
+-   add video/printscreen
+
+#### Writing text
+
+Working with Rstudio/Positron makes it easy to write text in visual mode which roughly should resemble the basics of programs like Word.
+
+-   add video showing example of text:
+
+    -   simple text
+
+    -   main points on page 2
+
+    -   bullet lists, etc
+
+    -   subtitles/headings
+
+    -   footnotes
+
+#### Computations
+
+Any computations have to be included in the so called code chunks. You can add them manually or with `ctrl` + `alt` + `i`.
+
+-   add video with examples
+
+    -   computations
+
+    -   plots + labels and captions
+
+    -   tables + labels and captions
+
+#### References
+
+By default the report relies on Zotero which is nicely integrated with RStudio but you can manually edit/create a reference.bib file. Tables and Figures are also references in text.
+
+-   add video
+
+    -   Zotero citations
+
+    -   Cross referencing tables and
