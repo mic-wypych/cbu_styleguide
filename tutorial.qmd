@@ -8,7 +8,7 @@ When you get/download a directory with the report template you should see the fo
 
 ```{r eval=FALSE}
 cbu_report
-├── template.amd
+├── template.qmd
 ├── cbu_report.rproj
 └── _extensions
     └── cbu_format_typst
@@ -21,11 +21,11 @@ cbu_report
 ├── cover_rect_ggdist.png
 ```
 
-The file `template.qmd` is the report template where all the work will happen. `cbu_report.rproj` is the R project file that allows us to work on R project level which makes many things easier. The `_extensions` folder contains fonts, logos as well as typst files that map the information from `template.qmd` to typst and then render in proper format to pdf. DO NOT TOUCH that folder. The remaining files contain the cbu logo and report cover.
+The file `template.qmd` is the report template where all the work will happen. `cbu_report.rproj` is the R project file that allows us to work on R project level which makes many things like managing paths easier. The `_extensions` folder contains fonts, logos as well as typst files that map the information from `template.qmd` to typst and then render in proper format to pdf. DO NOT TOUCH that folder. The remaining files contain the cbu logo and report cover.
 
 ### Brief introduction to quarto
 
-In case you have not worked with quarto before it is a multi-language version of R markdown which allows to combine code and text in a single file. You can find excellent documentation [here](https://quarto.org/docs/get-started/hello/rstudio.html) and a youtube tutorial [here](https://www.youtube.com/watch?v=_f3latmOhew). In order to be able to work with the template you will need to download and install quarto and some editor like rstudio or positron.
+In case you have not worked with quarto before it is a multi-language version of R markdown which allows to combine code and text in a single file. You can find excellent documentation [here](https://quarto.org/docs/get-started/hello/rstudio.html) and a youtube tutorial [here](https://www.youtube.com/watch?v=_f3latmOhew). In order to be able to work with the template you will need to download and install quarto and some editor like Rstudio or positron.
 
 When you open the `template.qmd` you will see something like this:
 
@@ -35,7 +35,7 @@ The top left pane is where the report template is. the top part of it is the yam
 
 ### Tech stack
 
-We use quarto for writing and combining text and code. The computations themselves can be done in R, Python or Julia. Rendering to pdf is handled by Typst and citations are made with Zotero.
+We use quarto for writing and combining text and code. The computations themselves can be done in R, Python or Julia. Rendering to pdf is handled by Typst and citations are made with Zotero. If you don't know Zotero you can learn more and download [here](https://www.zotero.org/).
 
 ### Walkthrough
 
