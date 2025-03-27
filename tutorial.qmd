@@ -77,7 +77,7 @@ Any computations have to be included in the so called code chunks. You can add t
 
 #### References
 
-By default the report relies on Zotero which is nicely integrated with RStudio but you can manually edit/create a reference.bib file. Tables and Figures are also references in text.
+By default the report relies on Zotero which is nicely integrated with RStudio but you can manually edit/create a reference.bib file. Tables and Figures are also references in text. In order to add a citation using Zotero you need to first save it in your Zotero library. The easiest way to do it is to just drag and drop a pdf with the article into your Zotero. You can also use browser extension that allows you to save to zotero directly from e.g. google scholar. Once you have the articles you want to cite in the library you can proceed with citing using `@`. This should prompt a dropdown menu with possible citations. As you start to write out the authors name the list should narrow down to the ones that match.
 
 -   add video
 
