@@ -49,6 +49,46 @@ plot_swatch <- function(palette, nrow = 1) {
           strip.text = element_blank())
 }
 
+plot_wheel <- function(palette) {
+
+  palette_df <- data.frame(hex = palette) |>
+    dplyr::mutate(id = row_number()) |>
+    cbind(
+      as.data.frame(colorspace::hex2RGB(palette)@coords)) # Normalize to [0,1]
+
+  palette_df <- palette_df |>
+    cbind(
+      rgb2hsv(palette_df$R, palette_df$G, palette_df$B) |>
+        t() |>
+        as.data.frame()
+    )
+
+
+  hue_values <- seq(0, 1, length.out = 360)  # 360 hue values
+  color_data <- data.frame(
+    xmin = hue_values,
+    xmax = hue_values + (1/360),  # Small increment to create adjacent rectangles
+    ymin = 1.1,  # Bottom of the rectangle
+    ymax = 1.2,  # Top of the rectangle
+    color = hsv(hue_values, 1, 1)  # Convert hue to colors
+  )
+
+
+
+  palette_df |>
+    ggplot2::ggplot(aes(x = h, y = s, color = hex)) +
+    geom_point(size = 7) +
+    geom_rect(data = color_data, aes(xmin = xmin, xmax = xmax, ymin = ymin, ymax = ymax, fill = color), inherit.aes = FALSE) +
+    scale_fill_identity() +
+    scale_color_identity() +
+    scale_x_continuous(breaks = c(0,.1,.2,.3,.4,.5,.6,.7,.8,.9), expand = c(0,0)) +
+    scale_y_continuous(limits = c(0, 1.2), expand = c(0,-.15)) +
+    coord_polar(clip = "off") +
+    theme_void() +
+    theme(legend.position = "none",
+          panel.grid.major = element_line(color = "grey80"))
+}
+
 theme_cbu <- function() {
   theme_minimal(base_size = 14, base_family = font) +
     theme(panel.grid.minor = element_blank(),
@@ -165,6 +205,12 @@ cbu_purple <- c('#d0ade3', '#bc9ad0', '#a987bc', '#9675aa', '#836397', '#715285'
 cbu_red <- c('#ff9799', '#f18489', '#e3727a', '#d55f6b', '#c74c5d', '#b8384f', '#aa2041')
 
 cbu_yellow <- c('#e4b67d', '#d2a368', '#c09054', '#af7e40', '#9d6b2d', '#8b5a18', '#7a4900')
+```
+
+That's how palettes look like on the color wheel:
+
+```{r}
+plot_wheel(c(cbu_pink, cbu_blue, cbu_purple, cbu_red, cbu_yellow))
 ```
 
 Sample plots in the continuous palettes are as follows:

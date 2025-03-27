@@ -1,0 +1,49 @@
+## Yaml header
+
+What to include:
+
+-   introduction to the file and folder
+
+-   What is a yaml header
+
+-   what information should go into a header
+
+## Writing text
+
+What to include:
+
+-   overview of quarto file and where you write stuff
+
+-   entering main points
+
+-   writing plain text
+
+-   basic text formatting:
+
+    -   Headings
+
+    -   bold, italic etc
+
+    -   footnotes
+
+    -   bullet lists
+
+## Computations
+
+What to include:
+
+-   adding code chunks
+
+-   code chunk options (echo etc.)
+
+-   writing code and what to remember
+
+    -   libraries
+
+    -   seeds etc.
+
+    -   sourcing
+
+    -   plots + labels and captions
+
+    -   tables + labels and captions
