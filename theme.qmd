@@ -94,7 +94,7 @@ Below is a breakdown of all elements in the theme:
 
 ## Table theming
 
-Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content.
+Cbu report format works on typst which necessitates using `{tinytable}` package for making table as it is currently the only one that supports rendering in typst without problems. The main 2 types of tables used in cbu reports are ones containing primarily numbers (e.g. summary statistics, reporting model coefficients) and ones containing primarily text (e.g. item wording). Those can be styled a bit differently to fit conventions and the particular content. General documentation of `{tinytabe}` package can be found [here](https://vincentarelbundock.github.io/tinytable/).
 
 ### Tables with numbers
 
@@ -104,24 +104,69 @@ These tables include things like tables with sample characteristics (e.g. age, g
 
 These tables include tables that primarily present text, especially when presenting scale items.
 
-issues:
+```{r}
+library(tinytable)
+tt_theme_cbu <- function(x) {
+    out <- x |>
+    tt() |>
+    format_tt(digits = 2, num_fmt = "significant_cell", num_mark_dec = ",") |>
+    style_tt(j = 1:ncol(x),align = "c") |>
+    style_tt(i = 0, bold = TRUE, line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "b", line_color = "#ABABAB") |>
+    style_tt(i = 0, line = "t", line_color = "#ABABAB")
+    return(out)
+}
 
--   long text
+```
 
--   merging cells
+-   One common use case for tables is to display items/questions along with some summary statistics like means and standard deviations
+
+    ```{r}
+    long_txt_df <- data.frame(item = c("When I want to feel more positive emotion (such as joy or amusement I change what I'm thinking about", "When I am feeling positive emotions I am careful not to express them", "I control my emotions by not expressing them"),
+                             mean = c(4.56, 3.43, 4.03),
+                             'sd' = c(1.12, 0.89, 1.07))
+    colnames(long_txt_df) <- c("item", "mean", "standard deviation")
+    tt_theme_cbu(long_txt_df)
+    ```
+
+-   Another common case is when we need to merge multiple cells into 1:
+
+    ```{r}
+    df_to_merge <-  data.frame(item = c("When I want to feel more positive emotion (such as joy or amusement I change what I'm thinking about", "When I am feeling positive emotions I am careful not to express them", "I control my emotions by not expressing them"),
+                              reliability = c(.76, .76 , .76))
+
+    df_to_merge |>
+    tt_theme_cbu() |>
+        style_tt(i = 1, j = 2, rowspan = 3, align = "c", alignv = "m")
+    ```
+
+-   Finally in some situations we might want to use some group labels (e.g. when displaying multiple scales in 1 table)
+
+    ```{r}
+    df_to_label <- data.frame(item = c("Poles are friendly", "Poles are warm", "Poles are competent", "Poles are capable"),
+                             mean = c(4.56, 4.77, 3.44, 4.78),
+                             sd = c(1.43, 1.56, 1.23, 1.65))
+    colnames(long_txt_df) <- c("item", "mean", "standard deviation")
+
+    df_to_label |>
+    tt_theme_cbu() |>
+    group_tt(i = list(
+        "Warmth" = 1,
+        "Competence" = 3))
+    ```
 
 ### Model output tables
 
-These tables include any statistical models presented in table format.
+These tables include any statistical models presented in table format. Most commonly those will be regression coefficients and some fit measures like R^2^. Remember to include some uncertainty measures and a common language explanation in text.
 
--   which information should be included
+```{r}
+library(modelsummary)
+N <- 1e4
+x <- rnorm(N)
+x2 <- rnorm(N, 1.3, .8)
+y <- rnorm(N, 2 + .3*x - .6*x2)
+df_to_lm <- data.frame(x, x2, y)
+lm_totable <- lm(y ~ x + x2, df_to_lm)
 
--   text tables:
-
-    -   issues: long text
-
-    -   merging cells
-
--   model output tables:
-
-    -   general information that should be included in a table that describes a model are pretty much the same as standard APA stuff: include uncertainty (standard errors or confidence intervals)
+modelsummary(lm_totable)
+```

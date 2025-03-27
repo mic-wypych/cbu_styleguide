@@ -4,7 +4,7 @@ This chapter is a walkthrough the report template. It's aim is to present each p
 
 ### General structure of the report
 
-When you get/download a directory with the report template you should see the following structure (to be cleaned later:
+When you get/download a directory with the report template you should see the following structure **(to be cleaned later**):
 
 ```{r eval=FALSE}
 cbu_report
@@ -13,7 +13,7 @@ cbu_report
 └── _extensions
     └── cbu_format_typst
         ├── logo.png
-        ├── Open_Sans
+        ├── Jost
         ├── typst-show.typ
         ├── typst-template.typ
         └── _extension.yml
@@ -35,7 +35,7 @@ The top left pane is where the report template is. the top part of it is the yam
 
 ### Tech stack
 
-We use quarto for writing and combining text and code. The computations themselves can be done in R, Python or Julia. Rendering to pdf is handled by Typst and citations are made with Zotero. If you don't know Zotero you can learn more and download [here](https://www.zotero.org/).
+We use quarto for writing and combining text and code. The computations themselves can be done in R, Python or Julia. Rendering to pdf is handled by Typst and citations are made with Zotero. If you don't know Zotero you can learn more and download [here](https://www.zotero.org/). The bibliography can also be manually edited in the reference.bib file.
 
 ### Walkthrough
 
