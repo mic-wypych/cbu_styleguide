@@ -157,7 +157,7 @@ tt_theme_cbu <- function(x) {
 
 ### Model output tables
 
-These tables include any statistical models presented in table format. Most commonly those will be regression coefficients and some fit measures like R^2^. Remember to include some uncertainty measures and a common language explanation in text.
+These tables include any statistical models presented in table format. Most commonly those will be regression coefficients and some fit measures like R^2^. Remember to include some uncertainty measures and a common language explanation in text. `{modelsummary}` package is a really nice package that integrates with `{tinytable}` that allows to
 
 ```{r}
 library(modelsummary)
@@ -168,5 +168,17 @@ y <- rnorm(N, 2 + .3*x - .6*x2)
 df_to_lm <- data.frame(x, x2, y)
 lm_totable <- lm(y ~ x + x2, df_to_lm)
 
-modelsummary(lm_totable)
+tt_model_cbu <- function(x) {
+    modelsummary(
+    models = x, 
+    fmt = 2,
+    statistic = c("B" = "{estimate}", 
+    "Błąd Standardowy" = "{std.error}"),  # Correctly renaming estimate
+    coef_omit = "Intercept",
+    shape = term ~ model + statistic,
+    gof_map = "r.squared"
+  )
+}
+
+tt_model_cbu(lm_totable)
 ```
