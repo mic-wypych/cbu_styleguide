@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>tutorial – cbu styleguide</title>
+<title>6&nbsp; tutorial – cbu styleguide</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -19,6 +19,40 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -72,7 +106,7 @@ ul.task-list li input[type="checkbox"] {
 
 </head>
 
-<body class="nav-sidebar floating fullcontent">
+<body class="nav-sidebar floating">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -81,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tutorial.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">tutorial.html</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./tutorial.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">tutorial</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
@@ -145,7 +179,7 @@ ul.task-list li input[type="checkbox"] {
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="./tutorial.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">tutorial.html</span></span></a>
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">tutorial</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -165,39 +199,128 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#general-structure-of-the-report" id="toc-general-structure-of-the-report" class="nav-link active" data-scroll-target="#general-structure-of-the-report"><span class="header-section-number">6.0.1</span> General structure of the report</a></li>
+  <li><a href="#brief-introduction-to-quarto" id="toc-brief-introduction-to-quarto" class="nav-link" data-scroll-target="#brief-introduction-to-quarto"><span class="header-section-number">6.0.2</span> Brief introduction to quarto</a></li>
+  <li><a href="#tech-stack" id="toc-tech-stack" class="nav-link" data-scroll-target="#tech-stack"><span class="header-section-number">6.0.3</span> Tech stack</a></li>
+  <li><a href="#walkthrough" id="toc-walkthrough" class="nav-link" data-scroll-target="#walkthrough"><span class="header-section-number">6.0.4</span> Walkthrough</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
-<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">tutorial</span></h1>
+</div>
 
 
 
+<div class="quarto-title-meta">
 
-<p>What this tutorial has to include:</p>
-<ol type="1">
-<li>General introduction to quarto?</li>
-<li>Overview of the format and its tech stack:
-<ol type="1">
-<li>quarto to write so we work in markdown</li>
-<li>typst to render to pdf. DO NOT TOUCH</li>
-<li>Zotero for citations</li>
-<li>R/python/julia for calculations. Preferably R</li>
-</ol></li>
-<li>Walkthrough making a report
-<ol type="1">
-<li>Writing regular text</li>
-<li>footnotes</li>
-<li>Headings: we use level 4 headings for sections</li>
-<li>Making tables</li>
-<li>Making plots</li>
-<li>References:
-<ol type="1">
-<li>Zotero</li>
-<li>referencing tables and plots</li>
-</ol></li>
-</ol></li>
-</ol>
+    
+  
+    
+  </div>
+  
 
 
+</header>
+
+
+<p>This chapter is a walkthrough the report template. It’s aim is to present each part of the report and show how to use it to write and render a ready cbu report.</p>
+<section id="general-structure-of-the-report" class="level3" data-number="6.0.1">
+<h3 data-number="6.0.1" class="anchored" data-anchor-id="general-structure-of-the-report"><span class="header-section-number">6.0.1</span> General structure of the report</h3>
+<p>When you get/download a directory with the report template you should see the following structure <strong>(to be cleaned later</strong>):</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cbu_report</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>├── template.qmd</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>├── cbu_report.rproj</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>└── _extensions</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    └── cbu_format_typst</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>        ├── logo.png</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>        ├── Jost</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>        ├── typst<span class="sc">-</span>show.typ</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>        ├── typst<span class="sc">-</span>template.typ</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>        └── _extension.yml</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>├── cbulogo<span class="sc">-</span>nobg.png</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>├── cover_rect_ggdist.png</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>The file <code>template.qmd</code> is the report template where all the work will happen. <code>cbu_report.rproj</code> is the R project file that allows us to work on R project level which makes many things like managing paths easier. The <code>_extensions</code> folder contains fonts, logos as well as typst files that map the information from <code>template.qmd</code> to typst and then render in proper format to pdf. DO NOT TOUCH that folder. The remaining files contain the cbu logo and report cover.</p>
+</section>
+<section id="brief-introduction-to-quarto" class="level3" data-number="6.0.2">
+<h3 data-number="6.0.2" class="anchored" data-anchor-id="brief-introduction-to-quarto"><span class="header-section-number">6.0.2</span> Brief introduction to quarto</h3>
+<p>In case you have not worked with quarto before it is a multi-language version of R markdown which allows to combine code and text in a single file. You can find excellent documentation <a href="https://quarto.org/docs/get-started/hello/rstudio.html">here</a> and a youtube tutorial <a href="https://www.youtube.com/watch?v=_f3latmOhew">here</a>. In order to be able to work with the template you will need to download and install quarto and some editor like Rstudio or positron.</p>
+<p>When you open the <code>template.qmd</code> you will see something like this:</p>
+<p><img src="images/paste-1.png" class="img-fluid"></p>
+<p>The top left pane is where the report template is. the top part of it is the yaml header where information like report title, date and authors are included. Below the header is the proper report with text and code chunks. In the same part on the right side is a table of contents based on headers. At the top of this pane you can find some basic text formatting tools like inserting images, links, inserting elements like code chunks, bullet lists etc. The rest is the regular Rstudio look.</p>
+</section>
+<section id="tech-stack" class="level3" data-number="6.0.3">
+<h3 data-number="6.0.3" class="anchored" data-anchor-id="tech-stack"><span class="header-section-number">6.0.3</span> Tech stack</h3>
+<p>We use quarto for writing and combining text and code. The computations themselves can be done in R, Python or Julia. Rendering to pdf is handled by Typst and citations are made with Zotero. If you don’t know Zotero you can learn more and download <a href="https://www.zotero.org/">here</a>. The bibliography can also be manually edited in the reference.bib file.</p>
+</section>
+<section id="walkthrough" class="level3" data-number="6.0.4">
+<h3 data-number="6.0.4" class="anchored" data-anchor-id="walkthrough"><span class="header-section-number">6.0.4</span> Walkthrough</h3>
+<p>Below you will see a basic walkthrough of making a simple report. We’ll go through setting the general information in the header, writing and formatting text, adding code chunks for calculations, tables and plots and adding references</p>
+<section id="yaml-header" class="level4" data-number="6.0.4.1">
+<h4 data-number="6.0.4.1" class="anchored" data-anchor-id="yaml-header"><span class="header-section-number">6.0.4.1</span> Yaml header</h4>
+<p>The first thing to fill when making a report is the so called YAML header. It’s the top part of the <code>template.qmd</code> denoted by <code>---</code>. The information you have to put here are the title of the report, date and authors with their affiliations.</p>
+<ul>
+<li>add video/printscreen</li>
+</ul>
+</section>
+<section id="writing-text" class="level4" data-number="6.0.4.2">
+<h4 data-number="6.0.4.2" class="anchored" data-anchor-id="writing-text"><span class="header-section-number">6.0.4.2</span> Writing text</h4>
+<p>Working with Rstudio/Positron makes it easy to write text in visual mode which roughly should resemble the basics of programs like Word.</p>
+<ul>
+<li><p>add video showing example of text:</p>
+<ul>
+<li><p>simple text</p></li>
+<li><p>main points on page 2</p></li>
+<li><p>bullet lists, etc</p></li>
+<li><p>subtitles/headings</p></li>
+<li><p>footnotes</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="computations" class="level4" data-number="6.0.4.3">
+<h4 data-number="6.0.4.3" class="anchored" data-anchor-id="computations"><span class="header-section-number">6.0.4.3</span> Computations</h4>
+<p>Any computations have to be included in the so called code chunks. You can add them manually or with <code>ctrl</code> + <code>alt</code> + <code>i</code>.</p>
+<ul>
+<li><p>add video with examples</p>
+<ul>
+<li><p>computations</p></li>
+<li><p>plots + labels and captions</p></li>
+<li><p>tables + labels and captions</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="references" class="level4" data-number="6.0.4.4">
+<h4 data-number="6.0.4.4" class="anchored" data-anchor-id="references"><span class="header-section-number">6.0.4.4</span> References</h4>
+<p>By default the report relies on Zotero which is nicely integrated with RStudio but you can manually edit/create a reference.bib file. Tables and Figures are also references in text.</p>
+<ul>
+<li><p>add video</p>
+<ul>
+<li><p>Zotero citations</p></li>
+<li><p>Cross referencing tables and</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="rendering" class="level4" data-number="6.0.4.5">
+<h4 data-number="6.0.4.5" class="anchored" data-anchor-id="rendering"><span class="header-section-number">6.0.4.5</span> Rendering</h4>
+<p>Once the report is ready it is time to render it! You can do it with the render button.</p>
+<ul>
+<li>add a video</li>
+</ul>
+
+
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
