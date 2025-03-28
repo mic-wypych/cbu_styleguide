@@ -12,9 +12,9 @@ Put the function here and discuss it a bit.
 library(tidyverse)
 library(showtext)
 
-font_add_google("Open Sans")
+font_add_google("Jost")
 showtext_auto()
-font <- "Open Sans"
+font <- "Jost"
 
 
 cbu_cat <- c("#b96784", "#88375d","#9bb6bd","#5E9FB1", "#755687","#4a2d5e", "#eb676c","#aa2041", "#f2d1ab", "#dd9d38")
@@ -24,8 +24,7 @@ cbu_cat_2 <- cbu_cat[c(6:10)]
 theme_cbu <- function() {
   theme_minimal(base_size = 14, base_family = font) +
     theme(panel.grid.minor = element_blank(),
-          panel.grid.major = element_line(color = "grey80", linewidth = .5),
-          panel.grid.major.x = element_blank(),
+          panel.grid.major = element_blank(),
           plot.background = element_rect(fill = "white", color = NA),
           plot.title = element_text(size = 1.68*12, face = "bold", family = font),
           plot.subtitle = element_text(face = "italic", family = font),

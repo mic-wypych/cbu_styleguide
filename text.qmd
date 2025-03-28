@@ -4,12 +4,12 @@ This part deals with all text-related things in the format. Both in terms of typ
 
 | level | font | size | styling |
 |-------------------|------------------|------------------|------------------|
-| [H1 - report title]{style="font-size: 2.0em;"} | Open sans | 2em | bold? |
+| [H1 - report title]{style="font-size: 2.0em;"} | Open sans | 2em |  |
 | [H2 - main points]{style="font-size: 1.68em;"} | Open sans | 1.68em |  |
 | [H3 - section title]{style="font-size: 1.41em;"} | Open sans | 1.41em |  |
-| [H4 - subsection]{style="font-size: 1.189em; font-weight bold;"} | Open sans | 1.1892em | bold? underline? |
+| [H4 - subsection]{style="font-size: 1.189em; font-weight bold;"} | Open sans | 1.1892em |  |
 | regular text | Open sans | 12pt |  |
-| [caption]{style="font-size: 8pt;"} | Open sans | 8pt | grey |
+| [caption]{style="font-size: 8pt;"} | Open sans | 8pt | grey, name and number bold |
 | [axis titles]{style="font-size: 8.5pt;"} | Open sans | 8.5pt |  |
 | [axis text]{style="font-size: 8pt;"} | Open sans | 8pt |  |
 | [plot text]{style="font-size: 10pt;"} | Open sans | 10pt |  |
