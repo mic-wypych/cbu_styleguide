@@ -135,9 +135,9 @@ A few more specific issues that often arise for bar plots:
 
     ```{r}
     df_long_labs %>%
-    ggplot(aes(x = item, y = mean)) +
-    geom_col(fill = cbu_cat_2[2], width = .6) +
-    geom_errorbar(aes(x = str_wrap(item, 40), ymin = mean - sd, ymax = mean + sd), width = .6) +
+    ggplot(aes(x = str_wrap(item, 40), y = mean)) +
+    geom_col(fill = cbu_cat_1[1], width = .6) +
+    geom_errorbar(aes(x = str_wrap(item, 40), ymin = mean - sd, ymax = mean + sd),width = .2) +
     theme_cbu()
     ```
 

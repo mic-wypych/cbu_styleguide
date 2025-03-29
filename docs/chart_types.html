@@ -257,8 +257,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(showtext)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
-<pre><code>Ładowanie wymaganego pakietu: sysfonts
-Ładowanie wymaganego pakietu: showtextdb</code></pre>
+<pre><code>Loading required package: sysfonts
+Loading required package: showtextdb</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggrepel)</span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggfittext)</span>
@@ -403,9 +403,9 @@ Option 2:</p>
 <li><p>adding errorbars:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df_long_labs <span class="sc">%&gt;%</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> item, <span class="at">y =</span> mean)) <span class="sc">+</span></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_col</span>(<span class="at">fill =</span> cbu_cat_2[<span class="dv">2</span>], <span class="at">width =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">str_wrap</span>(item, <span class="dv">40</span>), <span class="at">ymin =</span> mean <span class="sc">-</span> sd, <span class="at">ymax =</span> mean <span class="sc">+</span> sd), <span class="at">width =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">str_wrap</span>(item, <span class="dv">40</span>), <span class="at">y =</span> mean)) <span class="sc">+</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_col</span>(<span class="at">fill =</span> cbu_cat_1[<span class="dv">1</span>], <span class="at">width =</span> .<span class="dv">6</span>) <span class="sc">+</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_errorbar</span>(<span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">str_wrap</span>(item, <span class="dv">40</span>), <span class="at">ymin =</span> mean <span class="sc">-</span> sd, <span class="at">ymax =</span> mean <span class="sc">+</span> sd),<span class="at">width =</span> .<span class="dv">2</span>) <span class="sc">+</span></span>
 <span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_cbu</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
 <div>
@@ -464,17 +464,26 @@ Option 2:</p>
 <section id="line-charts" class="level3" data-number="5.0.3">
 <h3 data-number="5.0.3" class="anchored" data-anchor-id="line-charts"><span class="header-section-number">5.0.3</span> Line charts</h3>
 <p>Line charts are usually best suited for showing changes in time. One thing that sometimes comes up is a large number of lines that an make the plot unreadable. If possible we can then try to highlight just one (or a few) category and keep the rest in grey.</p>
-<pre class="{y{r}"><code>df_lines &lt;- data.frame(
-    date = rep(c(2012,2013,2014,2015, 2016), 5),
-    category = sort(rep(letters[1:5],5)),
-    value = rnorm(25)
-)
-
-df_lines %&gt;%
-ggplot(aes(x=date, y = value, color = category)) +
-geom_line(linewidth = 1.4) +
-scale_color_manual(values = cbu_cat_2) +
-theme_cbu()</code></pre>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>df_lines <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>    <span class="at">date =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">2012</span>,<span class="dv">2013</span>,<span class="dv">2014</span>,<span class="dv">2015</span>, <span class="dv">2016</span>), <span class="dv">5</span>),</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">category =</span> <span class="fu">sort</span>(<span class="fu">rep</span>(letters[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>],<span class="dv">5</span>)),</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">value =</span> <span class="fu">rnorm</span>(<span class="dv">25</span>)</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>df_lines <span class="sc">%&gt;%</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x=</span>date, <span class="at">y =</span> value, <span class="at">color =</span> category)) <span class="sc">+</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a><span class="fu">geom_line</span>(<span class="at">linewidth =</span> <span class="fl">1.4</span>) <span class="sc">+</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="fu">scale_color_manual</span>(<span class="at">values =</span> cbu_cat_2) <span class="sc">+</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a><span class="fu">theme_cbu</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="chart_types_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
 </section>
 <section id="scatterplots" class="level3" data-number="5.0.4">
 <h3 data-number="5.0.4" class="anchored" data-anchor-id="scatterplots"><span class="header-section-number">5.0.4</span> Scatterplots</h3>
@@ -496,7 +505,7 @@ theme_cbu()</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chart_types_files/figure-html/unnamed-chunk-9-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chart_types_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -526,7 +535,7 @@ theme_cbu()</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chart_types_files/figure-html/unnamed-chunk-10-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chart_types_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -554,7 +563,7 @@ theme_cbu()</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chart_types_files/figure-html/unnamed-chunk-11-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chart_types_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -583,7 +592,7 @@ theme_cbu()</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chart_types_files/figure-html/unnamed-chunk-12-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chart_types_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
@@ -617,7 +626,7 @@ theme_cbu()</code></pre>
 <div class="cell-output-display">
 <div>
 <figure class="figure">
-<p><img src="chart_types_files/figure-html/unnamed-chunk-13-1.png" class="img-fluid figure-img" width="672"></p>
+<p><img src="chart_types_files/figure-html/unnamed-chunk-14-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
