@@ -103,9 +103,7 @@ A few more specific issues that often arise for bar plots:
     geom_col(fill = cbu_cat_2[2], width = .6) +
     geom_text(aes(label = mean), nudge_y = .5) +
     coord_flip() +
-    theme_cbu() +
-    theme(panel.grid.major.y = element_blank(),
-         panel.grid.major.x = element_line(color = "grey80", linewidth = .5))
+    theme_cbu()
     ```
 
     \
@@ -126,9 +124,7 @@ A few more specific issues that often arise for bar plots:
     geom_col(fill = cbu_cat_2[2], width = .6) +
     geom_text(aes(label = mean), nudge_y = .5) +
     coord_flip() +
-    theme_cbu() +
-    theme(panel.grid.major.y = element_blank(),
-         panel.grid.major.x = element_line(color = "grey80", linewidth = .5))
+    theme_cbu() 
     ```
 
 -   adding errorbars:
@@ -190,7 +186,8 @@ df_lines %>%
 ggplot(aes(x=date, y = value, color = category)) +
 geom_line(linewidth = 1.4) +
 scale_color_manual(values = cbu_cat_2) +
-theme_cbu()
+theme_cbu() +
+theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
 ```
 
 ### Scatterplots
@@ -208,9 +205,10 @@ df_scatter$y <- rnorm(1e3, 2 + .5*df_scatter$x - .8*df_scatter$x_2 + .5*df_scatt
 
 df_scatter %>%
 ggplot(aes(x = x, y = y, color = cat)) +
-geom_count(alpha = .3) +
-scale_color_manual(values = cbu_cat_2) +
-theme_cbu()
+geom_point(alpha = .7) +
+scale_color_manual(values = cbu_cat_2[c(2,4)]) +
+theme_cbu() +
+theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
 ```
 
 -   dealing with overplotting
@@ -235,7 +233,8 @@ model_fit <- lm(y ~ ns(x, 3), fit_df)
 
 plot_predictions(model_fit, condition = "x") +
 geom_point(data = fit_df, aes(x = x, y = y), alpha = .3) +
-theme_cbu()
+theme_cbu() +
+theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
 ```
 
 ### Correlation plots?
@@ -255,9 +254,7 @@ geom_col(position = position_dodge(width = .9)) +
 geom_text(aes(label = cor), position = position_dodge(width = .9), size = 5) +
 coord_flip() +
 scale_fill_manual(values = cbu_cat_1) +
-theme_cbu() +
-theme(panel.grid.major.y = element_blank(),
-     panel.grid.major.x = element_line(color = "grey80"))
+theme_cbu() 
 ```
 
 ### Dumbbell charts
