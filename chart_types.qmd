@@ -137,7 +137,7 @@ A few more specific issues that often arise for bar plots:
     df_long_labs %>%
     ggplot(aes(x = item, y = mean)) +
     geom_col(fill = cbu_cat_2[2], width = .6) +
-    geom_errorbar(aes(x = str_wrap(item, 40), ymin = mean - sd, ymax = mean + sd), width = .2) +
+    geom_errorbar(aes(x = str_wrap(item, 40), ymin = mean - sd, ymax = mean + sd), width = .6) +
     theme_cbu()
     ```
 
@@ -179,7 +179,7 @@ theme_cbu()
 
 Line charts are usually best suited for showing changes in time. One thing that sometimes comes up is a large number of lines that an make the plot unreadable. If possible we can then try to highlight just one (or a few) category and keep the rest in grey.
 
-```{y{r}
+```{r}
 df_lines <- data.frame(
     date = rep(c(2012,2013,2014,2015, 2016), 5),
     category = sort(rep(letters[1:5],5)),
