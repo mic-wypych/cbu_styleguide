@@ -74,12 +74,13 @@ A few more specific issues that often arise for bar plots:
 
     ```{r}
     bar_df$category_2 <- c(rep("a", 3), rep("b", 4))
+    bar_df$category_3 <- c(rep(c("c", "d", "e"), 2), "f")
 
     bar_df %>%
-    ggplot(aes(x = category_2, y = means, fill = category)) +
+    ggplot(aes(x = category_2, y = means, fill = category_3)) +
     geom_col(width = .6, position = position_dodge(width = .6)) +
     geom_text(aes(label = means),position = position_dodge(width = .6), vjust = -1) +
-    scale_fill_manual(values = cbu_cat) +
+    scale_fill_manual(values = cbu_cat_1) +
     theme_cbu()
     ```
 
@@ -134,7 +135,8 @@ A few more specific issues that often arise for bar plots:
     ggplot(aes(x = str_wrap(item, 40), y = mean)) +
     geom_col(fill = cbu_cat_1[1], width = .6) +
     geom_errorbar(aes(x = str_wrap(item, 40), ymin = mean - sd, ymax = mean + sd),width = .2) +
-    theme_cbu()
+    theme_cbu() +
+    theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
     ```
 
 -   some likert-scale related issues:
@@ -187,7 +189,7 @@ ggplot(aes(x=date, y = value, color = category)) +
 geom_line(linewidth = 1.4) +
 scale_color_manual(values = cbu_cat_2) +
 theme_cbu() +
-theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
+theme(panel.grid.major.y = element_line(color = "grey90", linewidth = .5))
 ```
 
 ### Scatterplots
@@ -206,9 +208,9 @@ df_scatter$y <- rnorm(1e3, 2 + .5*df_scatter$x - .8*df_scatter$x_2 + .5*df_scatt
 df_scatter %>%
 ggplot(aes(x = x, y = y, color = cat)) +
 geom_point(alpha = .7) +
-scale_color_manual(values = cbu_cat_2[c(2,4)]) +
+scale_color_manual(values = cbu_cat_2[c(3,4)]) +
 theme_cbu() +
-theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
+theme(panel.grid.major.y = element_line(color = "grey90", linewidth = .5))
 ```
 
 -   dealing with overplotting
@@ -234,7 +236,7 @@ model_fit <- lm(y ~ ns(x, 3), fit_df)
 plot_predictions(model_fit, condition = "x") +
 geom_point(data = fit_df, aes(x = x, y = y), alpha = .3) +
 theme_cbu() +
-theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
+theme(panel.grid.major.y = element_line(color = "grey90", linewidth = .5))
 ```
 
 ### Correlation plots?
@@ -253,7 +255,7 @@ ggplot(aes(y = cor, x = var, fill = group)) +
 geom_col(position = position_dodge(width = .9)) +
 geom_text(aes(label = cor), position = position_dodge(width = .9), size = 5) +
 coord_flip() +
-scale_fill_manual(values = cbu_cat_1) +
+scale_fill_manual(values = cbu_cat_1[c(2,3)]) +
 theme_cbu() 
 ```
 
@@ -273,11 +275,11 @@ ggplot(aes(x = cat, y = y, color = factor(x))) +
 geom_line(aes(group = cat), color = "grey60") +
 geom_point(size = 3) +
 geom_text(aes(label = y), nudge_x = .2) +
-scale_color_manual(values = cbu_cat_1) +
+scale_color_manual(values = cbu_cat_1[c(1,4)]) +
 coord_flip() +
 theme_cbu() +
 theme(panel.grid.major.y = element_blank(),
-     panel.grid.major.x = element_line(color = "grey80"))
+     panel.grid.major.x = element_line(color = "grey90"))
 ```
 
 ### Waffle charts
