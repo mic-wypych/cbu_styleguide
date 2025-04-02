@@ -44,7 +44,7 @@ theme_cbu <- function() {
 }
 ```
 
-The function is based on theme minimal. It uses **Open Sans font** with base size of **14**. The main idea behind the theme function was to declutter the plot and take care of some basic layout & text hierarchy (especially the legend which can be rendered a bit awkwardly by default).
+The function is based on theme minimal. It uses **Jost** font with base size of **14**. The main idea behind the theme function was to declutter the plot and take care of some basic layout & text hierarchy (especially the legend which can be rendered a bit awkwardly by default).
 
 ## How it looks like
 
@@ -84,7 +84,8 @@ cont_df %>%
   geom_smooth(method = "gam", se = F) +
   scale_color_manual(values = cbu_cat_2[c(2,4,1)]) +
   labs(x = "jakiś czas", y = "jakaś ilościowa", color = "category") +
-  theme_cbu()
+  theme_cbu() +
+  theme(panel.grid.major.y = element_line(color = "grey60", linewidth = .5))
 ```
 
 Below is a breakdown of all elements in the theme:
